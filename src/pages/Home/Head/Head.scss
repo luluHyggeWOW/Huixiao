@@ -1,0 +1,43 @@
+headr {
+  .search {
+    width: 600px;
+    height: 40px;
+    background-color: blueviolet;
+    position: absolute;
+    top: 25px;
+    top: 50px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+
+    input {
+      text-align: center;
+      margin: 2px;
+      height: 30px;
+      width: 530px;
+    }
+
+    button {
+      margin: 2px;
+      width: 50px;
+      // background-color: blueviolet;
+      height: 30px;
+      // text-align: center;
+    }
+  }
+
+  .el-menu-demo {
+    background-color: #cbe5ff;
+    padding: 0;
+    height: 70px;
+  }
+
+  .userimg {
+    img {
+      display: flex;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+    }
+  }
+}

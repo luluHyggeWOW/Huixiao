@@ -1,0 +1,139 @@
+body,
+html {
+  height: 100%;
+  width: 100%;
+
+  .my-login-page {
+    background-color: #f7f9fb;
+    height: max-content;
+    width: 100%;
+    // background-image: url('./Login/img/Loginbkg.png');
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    opacity: 1;
+    font-size: 14px;
+  }
+}
+
+.my-login-page .my-login-page .brand {
+  // width: 100px;
+  // height: 100px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 40px auto;
+  position: relative;
+  z-index: 1;
+}
+
+
+
+.my-login-page {
+  // padding-bottom: 80px;
+  height: auto;
+
+  .brand {
+    height: 227px;
+    padding: 60px 0px 0px 100px;
+
+    // top: 500px;
+    img {
+      width: 170px;
+      // margin: 10px;
+      margin-top: -30px;
+      margin-left: 17px;
+    }
+  }
+
+
+  .card-wrapper {
+    width: 400px;
+  }
+
+  .card {
+    border-color: transparent;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .05);
+  }
+
+  .card.fat {
+    padding: 0px;
+  }
+
+  .card .card-title {
+    margin-bottom: 30px;
+  }
+
+  .forminput {
+    border-width: 2.3px;
+    height: 40px;
+
+    label {
+      width: 100%;
+    }
+
+
+  }
+
+  .card-body .form-group {
+    display: flex;
+    width: 100%;
+
+    label {
+      width: 100px;
+      margin: 10px;
+    }
+
+    .hint {
+      height: 20px;
+      width: 400px;
+
+      p {
+        color: #F56C6C;
+        // display: flex;
+        text-align: right;
+      }
+    }
+
+    #codebtn {
+      width: 130px;
+    }
+
+  }
+
+  .btn.btn-block {
+    padding: 12px 10px;
+    height: 50px;
+  }
+
+
+  .footer {
+    margin: 40px 0;
+    color: #888;
+    text-align: center;
+    // margin-bottom: 62px;
+  }
+}
+
+
+
+@media screen and (max-width: 425px) {
+  .my-login-page .card-wrapper {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .my-login-page .card.fat {
+    padding: 0;
+  }
+
+  .my-login-page .card.fat .card-body {
+    padding: 15px;
+  }
+}
+
+.pwshow img {
+  width: 23px;
+  height: 23px;
+  margin: -60px 0px 0px 315px;
+}

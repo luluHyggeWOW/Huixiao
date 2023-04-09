@@ -1,0 +1,65 @@
+html {
+  padding: 0 !important;
+  margin: 0 !important;
+  height: 1000px;
+  width: 100%;
+
+  background-color: #f7f9fb;
+  opacity: 1;
+
+
+
+  .userimg :hover {}
+
+
+  body {
+    display: flex;
+
+    nav {}
+
+    section {
+      display: flex;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+
+      News {
+        // display: flex;
+        // position: absolute;
+        // left: 50%;
+        // transform: translateX(-50%);
+      }
+
+      // display: flex;
+      .title {
+        // display: inline-block;
+        display: flex;
+
+        // top: 20%;
+        // position: relative;
+        // left: 50%;
+        // transform: translateX(-50%);
+        div {
+          width: 200px;
+          height: 60px;
+          background-color: pink;
+          margin: 20px;
+          text-align: center;
+        }
+      }
+    }
+
+    aside {
+      // display: flex;
+      position: absolute;
+      left: 100%;
+      transform: translateX(-100%);
+
+      // float: right;
+
+
+    }
+
+
+  }
+}
