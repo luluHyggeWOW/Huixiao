@@ -4,52 +4,75 @@
       <h1>校园大事件</h1>
     </div>
     <div class="imghot">
-      <div class="gdimg">
-        <img src="./image/Loginbkg.png" alt="">
-        <button class="btnleft">左</button>
-        <button class="btnright">右</button>
 
+      <div class="gdimg">
+        <Splide :options="{ rewind: true }" style="width: 600px">
+          <SplideSlide>
+            <img src="./image/Loginbkg.png">
+          </SplideSlide>
+          <SplideSlide>
+            <img src="./image/Loginbkg.png">
+          </SplideSlide>
+          <SplideSlide>
+            <img src="./image/Loginbkg.png">
+          </SplideSlide>
+        </Splide>
       </div>
       <div class="hotnews">
-        <ul>热点新闻
-          <li>GPT-4 版“贾维斯”诞生</li>
-          <li>微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖</li>
-          <li>微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖</li>
-          <li>微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖</li>
-          <li>微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖</li>
-          <li>微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖</li>
+        <ul v-for="(list,index) in hotnews">
+          <li>{{list.newstitle}}</li>
         </ul>
       </div>
     </div>
 
     <div class="allnews">
-      <ul>所有新闻
-        <li>GPT-4 版“贾维斯”诞生</li>
-        <li>微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖</li>
-        <li>微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖</li>
-        <li>微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖</li>
-        <li>微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖</li>
-        <li>微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖</li>
-        <li>GPT-4 版“贾维斯”诞生</li>
-        <li>微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖</li>
-        <li>微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖</li>
-        <li>微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖</li>
-        <li>微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖</li>
-        <li>微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖</li>
-        <li>GPT-4 版“贾维斯”诞生</li>
-        <li>微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖</li>
-        <li>微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖</li>
-        <li>微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖</li>
-        <li>微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖</li>
-        <li>微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖</li>
+      <ul v-for="(list,index) in allnews">
+        <li>{{list.newstitle}}</li>
       </ul>
     </div>
   </div>
 </template>
-
 <script setup>
+  import { Splide, SplideSlide } from '@splidejs/vue-splide';
+  import { defineComponent } from 'vue';
+  import '@splidejs/vue-splide/css';
   name: 'News'
-
+  let hotnews = [
+    {
+      newsid: '1',
+      newstitle: 'GPT-4 版“贾维斯”诞生'
+    },
+    {
+      newsid: '2',
+      newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
+    },
+    {
+      newsid: '3',
+      newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
+    },
+    {
+      newsid: '4',
+      newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
+    }
+  ]
+  let allnews = [
+    {
+      newsid: '1',
+      newstitle: 'GPT-4 版“贾维斯”诞生'
+    },
+    {
+      newsid: '2',
+      newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
+    },
+    {
+      newsid: '3',
+      newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
+    },
+    {
+      newsid: '4',
+      newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
+    }
+  ]
 </script>
 
 <style scoped lang="scss" src="./News.scss">

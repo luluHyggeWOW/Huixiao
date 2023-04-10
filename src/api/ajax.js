@@ -10,7 +10,7 @@ import store from '@/store'
 const requests = axios.create({
   //配置对象
   //基础路径，发请求路径应当会出现api
-  baseURL: "http://gmall-h5-api.atguigu.cn/api",
+  baseURL: "//localhost:8080",
   //代表请求超时时间5s
   timeout: 5000
 });
@@ -23,13 +23,13 @@ requests.interceptors.request.use((config) => {
     //给请求头添加一个字段 userTempId
     config.headers.userTempId = store.state.deatil.uuid_token
   }
-  nprogress.start();
+  // nprogress.start();
   return config;
 });
 requests.interceptors.response.use((res) => {
   //成功的回调函数：服务器响莹数据回来以后 响莹拦截器可以检测到 可以做一些事
   //进度条结束
-  nprogress.done();
+  // nprogress.done();
   return res.data;
 }, (err) => {
   //响应失败的回调函数

@@ -4,6 +4,7 @@
   left: 200px;
   // background-color: #f7f9fb;
   border-radius: 15px 0px 0 15px;
+  z-index: 3;
 
   .title {
     text-align: center;
@@ -14,7 +15,36 @@
     display: flex;
     width: 250px;
 
+    position: relative;
+
     .userimgdiv {
+      .red {
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        background-color: red;
+        transition: transform 2s;
+        top: 10px;
+        left: 10px;
+        // z-index: 4;
+        animation: myfirst 2s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+      }
+
+      @keyframes myfirst {
+        from {
+          background: red;
+
+        }
+
+        to {
+          background: rgb(255, 128, 128);
+          transform: scale(0.8);
+        }
+      }
+
 
       .userimg {
         width: 70px;

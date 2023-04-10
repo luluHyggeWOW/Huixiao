@@ -6,6 +6,7 @@
     <div class="messagelist" v-for="(item,index) in list">
       <div class="userimgdiv">
         <img class="userimg" :src='(item.img)' alt="">
+        <div class="red"></div>
       </div>
       <div class="namediv">
         <p class="username">{{item.name}}</p>
@@ -45,22 +46,7 @@
       $('.message').animate({ width: "80px" })
     })
   })
-  // $(window).scroll(function () {
-  //   var scrollTop = $(this).scrollTop();
-  //   var windowHeight = document.body.clientHeight;
-  //   console.log(scrollTop, windowHeight);
-  //   console.log("div本身的高度:" + $('.message').height());
-  //   console.log("距离顶部的的位置" + scrollTop);
-  //   //当滚动条滚动到一边的最底部，把需要的div滚动到底部就固定div不让移动了
-  //   if (scrollTop > $('#rightdiv').height() - windowHeight) {
-  //     console.log(true);
-  //     $(".message").css("position", "fixed"); //固定div让其不随着滚动条的滚动而滚动
-  //     $(".message").css("bottom", "10px");
-  //   }
-  //   else {
-  //     $(".message").css("position", "static");//恢复div可以跟随滚动条滚动
-  //   }
-  // })
+
 </script>
 
 <style scoped lang="scss" src="./Message.scss">

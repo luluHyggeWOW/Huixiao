@@ -1,42 +1,105 @@
 headr {
+  .el-menu-demo {
+    background-color: #cbe5ff;
+    justify-content: right;
+    padding: 0px;
+    margin-top: -10px;
+    width: 100%;
+    height: 100px;
+  }
+
+  #head1 {
+    height: 100px;
+    animation: head1 1s;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+
+    @keyframes head1 {
+      from {
+        height: 70px;
+      }
+
+      to {
+        height: 100px;
+      }
+    }
+  }
+
+  #head2 {
+    height: 70px;
+    animation: head2 1s;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+
+    @keyframes head2 {
+      from {
+        height: 100px;
+      }
+
+      to {
+        height: 70px;
+      }
+    }
+  }
+
+  .searchlist {
+    position: fixed;
+    background-color: red;
+    top: 100px;
+    right: 100px;
+    z-index: 3;
+
+  }
+
+
   .search {
     width: 600px;
     height: 40px;
-    background-color: blueviolet;
-    position: absolute;
-    top: 25px;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin-top: auto;
+    margin-bottom: auto;
+    transform: translateX(- 10%);
     display: flex;
+    padding: auto;
+    border-radius: 15px;
 
     input {
+      outline: 0;
       text-align: center;
       margin: 2px;
       height: 30px;
-      width: 530px;
+      width: 700px;
+      border-radius: 15px;
+      text-align: left;
+      font-size: 20px;
+      border: 2px solid #9ccaf7;
+      background-color: #f7f9fb;
+      padding-left: 10px;
     }
 
-    button {
-      margin: 2px;
-      width: 50px;
-      // background-color: blueviolet;
-      height: 30px;
-      // text-align: center;
+    :focus {
+      border: 2px solid #0262c2;
+    }
+
+    .btn {
+      cursor: pointer;
+
+      :hover {
+        background-color: #9ccaf7;
+      }
+
+      img {
+        width: 40px;
+        height: 40px;
+      }
     }
   }
+}
 
-  .el-menu-demo {
-    background-color: #cbe5ff;
-    padding: 0;
-    height: 70px;
-  }
-
-  .userimg {
-    img {
-      display: flex;
-      justify-content: center;
-      width: 50px;
-      height: 50px;
-    }
+.userimg {
+  img {
+    display: flex;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
   }
 }

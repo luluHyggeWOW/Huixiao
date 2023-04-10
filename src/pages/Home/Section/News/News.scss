@@ -14,6 +14,7 @@
     top: 50px;
     left: 50%;
     transform: translate(-50%, -50%);
+
   }
 
   .imghot {
@@ -23,20 +24,8 @@
       margin-top: 100px;
 
       img {
-        width: 600px; // padding-bottom: 56.25%;
+        // padding-bottom: 56.25%;
         height: 300px;
-      }
-
-      .btnleft {
-        position: absolute;
-        top: 350px;
-        left: 530px;
-      }
-
-      .btnright {
-        position: absolute;
-        top: 350px;
-        left: 500px;
       }
     }
 
@@ -47,6 +36,7 @@
 
       li {
         padding: 10px;
+        list-style: none;
       }
     }
   }
@@ -55,5 +45,9 @@
     width: 100%;
     height: auto;
     top: 400px;
+
+    li {
+      list-style: none;
+    }
   }
 }

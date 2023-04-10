@@ -1,6 +1,11 @@
 html {
   nav {
-    width: 250px;
+    // width: 250px;
     height: 100%;
+    // margin: 0px;
+    margin-top: 100px;
+    margin-left: -10px;
+    padding: 0;
+    position: fixed;
   }
 }
