@@ -1,54 +1,59 @@
-html {
+.main {
+  width: 1200px;
+  height: 1200px;
+  position: absolute;
+  // background-color: olive;
+  left: 50%;
+  transform: translateX(-50%);
 
-  body {
-    width: 1000px;
-    height: 1500px;
-    background-color: aqua;
+
+  .title {
+    font-size: 30px;
+    padding: 20px;
     position: absolute;
+    top: 50px;
     left: 50%;
-    transform: translateX(-50%);
-    top: 100%;
-    // display: flex;
+    transform: translate(-50%, -50%);
+  }
 
-    .title {
-      font-size: 30px;
-      padding: 20px;
-      position: absolute;
-      top: 50px;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
+  .imghot {
+    display: flex;
 
     .gdimg {
-      top: 100px;
-      display: flex;
-      position: relative;
+      margin-top: 100px;
 
       img {
-        // position: relative;
-        width: 800px; // padding-bottom: 56.25%;
+        width: 600px; // padding-bottom: 56.25%;
         height: 300px;
       }
 
-      .hotnews {
-        // margin: 10px;
-        position: relative;
-        // top: -5%;
-        height: 300px;
-        background-color: brown;
+      .btnleft {
+        position: absolute;
+        top: 350px;
+        left: 530px;
       }
 
+      .btnright {
+        position: absolute;
+        top: 350px;
+        left: 500px;
+      }
     }
 
-    .allnews {
-      width: 1600px;
-      height: auto;
-      position: absolute;
-      top: 400px;
+    .hotnews {
+      position: relative;
+      top: 100px;
+      height: 300px;
+
+      li {
+        padding: 10px;
+      }
     }
   }
 
-
-
-
+  .allnews {
+    width: 100%;
+    height: auto;
+    top: 400px;
+  }
 }

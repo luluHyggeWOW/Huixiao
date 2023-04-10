@@ -23,7 +23,7 @@
         <el-menu-item index="2-3">选项3</el-menu-item>
       </el-sub-menu>
     </el-menu>
-    <div class="search">
+    <div class="search" v-if="navshow">
       <input type="text">
       <button>搜索</button>
     </div>
@@ -31,8 +31,16 @@
 </template>
 
 <script setup>
+  import { ref } from 'vue'
   name: 'Headr'
-
+  let navshow = ref(true);
+  addEventListener('resize', () => {
+    if (window.innerWidth <= 1400) {
+      navshow.value = false
+    } else {
+      navshow.value = true
+    }
+  })
 </script>
 
 <style scoped lang="scss" src='./Head.scss'>
@@ -42,6 +50,8 @@
   .el-menu-demo {
     display: flex;
     justify-content: right;
+    padding: 0px;
+    margin: -10px;
   }
 
   .userimg {

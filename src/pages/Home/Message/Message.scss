@@ -1,5 +1,42 @@
-div {
-  width: 250px;
+.message {
+  width: 70px;
   height: 700px;
-  background-color: red;
+  left: 200px;
+  // background-color: #f7f9fb;
+  border-radius: 15px 0px 0 15px;
+
+  .title {
+    text-align: center;
+    height: 70px;
+  }
+
+  .messagelist {
+    display: flex;
+    width: 250px;
+
+    .userimgdiv {
+
+      .userimg {
+        width: 70px;
+        height: 70px;
+        margin: auto;
+        padding: 5px;
+      }
+    }
+
+
+    .namediv {
+      margin-top: -5px;
+    }
+
+    .username {
+      padding: 0 0px 0px 0px;
+    }
+
+    .lastmessage {
+      font-size: 10px;
+      padding: 0 0px 0px 0px;
+    }
+  }
+
 }

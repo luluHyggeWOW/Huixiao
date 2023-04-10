@@ -1,65 +1,58 @@
 html {
-  padding: 0 !important;
-  margin: 0 !important;
-  height: 1000px;
+
+  padding: 0;
+  margin: 0;
+  height: 100%;
   width: 100%;
-
   background-color: #f7f9fb;
-  opacity: 1;
 
 
+  .app {
 
-  .userimg :hover {}
+    header {
+      position: fixed;
+      left: 0;
+      right: 0;
+      z-index: 3;
+    }
 
-
-  body {
-    display: flex;
-
-    nav {}
-
-    section {
+    body {
+      position: relative;
       display: flex;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
 
-      News {
-        // display: flex;
-        // position: absolute;
-        // left: 50%;
-        // transform: translateX(-50%);
+      Nav {
+        z-index: 2;
       }
 
-      // display: flex;
-      .title {
-        // display: inline-block;
-        display: flex;
+      section {
+        // display: flex;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
 
-        // top: 20%;
-        // position: relative;
-        // left: 50%;
-        // transform: translateX(-50%);
-        div {
-          width: 200px;
-          height: 60px;
-          background-color: pink;
-          margin: 20px;
-          text-align: center;
+        .title {
+          display: flex;
+
+          margin-top: 80px;
+
+          div {
+            width: 200px;
+            height: 60px;
+            background-color: pink;
+            margin: 20px;
+            text-align: center;
+            border-radius: 15px;
+          }
         }
       }
+
+      .mes {
+        position: fixed;
+        left: 100%;
+        bottom: 30px;
+        transform: translateX(-100%);
+
+      }
     }
-
-    aside {
-      // display: flex;
-      position: absolute;
-      left: 100%;
-      transform: translateX(-100%);
-
-      // float: right;
-
-
-    }
-
-
   }
 }
