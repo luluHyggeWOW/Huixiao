@@ -7,6 +7,8 @@ import 'element-plus/theme-chalk/index.css'
 import jquery from 'jquery'
 import VueSplide from '@splidejs/vue-splide'
 import requests from './api/api'
+import pinia from '@/store'
+import { createPinia } from 'pinia'
 // import axios from 'axios'
 const app = createApp(App)
 
@@ -14,4 +16,4 @@ const app = createApp(App)
 
 app.config.globalProperties.$request = requests
 app.use(store).use(router).use(ElementPlus)
-  .use(jquery).use(VueSplide).mount('#app')
+  .use(jquery).use(VueSplide).use(pinia).use(createPinia()).mount('#app')

@@ -11,11 +11,11 @@
            alt=""
            @click="SearchList">
     </div>
-    <div style="background:red">
+    <!-- <div style="background:red">
       111111
       <img :src="img"
            alt="">
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -24,13 +24,22 @@ import { ref, reactive, onMounted } from 'vue';
 import { getSearchList } from '@/store/search/index'
 import { storeToRefs } from 'pinia'
 import Axios from "axios";
+
 name: 'Search'
 let searchtext = ref('ce')
-let img = ref(require('./image/find.png'));
-console.log(1, img.value);
+// let img = ref(require('./image/find.png'));
 // let get = getSearchList();
 
 let SearchList = () => {
+  Axios({ url: ``, method: 'get' }, {
+    // params: data
+  }).then(response => {
+    // console.log(response.data.data);
+    console.log(1);
+    var jsonObj = JSON.parse(JSON.stringify(response.data));
+    console.log(jsonObj);
+
+  });
   // console.log(searchtext.value);
   // Axios({ url: `http://192.168.43.7:63010/talk/study_talk/search_source?source=${searchtext.value}`, method: 'get' }, {
   //   // params: data

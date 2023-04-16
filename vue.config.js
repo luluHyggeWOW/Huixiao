@@ -6,7 +6,7 @@ module.exports = defineConfig({
   devServer: {
     proxy: {
       '/api': {
-        target: 'http://192.168.43.7:8082/',//这里填入你要请求的接口的前缀
+        target: 'http://jsonplaceholder.typicode.com/',//这里填入你要请求的接口的前缀
         changeOrigin: true,//虚拟的站点需要更管origin                  //是否https接口
         pathRewrite: {
           '^/api': 'api'//重写路径
