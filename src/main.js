@@ -5,12 +5,13 @@ import store from './store'
 import ElementPlus from 'element-plus'
 import 'element-plus/theme-chalk/index.css'
 import jquery from 'jquery'
-import axios from 'axios'
-import qs from 'qs'
-// app.prototype.$ajax = qs;
+import VueSplide from '@splidejs/vue-splide'
+import requests from './api/api'
+// import axios from 'axios'
 const app = createApp(App)
 
-app.config.globalProperties.$ajax = axios;
-axios.defaults.baseURL = 'http:127.0.0.1:3333/'
+// main.js
 
-app.use(store).use(router).use(ElementPlus).use(jquery).mount('#app')
+app.config.globalProperties.$request = requests
+app.use(store).use(router).use(ElementPlus)
+  .use(jquery).use(VueSplide).mount('#app')

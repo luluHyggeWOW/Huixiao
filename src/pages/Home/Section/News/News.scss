@@ -1,11 +1,7 @@
 .main {
-  width: 1200px;
-  height: 1200px;
+  background-color: rgb(244, 252, 255);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   position: absolute;
-  // background-color: olive;
-  left: 50%;
-  transform: translateX(-50%);
-
 
   .title {
     font-size: 30px;
@@ -24,8 +20,10 @@
       margin-top: 100px;
 
       img {
-        // padding-bottom: 56.25%;
-        height: 300px;
+        width: 600px;
+        height: 400px;
+        // z-index: 10;
+        border-radius: 0;
       }
     }
 

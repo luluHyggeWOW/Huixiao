@@ -1,16 +1,15 @@
 //对于axios进行二次封装
 import router from "@/router";
 import axios from "axios";
-//引入进度条
-import nprogress from "nprogress";
-import "nprogress/nprogress.css";
+
 import store from '@/store'
+
 //1 利用axios对象的方法create 去创建一个 axios实例
 //2 request 就是axios 只不过稍微配置一下
 const requests = axios.create({
   //配置对象
   //基础路径，发请求路径应当会出现api
-  baseURL: "//localhost:8080",
+  baseURL: "http://192.168.43.7:8082/",
   //代表请求超时时间5s
   timeout: 5000
 });
@@ -19,10 +18,10 @@ requests.interceptors.request.use((config) => {
   //congif:配置对象，对象里面有一个属性很重要 headers请求头
   //进度条开始动
   // console.log(store);
-  if (store.state.deatil.uuid_token) {
-    //给请求头添加一个字段 userTempId
-    config.headers.userTempId = store.state.deatil.uuid_token
-  }
+  // if (store.state.deatil.uuid_token) {
+  //   //给请求头添加一个字段 userTempId
+  //   config.headers.userTempId = store.state.deatil.uuid_token
+  // }
   // nprogress.start();
   return config;
 });

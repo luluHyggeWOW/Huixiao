@@ -42,57 +42,9 @@ headr {
     }
   }
 
-  .searchlist {
-    position: fixed;
-    background-color: red;
-    top: 100px;
-    right: 100px;
-    z-index: 3;
-
-  }
 
 
-  .search {
-    width: 600px;
-    height: 40px;
-    margin-top: auto;
-    margin-bottom: auto;
-    transform: translateX(- 10%);
-    display: flex;
-    padding: auto;
-    border-radius: 15px;
 
-    input {
-      outline: 0;
-      text-align: center;
-      margin: 2px;
-      height: 30px;
-      width: 700px;
-      border-radius: 15px;
-      text-align: left;
-      font-size: 20px;
-      border: 2px solid #9ccaf7;
-      background-color: #f7f9fb;
-      padding-left: 10px;
-    }
-
-    :focus {
-      border: 2px solid #0262c2;
-    }
-
-    .btn {
-      cursor: pointer;
-
-      :hover {
-        background-color: #9ccaf7;
-      }
-
-      img {
-        width: 40px;
-        height: 40px;
-      }
-    }
-  }
 }
 
 .userimg {

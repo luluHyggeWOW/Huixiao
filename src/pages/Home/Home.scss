@@ -20,9 +20,12 @@ html {
       position: relative;
       display: flex;
 
+
+
       Nav {
         z-index: 2;
       }
+
 
       section {
         // display: flex;
@@ -31,19 +34,20 @@ html {
         transform: translateX(-50%);
 
         .title {
+          // z-index: 4;
           display: flex;
 
-          margin-top: 80px;
+          margin: 100px;
 
-          div {
-            width: 200px;
-            height: 60px;
-            background-color: pink;
-            margin: 20px;
-            text-align: center;
-            border-radius: 15px;
-          }
         }
+      }
+
+      .views {
+        width: 1200px;
+        position: absolute;
+        top: 200px;
+        left: 50%;
+        transform: translate(-50%, -50%);
       }
 
       .mes {

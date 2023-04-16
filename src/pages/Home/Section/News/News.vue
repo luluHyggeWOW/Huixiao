@@ -4,17 +4,13 @@
       <h1>校园大事件</h1>
     </div>
     <div class="imghot">
-
       <div class="gdimg">
-        <Splide :options="{ rewind: true }" style="width: 600px">
+        <Splide :options="{ rewind: true }" style="width: 600px;">
           <SplideSlide>
-            <img src="./image/Loginbkg.png">
+            <img src="./image/Loginbkg.png" alt="Sample 1">
           </SplideSlide>
           <SplideSlide>
-            <img src="./image/Loginbkg.png">
-          </SplideSlide>
-          <SplideSlide>
-            <img src="./image/Loginbkg.png">
+            <img src="./image/Loginbkg.png" alt="Sample 2">
           </SplideSlide>
         </Splide>
       </div>
@@ -31,6 +27,7 @@
       </ul>
     </div>
   </div>
+
 </template>
 <script setup>
   import { Splide, SplideSlide } from '@splidejs/vue-splide';
@@ -44,11 +41,11 @@
     },
     {
       newsid: '2',
-      newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
+      newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩'
     },
     {
       newsid: '3',
-      newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
+      newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩'
     },
     {
       newsid: '4',
@@ -62,15 +59,15 @@
     },
     {
       newsid: '2',
-      newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
+      newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
     },
     {
       newsid: '3',
-      newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
+      newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
     },
     {
       newsid: '4',
-      newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
+      newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
     }
   ]
 </script>

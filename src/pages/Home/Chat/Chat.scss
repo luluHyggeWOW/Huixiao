@@ -1,0 +1,17 @@
+html {
+
+  #chatbox {
+    // display: flex;
+    position: fixed;
+    z-index: 3;
+    // margin-top: 20px;
+    // top: 200px;
+    // right: 50px;
+    width: 500px;
+    height: 500px;
+    background-color: pink;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

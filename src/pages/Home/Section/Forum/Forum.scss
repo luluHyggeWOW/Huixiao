@@ -1,0 +1,131 @@
+html {
+  .Forumbox {
+    position: absolute;
+    background-color: rgb(244, 252, 255);
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+
+    .classes {
+      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+      // padding: 10px;
+      // height: 60px;
+      // display: flex;
+
+      .head {
+        display: flex;
+        padding: 10px;
+        // font-size: 20px;
+
+        // height: 40px;
+
+
+        .title {
+
+          padding-left: 10px;
+
+          p {
+
+            font-size: 15px;
+          }
+        }
+      }
+
+      .body {
+        display: flex;
+
+        .left {
+          width: 800px;
+          // background-color: rgb(198, 246, 191);
+
+          .commentbox {
+            display: flex;
+
+            .user {
+              width: 150px;
+              padding: 20px;
+
+              img {
+                width: 100px;
+                // height: 100px;
+              }
+
+              .username {
+                // font-size: 18px;
+                text-align: center;
+              }
+            }
+
+            .questionbox {
+              padding-right: 20px;
+
+              .question {
+                font-size: 25px;
+                font-weight: 700;
+              }
+
+              .more {
+                // width: 700px;
+              }
+
+              .handle {
+                .morecomment {
+
+                  // background-color: cadetblue;
+                  // width: 500px;
+                  .pushcomment {
+                    position: relative;
+                    width: 60px;
+                    height: 30px;
+                    font-size: 15px;
+                    margin-left: 570px;
+                    margin-top: -70px;
+                  }
+
+                  .othercommentbox {
+                    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+
+
+                    .othercommentdiv {
+                      display: flex;
+
+                      .otheruse {
+                        width: 50px;
+                        padding: 10px;
+
+                        img {
+                          width: 50px;
+                        }
+
+                        p {
+                          text-align: center;
+                          font-size: 10px;
+                        }
+                      }
+
+                      .othercomment {
+                        p {
+                          font-size: 13px;
+                        }
+                      }
+                    }
+                  }
+                }
+
+
+
+
+              }
+            }
+
+          }
+        }
+
+        .right {
+          margin-left: 10px;
+          width: 390px;
+          height: 1000px;
+          background-color: rgb(241, 171, 211);
+        }
+      }
+    }
+  }
+}
