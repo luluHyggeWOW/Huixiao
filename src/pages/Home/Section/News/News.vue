@@ -1,28 +1,33 @@
 <template>
   <div class="main">
-    <div class="title">
-      <h1>校园大事件</h1>
-    </div>
+    <!-- <div class="title">
+      <span>校园大事件</span>
+    </div> -->
     <div class="imghot">
       <div class="gdimg">
-        <Splide :options="{ rewind: true }" style="width: 600px;">
+        <Splide :options="{ rewind: true }"
+                style="width: 600px;">
           <SplideSlide>
-            <img src="./image/Loginbkg.png" alt="Sample 1">
+            <img src="./image/Loginbkg.png"
+                 alt="Sample 1">
           </SplideSlide>
           <SplideSlide>
-            <img src="./image/Loginbkg.png" alt="Sample 2">
+            <img src="./image/Loginbkg.png"
+                 alt="Sample 2">
           </SplideSlide>
         </Splide>
       </div>
       <div class="hotnews">
-        <ul v-for="(list,index) in hotnews">
+        <ul v-for="(list,index) in hotnews"
+            :key=index>
           <li>{{list.newstitle}}</li>
         </ul>
       </div>
     </div>
 
     <div class="allnews">
-      <ul v-for="(list,index) in allnews">
+      <ul v-for="(list,index) in allnews"
+          :key=index>
         <li>{{list.newstitle}}</li>
       </ul>
     </div>
@@ -30,48 +35,88 @@
 
 </template>
 <script setup>
-  import { Splide, SplideSlide } from '@splidejs/vue-splide';
-  import { defineComponent } from 'vue';
-  import '@splidejs/vue-splide/css';
-  name: 'News'
-  let hotnews = [
-    {
-      newsid: '1',
-      newstitle: 'GPT-4 版“贾维斯”诞生'
-    },
-    {
-      newsid: '2',
-      newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩'
-    },
-    {
-      newsid: '3',
-      newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩'
-    },
-    {
-      newsid: '4',
-      newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
-    }
-  ]
-  let allnews = [
-    {
-      newsid: '1',
-      newstitle: 'GPT-4 版“贾维斯”诞生'
-    },
-    {
-      newsid: '2',
-      newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
-    },
-    {
-      newsid: '3',
-      newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
-    },
-    {
-      newsid: '4',
-      newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
-    }
-  ]
+import { Splide, SplideSlide } from '@splidejs/vue-splide';
+import { defineComponent } from 'vue';
+import '@splidejs/vue-splide/css';
+name: 'News'
+let hotnews = [
+  {
+    newsid: '1',
+    newstitle: 'GPT-4 版“贾维斯”诞生'
+  },
+  {
+    newsid: '2',
+    newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩'
+  },
+  {
+    newsid: '3',
+    newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩'
+  },
+  {
+    newsid: '4',
+    newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
+  }
+]
+let allnews = [
+  {
+    newsid: '1',
+    newstitle: 'GPT-4 版“贾维斯”诞生'
+  },
+  {
+    newsid: '2',
+    newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
+  },
+  {
+    newsid: '3',
+    newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
+  },
+  {
+    newsid: '4',
+    newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
+  }
+  ,
+  {
+    newsid: '4',
+    newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
+  }
+  ,
+  {
+    newsid: '4',
+    newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
+  }
+  ,
+  {
+    newsid: '4',
+    newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
+  }
+  ,
+  {
+    newsid: '4',
+    newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
+  }
+  ,
+  {
+    newsid: '4',
+    newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
+  }
+  ,
+  {
+    newsid: '4',
+    newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
+  }
+  ,
+  {
+    newsid: '4',
+    newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
+  }
+  ,
+  {
+    newsid: '4',
+    newstitle: '微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖微软提出AIGC新“玩法”，图灵奖'
+  }
+
+]
 </script>
 
 <style scoped lang="scss" src="./News.scss">
-
 </style>

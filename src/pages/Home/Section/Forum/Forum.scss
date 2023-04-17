@@ -1,11 +1,10 @@
 html {
   .Forumbox {
+
     position: absolute;
-    background-color: rgb(244, 252, 255);
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 
     .classes {
-      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+      // box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
       // padding: 10px;
       // height: 60px;
       // display: flex;
@@ -35,6 +34,10 @@ html {
         .left {
           width: 800px;
           // background-color: rgb(198, 246, 191);
+
+          background-color: rgb(244, 252, 255);
+          box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+          border-radius: 15px 0px 0px 15px;
 
           .commentbox {
             display: flex;
@@ -67,52 +70,95 @@ html {
               }
 
               .handle {
-                .morecomment {
+                display: flex;
+                margin-bottom: 10px;
 
-                  // background-color: cadetblue;
-                  // width: 500px;
-                  .pushcomment {
-                    position: relative;
-                    width: 60px;
+                div {
+                  margin-right: 20px;
+
+                  button {
+                    background-color: rgb(232, 247, 252);
+                    // background-color: red;
+                    width: auto;
                     height: 30px;
-                    font-size: 15px;
-                    margin-left: 570px;
-                    margin-top: -70px;
-                  }
+                    border: 0px;
+                    text-align: center;
+                    display: flex;
+                    border-radius: 5px;
 
-                  .othercommentbox {
-                    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+                    p {
+                      margin-top: 6px;
 
 
-                    .othercommentdiv {
-                      display: flex;
-
-                      .otheruse {
-                        width: 50px;
-                        padding: 10px;
-
-                        img {
-                          width: 50px;
-                        }
-
-                        p {
-                          text-align: center;
-                          font-size: 10px;
-                        }
+                      img {
+                        width: 20px;
+                        margin-top: -2px;
+                        margin-right: 2px
                       }
 
-                      .othercomment {
-                        p {
-                          font-size: 13px;
-                        }
+                      span {
+                        margin-left: 10px;
+                        margin-right: 10px;
+                        font-size: 15px;
+                        position: relative;
+                        top: -3px;
+                        left: 0px;
                       }
                     }
                   }
+
+                  button:hover {
+                    background-color: rgb(168, 230, 251);
+                  }
+
                 }
 
 
 
+              }
 
+              .morecomment {
+
+                // background-color: cadetblue;
+                // width: 500px;
+                .pushcomment {
+                  position: relative;
+                  width: 60px;
+                  height: 30px;
+                  font-size: 15px;
+                  margin-left: 570px;
+                  margin-top: -70px;
+                }
+
+                .othercommentbox {
+                  margin-top: -22px;
+                  border: 1px solid rgb(230, 222, 222);
+                  border-radius: 0px 0px 15px 15px;
+
+                  .othercommentdiv {
+                    display: flex;
+
+                    .otheruse {
+                      width: 50px;
+                      padding: 10px;
+
+                      img {
+                        width: 50px;
+                      }
+
+                      p {
+                        text-align: center;
+                        font-size: 10px;
+                      }
+                    }
+
+                    .othercomment {
+                      p {
+                        font-size: 13px;
+                      }
+                    }
+                  }
+                }
               }
             }
 
@@ -120,10 +166,96 @@ html {
         }
 
         .right {
-          margin-left: 10px;
-          width: 390px;
+          margin-left: 30px;
+          width: 370px;
           height: 1000px;
-          background-color: rgb(241, 171, 211);
+          margin-top: -20px;
+
+          .creation {
+            width: 100%;
+            height: 240px;
+            background-color: rgb(244, 252, 255);
+            box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+            border-radius: 0px 15px 0px 0px;
+
+
+            .title {
+              position: relative;
+              text-align: center;
+
+              top: 10px;
+
+              img {
+                position: absolute;
+                left: 110px;
+                top: -5px;
+              }
+
+              p {
+                font-size: 20px;
+              }
+            }
+
+            .text {
+              margin: 20px;
+              width: 100%px;
+              height: 100px;
+              background-color: rgb(224, 238, 250);
+              border-radius: 15px;
+
+              span {
+                position: relative;
+                font-size: 20px;
+                margin-left: 10px;
+                top: 5px
+              }
+
+              p {
+                width: 200px;
+                margin-left: 10px;
+                color: #8a8a8a;
+              }
+
+              img {
+                width: 100px;
+                position: relative;
+                top: -100px;
+                left: 220px
+              }
+            }
+
+            .addbtn {
+              text-align: center;
+            }
+          }
+
+          .hotforum {
+            margin-top: 30px;
+            width: 100%;
+            height: 400px;
+            background-color: rgb(244, 252, 255);
+            box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+            border-radius: 0px 0px 15px 0px;
+
+            .title {
+              position: relative;
+              text-align: center;
+
+              top: 10px;
+
+              img {
+                position: absolute;
+                left: 110px;
+                top: -2px;
+                width: 30px;
+              }
+
+              p {
+                font-size: 20px;
+              }
+            }
+          }
+
         }
       }
     }

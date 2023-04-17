@@ -1,16 +1,12 @@
 <template>
-  <div id='id'>
+  <div class='box'>
 
   </div>
 </template>
 
-<script>
-  export default {
-    name: 'name'
-
-  }
+<script setip>
+name: 'Shop'
 </script>
 
-<style scoped>
-
+<style scoped lang="scss" src="./Shop.scss">
 </style>

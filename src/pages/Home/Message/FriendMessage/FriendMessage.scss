@@ -1,0 +1,57 @@
+* {
+  .box {
+    width: 800px;
+    height: 606px;
+    background-color: rgb(231, 231, 231);
+    display: flex;
+  }
+
+  .close {
+    position: absolute;
+    left: 790px;
+    top: -5px;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    text-align: center;
+    border-radius: 100%;
+  }
+
+  .boxleft {
+    .chatbox {
+      width: 600px;
+      height: 450px;
+      background-color: aliceblue;
+    }
+
+    .inputbox {
+      padding: 0;
+      width: 600px;
+      height: 150px;
+
+    }
+
+    .pushtext {
+      width: 80px;
+      // height: 40px;
+      position: relative;
+      left: 520px;
+      top: -32px;
+    }
+  }
+
+  .boxright {
+    .userimg {
+      width: 120px;
+      padding: 40px 40px 0px 40px;
+    }
+
+    .username {
+      text-align: center;
+
+      p {
+        font-size: 20px;
+      }
+    }
+  }
+}

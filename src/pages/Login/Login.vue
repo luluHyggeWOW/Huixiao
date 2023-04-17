@@ -38,7 +38,7 @@
                                 type="email"
                                 class="forminput"
                                 name="studentnumber"
-                                v-model="user.studentnumber"
+                                v-model="userinfo.studentnumber"
                                 maxlength="11" />
                       <div class="invalid-feedback">
                         Email is invalid
@@ -58,7 +58,7 @@
                                 @mouseenter="PWlogoenter"
                                 @mouseleave="PWlogoleave"
                                 name="password"
-                                v-model="user.password" />
+                                v-model="userinfo.password" />
                       <div class="pwshow"
                            @click="passwordshow=!passwordshow"
                            type="button"
@@ -106,20 +106,20 @@ import { ref, reactive, watch } from 'vue';
 import { ElMessage } from 'element-plus';
 import debounce from "@/utils/debounce.js";
 import thorttle from "@/utils/thorttle.js";
-// import router from '@/router'
 import { useRoute, useRouter } from 'vue-router';
 import Axios from "axios";
 name: 'Login';
 let logoimg = ref(require('@/pages/Login/image/neutral.png'))
 let pwshowimg = ref(require('@/pages/Login/image/pwshow.png'))
 let passwordshow = ref(false)
-let user = reactive({
+let userinfo = reactive({
   studentnumber: '',
   password: ''
 })
 const route = useRoute();
+const router = useRouter();
 // console.log(route.query.userphone);
-user.studentnumber = route.query.userphone
+userinfo.studentnumber = route.query.userphone
 // user.studentnumber = ref(router.params.userphone)
 let okLogin = ref(false);
 //鼠标悬停input logo变换
@@ -162,7 +162,7 @@ watch([passwordshow], () => {
 //节流
 //点击登录
 const userLogin = debounce(function () {
-  console.log(user);
+  // console.log(user);
   // let loginflag = false
   // Axios({
   //   url: `http://192.168.43.7:63010/auth/oauth/token?client_id=XcWebApp&client_secret=XcWebApp&grant_type=password`, data: {
@@ -175,9 +175,10 @@ const userLogin = debounce(function () {
   //   var jsonObj = JSON.parse(JSON.stringify(response.data.data));
 
   // });
+
   if (1) {
-    // route.push({ path: "/home", query: { userphone: userinfo.phone } });
-    // console.log(Math.random());
+    // router.push({ path: "/home", query: { userphone: userinfo.studentnumber } });
+    router.push({ path: "/news", query: { userphone: userinfo.studentnumber } });
     ElMessage.success('登陆成功')
   }
   else {

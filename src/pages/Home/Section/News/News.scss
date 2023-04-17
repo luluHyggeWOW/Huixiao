@@ -2,22 +2,29 @@
   background-color: rgb(244, 252, 255);
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   position: absolute;
+  border-radius: 15px;
 
   .title {
-    font-size: 30px;
-    padding: 20px;
+    // width: 300px;
+    // height: 140px;
+
     position: absolute;
     top: 50px;
     left: 50%;
     transform: translate(-50%, -50%);
 
+    span {
+      font-size: 60px;
+      font-weight: 1000px;
+    }
   }
 
   .imghot {
     display: flex;
 
     .gdimg {
-      margin-top: 100px;
+      margin-top: 30px;
+      margin-left: 30px;
 
       img {
         width: 600px;
@@ -29,7 +36,7 @@
 
     .hotnews {
       position: relative;
-      top: 100px;
+      top: 30px;
       height: 300px;
 
       li {

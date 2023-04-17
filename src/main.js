@@ -9,7 +9,8 @@ import VueSplide from '@splidejs/vue-splide'
 import requests from './api/api'
 import pinia from '@/store'
 import { createPinia } from 'pinia'
-// import axios from 'axios'
+import mitt from "mitt";
+
 const app = createApp(App)
 
 // main.js
@@ -17,3 +18,4 @@ const app = createApp(App)
 app.config.globalProperties.$request = requests
 app.use(store).use(router).use(ElementPlus)
   .use(jquery).use(VueSplide).use(pinia).use(createPinia()).mount('#app')
+app.config.globalProperties.mittBus = new mitt()
