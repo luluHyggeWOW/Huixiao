@@ -7,8 +7,6 @@
       <Head></Head>
     </header>
 
-    <Chat></Chat>
-
     <body>
 
       <Nav></Nav>
@@ -28,8 +26,8 @@
       <div class="mes">
         <Message />
       </div>
-      <div class="Friendmes">
-        <FriendMessage />
+      <div class="Chat">
+        <Chat />
       </div>
       <div class="windons">
       </div>
@@ -45,9 +43,8 @@
 <script setup>
 import Head from '@/pages/Home/Head/Head.vue'
 import Nav from '@/pages/Home/Nav/Nav.vue'
-import Chat from '@/pages/Home/Chat/Chat.vue'
 import Message from '@/pages/Home/Message/Message.vue'
-import FriendMessage from '@/pages/Home/Message/FriendMessage/FriendMessage.vue'
+import Chat from '@/pages/Home/Message/Chat/Chat.vue'
 import Footer from '@/pages/Home/Footer/Footer.vue'
 
 import { components, ref, router } from 'vue'

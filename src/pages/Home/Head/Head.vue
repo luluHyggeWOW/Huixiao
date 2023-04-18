@@ -2,7 +2,7 @@
   <headr>
     <el-menu class="el-menu-demo"
              mode="horizontal"
-             id="head1">
+             :id="head">
 
       <Search></Search>
 
@@ -10,7 +10,7 @@
                    class="userimg">
         <template #title><img src="./image/neutral.png"
                alt=""></template>
-        <el-menu-item index="2-1">选项1</el-menu-item>
+        <el-menu-item index="2-1">我的资料</el-menu-item>
         <el-menu-item index="2-2">选项2</el-menu-item>
         <el-menu-item index="2-3">选项3</el-menu-item>
       </el-sub-menu>
@@ -27,9 +27,7 @@
           <el-menu-item index="2-4-3">选项3</el-menu-item>
         </el-sub-menu>
       </el-sub-menu>
-      <el-menu-item index="3"
-                    disabled>消息中心</el-menu-item>
-      <el-menu-item index="4">订单管理</el-menu-item>
+      <el-menu-item index="4">联系我们</el-menu-item>
 
     </el-menu>
 
@@ -55,7 +53,7 @@ name: 'Headr'
 // }
 let navshow = ref(true);
 let searchtext = ref("");
-console.log(window.innerHeight);
+// console.log(window.innerHeight);
 addEventListener('resize', () => {
   // if (window.innerWidth <= 1400) {
   //   navshow.value = false
@@ -63,18 +61,29 @@ addEventListener('resize', () => {
   //   navshow.value = true
   // }
 })
-$(window).scroll(function () {
-  var scrollTop = $(this).scrollTop();
+
+// document.getElementsByClassName('el-menu-demo')[0].scrollTop
+
+// $(window).scroll(function () {
+//   var scrollTop = $(this).scrollTop();
+//   if (scrollTop == 0) {
+//     $('#head2').attr('id', 'head1')
+//   } else {
+//     $('#head1').attr('id', 'head2')
+//   }
+
+// })
+let head = ref();
+const handleScroll = () => {
+  let scrollTop = document.documentElement.scrollTop;
   if (scrollTop == 0) {
-    $('#head2').attr('id', 'head1')
+    head.value = "head1"
   } else {
-    $('#head1').attr('id', 'head2')
+    head.value = "head2"
   }
-
-})
-
+}
 onMounted(() => {
-
+  window.addEventListener('scroll', handleScroll, true)
 
 })
 

@@ -1,13 +1,8 @@
 html {
   .Forumbox {
-
     position: absolute;
 
     .classes {
-      // box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-      // padding: 10px;
-      // height: 60px;
-      // display: flex;
 
       .head {
         display: flex;
@@ -31,10 +26,12 @@ html {
       .body {
         display: flex;
 
+        position: relative;
+
         .left {
           width: 800px;
           // background-color: rgb(198, 246, 191);
-
+          height: 2000px;
           background-color: rgb(244, 252, 255);
           box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
           border-radius: 15px 0px 0px 15px;
@@ -89,7 +86,6 @@ html {
                     p {
                       margin-top: 6px;
 
-
                       img {
                         width: 20px;
                         margin-top: -2px;
@@ -110,17 +106,13 @@ html {
                   button:hover {
                     background-color: rgb(168, 230, 251);
                   }
-
                 }
-
-
 
               }
 
+
               .morecomment {
 
-                // background-color: cadetblue;
-                // width: 500px;
                 .pushcomment {
                   position: relative;
                   width: 60px;
@@ -155,6 +147,7 @@ html {
                     .othercomment {
                       p {
                         font-size: 13px;
+                        margin-right: 20px;
                       }
                     }
                   }
@@ -170,6 +163,7 @@ html {
           width: 370px;
           height: 1000px;
           margin-top: -20px;
+          position: relative;
 
           .creation {
             width: 100%;
@@ -235,7 +229,7 @@ html {
             height: 400px;
             background-color: rgb(244, 252, 255);
             box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-            border-radius: 0px 0px 15px 0px;
+            border-radius: 0px 0px 0px 0px;
 
             .title {
               position: relative;
@@ -254,7 +248,53 @@ html {
                 font-size: 20px;
               }
             }
+
+            .hotbox {
+              margin-top: 30px;
+
+              .hotdiv {
+
+                display: flex;
+                padding: 0px 20px 0px 20px;
+
+                .top {
+                  position: relative;
+                  color: rgb(247, 210, 23);
+                  font-size: 20px;
+                  font-weight: 700;
+                  margin-right: 20px;
+                  top: -20px;
+                }
+
+                span {
+                  font-weight: 550;
+                }
+              }
+            }
+
           }
+
+          .footer {
+            top: 45px;
+            // // z-index: 4;
+            background-color: rgb(244, 252, 255);
+            box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+            border-radius: 0px 0px 15px 0px;
+            position: relative;
+            width: 370px;
+            height: 900px;
+
+            p {
+              padding: 20px 0px 0px 20px;
+              color: rgb(137, 131, 131);
+            }
+          }
+
+          .footeradd {
+            position: fixed;
+            top: 90px;
+          }
+
 
         }
       }

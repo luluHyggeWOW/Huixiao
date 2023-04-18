@@ -27,7 +27,7 @@
               <p class="more">阿萨德群奥所大所多大青蛙多群无多群无大所多1大东区多群阿萨德群奥所大所多大青蛙多群无多群无大所多1大东区多群阿萨德群奥所大所多大青蛙多群无多群无大所多1大东区多群阿萨德群奥所大所多大青蛙多群无多群无大所多1大东区多群阿萨德群奥所大所多大青蛙多群无多群无大所多1大东区多群阿萨德群奥所大所多大青蛙多群无多群无大所多1大东区多群阿萨德群奥所大所多大青蛙多群无多群无大所多1大东区多群阿萨德群奥所大所多大青蛙多群无多群无大所多1大东区多群阿萨德群奥所大所多大青蛙多群无多群无大所多1大东区多群阿萨德群奥所大所多大青蛙多群无多群无大所多1大东区多群阿萨德群奥所大所多大青蛙多群无多群无大所多1大东区多群</p>
               <div class="handle">
                 <div>
-                  <button @click="like"
+                  <button @click="like()"
                           class="like">
                     <p><img src="./image/like.png"
                            class="likeimg">
@@ -36,7 +36,7 @@
                   </button>
                 </div>
                 <div>
-                  <button @click="othercommentshow"
+                  <button @click="othercommentshow=!othercommentshow"
                           class="othercommentshow">
                     <p><img src="./image/comment.png"
                            class="commentimg"
@@ -105,6 +105,19 @@
               <img src="./image/hot.png"
                    alt="">
               <p>热榜讨论</p>
+
+            </div>
+            <div class="hotbox">
+              <div class="hotdiv"
+                   v-for="(list,index) in hotforum"
+                   :key="index">
+                <p class="top">{{index+1}}</p><span>{{list.title}}</span>
+              </div>
+            </div>
+            <div :class="footerclass">
+              <p>联系我们 © 2023 青钢影007LT</p>
+              <p>举报邮箱：jubao龙涛@www.com</p>
+              <p>服务热线：888-888-8888</p>
             </div>
           </div>
         </div>
@@ -150,12 +163,49 @@ let titles = reactive([
   }
 
 ])
+let hotforum = reactive([
+  {
+    id: 1,
+    title: "七国集团外长会反对中国试图以七国集团外长会反对中国试图以",
+    likeed: false,
+  },
+  {
+    id: 2,
+    title: "同事的工资是自己的 2-3 倍,事的工资是自己的 2-3 倍",
+    likeed: false,
+  }
+  ,
+  {
+    id: 3,
+    title: "多城今年首次冲上 30℃",
+    likeed: false,
+  }
+  ,
+  {
+    id: 4,
+    title: "七国集团外长会反对中国试图以武力单方面改变台海现状",
+    likeed: false,
+  }
+  ,
+  {
+    id: 5,
+    title: "为什么在《原神》游戏中升级等级到 80 就不建议再升到 90 呢？",
+    likeed: false,
+  }
+])
 let forumlist = reactive([]);
 let comment = ref("我我我啊啊啊啊")
 let othercommentshow = ref(false)
+let footerclass = ref('footer')
 const like = () => {
-  // document.getElementsByClassName("like")[0].style.backgroundColor = "blue"
+  console.log(this);
+  if (1)
+    document.getElementsByClassName("like")[0].style.backgroundColor = "#409EFF"
   // document.getElementsByClassName("likeimg")[0].src = "./image/liked.png"
+  else {
+    document.getElementsByClassName("like")[0].style.backgroundColor = "rgb(232, 247, 252);"
+  }
+
 }
 const opencomment = () => {
   othercommentshow.value = !othercommentshow.value
@@ -176,6 +226,19 @@ const pushcomment = () => {
 //   console.log("store.searchList", forumlist);
 // })
 
+//调整footer
+const handleScroll = () => {
+  let scrollTop = document.documentElement.scrollTop;
+  if (scrollTop >= 800) {
+    footerclass.value = "footer footeradd"
+  } else {
+    footerclass.value = "footer"
+  }
+}
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll, true)
+
+})
 
 </script>
 

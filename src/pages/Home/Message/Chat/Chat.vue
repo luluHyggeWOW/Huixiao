@@ -2,7 +2,8 @@
   <div class="box"
        v-if="chatflag">
     <div class="close"
-         @click="closechat">X</div>
+         @click="closechat"><img src="./image/closebtn.png"
+           alt=""></div>
     <div class="boxleft">
       <div class="chatbox">
 
@@ -32,7 +33,7 @@
 
 <script setup>
 import { ref, reactive, getCurrentInstance } from 'vue';
-name: 'FriendMessage'
+name: 'Chat'
 let username = ref()
 let userid = ref()
 let chatflag = ref(false)
@@ -51,5 +52,5 @@ proxy.mittBus.on('chatflag', (data) => {
 
 </script>
 
-<style scoped lang="scss" src="./FriendMessage.scss">
+<style scoped lang="scss" src="./Chat.scss">
 </style>
