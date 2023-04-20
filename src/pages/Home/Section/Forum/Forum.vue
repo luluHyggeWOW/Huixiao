@@ -8,36 +8,41 @@
             <div class="title"
                  v-for="list in titles"
                  :key="list.id">
-              <el-tag size="medium"
-                      style="width:auto;height:30px;">
+              <el-tag style="width:auto;height:30px;">
                 <p>{{list.title}}</p>
               </el-tag>
             </div>
           </div>
-          <div class="commentbox">
-            <!-- v-for="lists in forumlist"
-               :key=lists.id -->
+          <div class="commentbox"
+               v-for="(list,index) in Forum.Forumlist"
+               :key="list.t_id">
             <div class="user">
-              <img src="./image/neutral.png"
-                   alt="">
-              <p class="username">呜呜呜</p>
+              <img alt=""
+                   :src="list.t_img">
+              <p class="username">{{list.t_uid}}</p>
             </div>
             <div class="questionbox">
-              <p class="question">为甚买买买嗷嗷</p>
-              <p class="more">阿萨德群奥所大所多大青蛙多群无多群无大所多1大东区多群阿萨德群奥所大所多大青蛙多群无多群无大所多1大东区多群阿萨德群奥所大所多大青蛙多群无多群无大所多1大东区多群阿萨德群奥所大所多大青蛙多群无多群无大所多1大东区多群阿萨德群奥所大所多大青蛙多群无多群无大所多1大东区多群阿萨德群奥所大所多大青蛙多群无多群无大所多1大东区多群阿萨德群奥所大所多大青蛙多群无多群无大所多1大东区多群阿萨德群奥所大所多大青蛙多群无多群无大所多1大东区多群阿萨德群奥所大所多大青蛙多群无多群无大所多1大东区多群阿萨德群奥所大所多大青蛙多群无多群无大所多1大东区多群阿萨德群奥所大所多大青蛙多群无多群无大所多1大东区多群</p>
+              <p class="question">{{list.t_date}}</p>
+              <div class="more">
+                <img :src="list.t_img"
+                     alt="">
+                <span>{{list.t_date}}</span>
+              </div>
               <div class="handle">
                 <div>
-                  <button @click="like()"
+                  <button @click="like(index)"
                           class="like">
-                    <p><img src="./image/like.png"
+
+                    <p><img src="./image/like0.png"
                            class="likeimg">
-                      <span>赞</span>
+                      <span>{{list.t_like_count}}</span>
                     </p>
                   </button>
                 </div>
                 <div>
-                  <button @click="othercommentshow=!othercommentshow"
-                          class="othercommentshow">
+                  <button @click="othercommentshow(index)"
+                          class="othercommentshow"
+                          ref="othercommentshowdiv">
                     <p><img src="./image/comment.png"
                            class="commentimg"
                            alt=""><span>评论</span></p>
@@ -45,7 +50,8 @@
                 </div>
 
               </div>
-              <div class="morecomment">
+              <div class="morecomment"
+                   ref="morecomment">
                 <el-input type="textarea"
                           class="youcomment"
                           v-model="comment"
@@ -80,7 +86,6 @@
             </div>
 
           </div>
-
         </div>
         <div class="right">
           <div class="creation">
@@ -93,7 +98,8 @@
               <img src="./image/bear.png"
                    alt="">
             </div>
-            <div class="addbtn">
+            <div class="addbtn"
+                 @click="dialogForm">
               <el-button type="primary"
                          style="width:200px; height:50px;font-size:18px"><img src="./image/add.png"
                      alt=""
@@ -114,13 +120,16 @@
                 <p class="top">{{index+1}}</p><span>{{list.title}}</span>
               </div>
             </div>
-            <div :class="footerclass">
+            <div :class="
+                           footerclass">
               <p>联系我们 © 2023 青钢影007LT</p>
               <p>举报邮箱：jubao龙涛@www.com</p>
               <p>服务热线：888-888-8888</p>
             </div>
           </div>
         </div>
+        <Forumadd :dialogFormVisible="dialogFormVisible"
+                  class="Forumadd"></Forumadd>
       </div>
     </div>
     <div>
@@ -131,10 +140,11 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, toRaw } from 'vue'
+import { ref, reactive, onMounted, toRaw, computed, watch, Created, resetFields } from 'vue'
 import { getForumList } from '@/store/forum/index'
+import { storeToRefs } from 'pinia';
+import Forumadd from './Forumadd/Forumadd.vue'
 
-const store = getForumList();
 
 name: 'Forum'
 
@@ -193,52 +203,101 @@ let hotforum = reactive([
     likeed: false,
   }
 ])
-let forumlist = reactive([]);
+let Forum = reactive({
+  Forumlist: '',
+  allForumlist: '',
+  moreForumlist: '',
+  nowPage: 1,
+});
+let dialogFormVisible = ref(false);
+// const Forumaddref = ref(null)
+const dialogForm = () => {
+  console.log(dialogFormVisible.value);
+  document.getElementsByClassName('Forumadd')[0].style.display = "block"
+  dialogFormVisible.value = true
+}
 let comment = ref("我我我啊啊啊啊")
-let othercommentshow = ref(false)
+// let othercommentshow = ref(false)
 let footerclass = ref('footer')
-const like = () => {
-  console.log(this);
+const store = getForumList();
+async function like (index) {
+  await store.changelike(index)
   if (1)
     document.getElementsByClassName("like")[0].style.backgroundColor = "#409EFF"
   // document.getElementsByClassName("likeimg")[0].src = "./image/liked.png"
   else {
     document.getElementsByClassName("like")[0].style.backgroundColor = "rgb(232, 247, 252);"
   }
+}
+
+const morecomment = ref(null);
+const othercommentshowdiv = ref(null)
+function othercommentshow (index) {
+  if (morecomment.value[index].style.display == "block") {
+    morecomment.value[index].style.display = "none"
+    othercommentshowdiv.value[index].style.backgroundColor = "rgb(232, 247, 252)"
+  } else {
+    morecomment.value[index].style.display = "block"
+    othercommentshowdiv.value[index].style.backgroundColor = "#409EFF"
+  }
 
 }
+
 const opencomment = () => {
   othercommentshow.value = !othercommentshow.value
 }
 const pushcomment = () => {
 
 }
-// const qqq = () => {
-//   store.getList();
-//   forumlist = JSON.parse(JSON.stringify(store.searchList));
-//   console.log("store.searchList", forumlist[0]);
-//   forumlist.push({ aa: 1 })
-// }
-// onMounted(() => {
-//   store.getList();
-//   // const forumStore = JSON.parse(JSON.stringify(store));
-//   forumlist = JSON.parse(JSON.stringify(store.searchList));
-//   console.log("store.searchList", forumlist);
-// })
-
 //调整footer
+
 const handleScroll = () => {
   let scrollTop = document.documentElement.scrollTop;
-  if (scrollTop >= 800) {
+  if (scrollTop >= 820) {
     footerclass.value = "footer footeradd"
   } else {
     footerclass.value = "footer"
   }
 }
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll, true)
+//懒加载
 
+const lazyloading = () => {
+  let scrollTop = document.documentElement.scrollTop;
+  if (scrollTop >= Forum.nowPage * 1500) {
+    Forum.nowPage++;
+    if (Forum.nowPage * 10 >= Forum.allForumlist.length) {
+      Forum.Forumlist = Forum.allForumlist
+    }
+    else {
+      Forum.Forumlist = Forum.allForumlist.slice(0, 1 * Forum.nowPage)
+    }
+  }
+}
+
+
+
+onMounted(async () => {
+  window.addEventListener('scroll', handleScroll, true)
+  window.addEventListener('scroll', lazyloading, true)
+
+  await store.getList()
+  store.forumsList
+  const { forumList } = storeToRefs(store)
+
+  //懒加载判断
+  if (toRaw(forumList.value).length <= 10) {
+    Forum.Forumlist = toRaw(forumList.value);
+    Forum.moreForumlist = false
+  }
+  else {
+    Forum.Forumlist = toRaw(forumList.value).slice(0, 10);
+    Forum.allForumlist = toRaw(forumList.value);
+    Forum.moreForumlist = true
+  }
 })
+
+
+
 
 </script>
 

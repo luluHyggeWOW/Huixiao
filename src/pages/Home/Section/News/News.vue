@@ -5,17 +5,13 @@
     </div> -->
     <div class="imghot">
       <div class="gdimg">
-        <Splide :options="{ rewind: true }"
-                style="width: 600px;">
-          <SplideSlide>
-            <img src="./image/Loginbkg.png"
-                 alt="Sample 1">
-          </SplideSlide>
-          <SplideSlide>
-            <img src="./image/Loginbkg.png"
-                 alt="Sample 2">
-          </SplideSlide>
-        </Splide>
+        <el-carousel trigger="click"
+                     height="400px">
+          <el-carousel-item v-for="item in newsimg"
+                            :key="item">
+            <img :src="item.img">
+          </el-carousel-item>
+        </el-carousel>
       </div>
       <div class="hotnews">
         <ul v-for="(list,index) in hotnews"
@@ -39,6 +35,22 @@ import { Splide, SplideSlide } from '@splidejs/vue-splide';
 import { defineComponent } from 'vue';
 import '@splidejs/vue-splide/css';
 name: 'News'
+let newsimg = [{
+  img: require('./image/Loginbkg.png')
+},
+{
+  img: require('./image/Loginbkg.png')
+},
+{
+  img: require('./image/Loginbkg.png')
+},
+{
+  img: require('./image/Loginbkg.png')
+},
+{
+  img: require('./image/Loginbkg.png')
+},
+]
 let hotnews = [
   {
     newsid: '1',

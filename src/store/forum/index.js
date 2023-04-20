@@ -1,44 +1,65 @@
 
 import { defineStore } from 'pinia'
-import { reqSearchList } from '@/api/api';
-import axios from 'axios';
+import { reqForumList, repForumlike } from '@/api/api';
+import { ref, computed } from 'vue'
+export const getForumList = defineStore('getlist', () => {
 
-export const getForumList = defineStore('getlist', {
-  state: () => ({
-    searchList: {},
-  }),
-  getters: {
-    // 当前形参 state 当前仓库中的state 并非大仓库中的那个state
-    forumsList (state) {
-      //.如果服务器数据回来了是一个数组 加入网络不给力没网 返回的是undefind
-      return state.searchList || [];
-    },
+  const forumList = ref({})
 
-
-  },
-
-  actions: {
-    //获取search模块数据
-    async getList (params = {}) {
-      //当前这reqSearchList这个函数在调用获取服务器数据的时候 至少传递一个参数（空对象)
-      //params形参 是当用户派发action的时候 第二个参数传递过来的 至少是一个空对象
-      let result = await reqSearchList(params);
-      // let result = await axios.get('http://jsonplaceholder.typicode.com/posts')
-      // console.log(result);
-      // this.searchList = result;
-      this.searchList = result;
-      // if (result.code == 200) {
-      //   this.searchList = result.data;
-      //   this.a = 2
-      // }
-      // else {
-      //   this.a = 3
-      // }
+  async function getList () {
+    //当前这reqSearchList这个函数在调用获取服务器数据的时候 至少传递一个参数（空对象)
+    //params形参 是当用户派发action的时候 第二个参数传递过来的 至少是一个空对象
+    let result = await reqForumList();
+    if (result.code == 200) {
+      // console.log('result', result);
+      forumList.value = result.data;
     }
+    else {
 
+    }
+  }
+  async function changelike (index) {
+    console.log(111, forumList.value[index]);
+    var d = new Date();
+    var year = String(d.getFullYear())
+    var month = d.getMonth() + 1;
+    if (month <= 9) {
+      month = `0${month}`
+    }
+    var day = String(d.getDate());
+    let time = year + month + day
+    let data = {
+      like_sid: forumList.value[index].t_id,
+      like_uid: forumList.value[index].t_uid,
+      like_data: time,
+    }
+    console.log(data.like_sid, data.like_uid, data.like_data);
+    let result = await repForumlike(data);
+    if (result.code == 200) {
+      console.log('result', result.data);
+      //  result.data;
+    }
+    else {
+
+    }
+  }
+  const forumsList = () => {
+    console.log('state', forumList.value)
+    return forumList.value
+  }
+  return {
+    getForumList,
+    getList,
+    forumsList,
+    forumList,
+    changelike,
   }
 
-})
+}
+
+)
 
 
-export default getForumList
+
+
+

@@ -28,7 +28,7 @@ const router = createRouter({
         {
           path: '/forum',
           name: 'forum',
-          component: () => import('@/pages/Home/Section/Forum/Forum.vue')
+          component: () => import('@/pages/Home/Section/Forum/Forum.vue'),
         },
         {
           path: '/news',
@@ -40,7 +40,33 @@ const router = createRouter({
           name: 'shop',
           component: () => import('@/pages/Home/Section/Shop/Shop.vue')
         },
-
+        {
+          path: '/userinfo',
+          name: 'userinfo',
+          component: () => import('@/pages/Home/Head/Userinfo/Userinfo.vue'),
+          children: [
+            {
+              path: '/userinfo/basic',
+              name: 'basic',
+              component: () => import('@/pages/Home/Head/Userinfo/basic/basic.vue'),
+            },
+            {
+              path: '/userinfo/school',
+              name: 'school',
+              component: () => import('@/pages/Home/Head/Userinfo/school/school.vue')
+            },
+            // {
+            //   path: '/shop',
+            //   name: 'shop',
+            //   component: () => import('')
+            // },
+            // {
+            //   path: '/userinfo',
+            //   name: 'userinfo',
+            //   component: () => import('')
+            // },
+          ]
+        },
       ]
     },
 

@@ -31,7 +31,7 @@ html {
         .left {
           width: 800px;
           // background-color: rgb(198, 246, 191);
-          height: 2000px;
+          height: auto;
           background-color: rgb(244, 252, 255);
           box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
           border-radius: 15px 0px 0px 15px;
@@ -45,17 +45,17 @@ html {
 
               img {
                 width: 100px;
-                // height: 100px;
+                border-radius: 100%;
               }
 
               .username {
-                // font-size: 18px;
                 text-align: center;
               }
             }
 
             .questionbox {
               padding-right: 20px;
+              width: 860px;
 
               .question {
                 font-size: 25px;
@@ -63,7 +63,26 @@ html {
               }
 
               .more {
-                // width: 700px;
+                position: relative;
+                min-height: 80px;
+                display: flex;
+                width: 600px;
+                margin-bottom: 20px;
+
+                img {
+                  width: 150px;
+                  border-radius: 0px;
+                }
+
+                span {
+                  // position: absolute;
+                  width: 430px;
+                  margin-left: 20px;
+                  word-break: break-all;
+                  word-wrap: break-word
+                }
+
+
               }
 
               .handle {
@@ -75,7 +94,7 @@ html {
 
                   button {
                     background-color: rgb(232, 247, 252);
-                    // background-color: red;
+                    // background-color: rgb(47, 182, 255);
                     width: auto;
                     height: 30px;
                     border: 0px;
@@ -89,15 +108,17 @@ html {
                       img {
                         width: 20px;
                         margin-top: -2px;
-                        margin-right: 2px
+                        margin-right: 2px;
+
                       }
 
                       span {
+
                         margin-left: 10px;
                         margin-right: 10px;
                         font-size: 15px;
                         position: relative;
-                        top: -3px;
+                        top: -4px;
                         left: 0px;
                       }
                     }
@@ -106,12 +127,14 @@ html {
                   button:hover {
                     background-color: rgb(168, 230, 251);
                   }
+
                 }
 
               }
 
 
               .morecomment {
+                display: none;
 
                 .pushcomment {
                   position: relative;
@@ -275,7 +298,7 @@ html {
           }
 
           .footer {
-            top: 45px;
+            top: 30px;
             // // z-index: 4;
             background-color: rgb(244, 252, 255);
             box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
@@ -293,6 +316,12 @@ html {
           .footeradd {
             position: fixed;
             top: 90px;
+            margin-top: -20px;
+
+            p {
+
+              padding: 20px 0px 0px 20px;
+            }
           }
 
 

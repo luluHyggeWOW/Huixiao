@@ -9,7 +9,7 @@ import store from '@/store'
 const requests = axios.create({
   //配置对象
   //基础路径，发请求路径应当会出现api
-  baseURL: "http://jsonplaceholder.typicode.com",
+  baseURL: "http://8.130.115.231:63010",
   //代表请求超时时间5s
   timeout: 5000
 });

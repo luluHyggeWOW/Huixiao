@@ -1,5 +1,5 @@
 <template>
-  <headr>
+  <div class="headr">
     <el-menu class="el-menu-demo"
              mode="horizontal"
              :id="head">
@@ -10,7 +10,8 @@
                    class="userimg">
         <template #title><img src="./image/neutral.png"
                alt=""></template>
-        <el-menu-item index="2-1">我的资料</el-menu-item>
+        <el-menu-item index="2-1"
+                      @click="userinfo">我的资料</el-menu-item>
         <el-menu-item index="2-2">选项2</el-menu-item>
         <el-menu-item index="2-3">选项3</el-menu-item>
       </el-sub-menu>
@@ -31,7 +32,7 @@
 
     </el-menu>
 
-  </headr>
+  </div>
 </template>
 
 <script setup>
@@ -39,6 +40,10 @@ import { ref, onMounted } from 'vue'
 import Search from '@/pages/Home/Head/Search/Search.vue'
 // import { requests } from "@/api/request"
 // import axios from 'axios'
+import { useRoute, useRouter } from "vue-router"
+
+const route = useRoute()
+const $router = useRouter()
 name: 'Headr'
 // const Login = async () => {
 //   await requests({ url: `/study_talk/search_source?source=ce`, method: 'get' }).then(
@@ -81,6 +86,9 @@ const handleScroll = () => {
   } else {
     head.value = "head2"
   }
+}
+const userinfo = () => {
+  $router.push('/userinfo')
 }
 onMounted(() => {
   window.addEventListener('scroll', handleScroll, true)
