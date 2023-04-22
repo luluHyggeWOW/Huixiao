@@ -84,8 +84,9 @@
                 </div>
               </div>
             </div>
-
+            <div class="footerline"></div>
           </div>
+
         </div>
         <div class="right">
           <div class="creation">
@@ -217,7 +218,6 @@ const dialogForm = () => {
   dialogFormVisible.value = true
 }
 let comment = ref("我我我啊啊啊啊")
-// let othercommentshow = ref(false)
 let footerclass = ref('footer')
 const store = getForumList();
 async function like (index) {

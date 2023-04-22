@@ -88,13 +88,19 @@ const handleScroll = () => {
   }
 }
 const userinfo = () => {
+  // this.isShow = !this.isShow;
+  // 滚动条宽度
+  let scrollWidth = window.innerWidth - document.documentElement.offsetWidth;
+  console.log(scrollWidth);
+  document.body.style.overflow = 'hidden';
+  document.body.style.paddingRight = scrollWidth + 'px';
   $router.push('/userinfo')
 }
 onMounted(() => {
   window.addEventListener('scroll', handleScroll, true)
 
 })
-
+//滚动条防抖
 
 </script>
 

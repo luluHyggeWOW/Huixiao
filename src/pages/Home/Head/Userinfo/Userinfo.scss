@@ -8,6 +8,18 @@
     display: flex;
     border-radius: 15px;
 
+
+    .closebox {
+      position: absolute;
+      left: 1160px;
+      top: 10px;
+      cursor: pointer;
+
+      img {
+        width: 25px;
+      }
+    }
+
     .top {
       position: relative;
 

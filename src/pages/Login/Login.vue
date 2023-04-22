@@ -1,102 +1,79 @@
 <template>
   <div class="bg">
 
-    <head>
-      <meta charset="utf-8">
-      <meta name="author"
-            content="Kodinger">
-      <meta name="viewport"
-            content="width=device-width,initial-scale=1">
-      <title>My Login Page</title>
-      <link rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-            crossorigin="anonymous">
-    </head>
-
     <body class="my-login-page">
-      <section class="h-100">
-        <div class="container h-100">
-          <div class="row justify-content-md-center h-100">
-            <div class="card-wrapper">
-              <div class="brand">
-                <img :src="logoimg"
-                     alt="logo">
-
-              </div>
-              <div class="card fat">
-                <div class="card-body">
-                  <h4 class="card-title">Login</h4>
-                  <form method="POST"
-                        class="my-login-validation"
-                        novalidate="">
-                    <div class="form-group">
-                      <label for="email">Student Number</label>
-                      <el-input id="studentnumber"
-                                @mouseenter="SNlogoenter"
-                                @mouseleave="SNlogoleave"
-                                type="email"
-                                class="forminput"
-                                name="studentnumber"
-                                v-model="userinfo.studentnumber"
-                                maxlength="11" />
-                      <div class="invalid-feedback">
-                        Email is invalid
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label for="password">Password
-                        <a href="forgot.html"
-                           class="float-right">
-                          Forgot Password?
-                        </a>
-                      </label>
-                      <el-input id="password"
-                                :type='passwordshow?"text":"password"'
-                                class="forminput"
-                                @mouseenter="PWlogoenter"
-                                @mouseleave="PWlogoleave"
-                                name="password"
-                                v-model="userinfo.password" />
-                      <div class="pwshow"
-                           @click="passwordshow=!passwordshow"
-                           type="button"
-                           @mouseenter="PWlogoenter">
-                        <img :src="pwshowimg">
-                      </div>
-                      <div class="invalid-feedback">
-                        Password is required
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <el-checkbox type="checkbox"
-                                   name="remember"
-                                   id="remember">Remember Me</el-checkbox>
-                    </div>
-                    <div class="form-group m-0">
-                      <el-button type="primary"
-                                 class="btn btn-primary btn-block"
-                                 @click="userLogin"
-                                 :plain="okLogin">
-                        Login
-                      </el-button>
-                    </div>
-                    <div class="mt-4 text-center">
-                      Don' t have an account? <router-link to="/register"><a href="">Create One</a>
-                      </router-link>
-                    </div>
-                  </form>
-                </div>
-              </div>
-              <div class="footer">
-                Copyright &copy; 2023 &mdash; Your Company
+      <div class="box">
+        <div class="brand">
+          <img :src="logoimg"
+               alt="logo">
+        </div>
+        <div class="card-body">
+          <h4 class="card-title">Login</h4>
+          <form class="my-login-validation"
+                novalidate="">
+            <div class="form-group">
+              <label for="email">Student Number</label>
+              <el-input @mouseenter="SNlogoenter"
+                        @mouseleave="SNlogoleave"
+                        type="email"
+                        class="forminput"
+                        name="cellphone"
+                        v-model="userinfo.cellphone"
+                        maxlength="11"
+                        width="200px" />
+              <div class="invalid-feedback">
+                Email is invalid
               </div>
             </div>
-          </div>
+
+            <div class="form-group">
+              <label for="password">Password
+                <a href="forgot.html"
+                   class="float-right">
+                  Forgot Password?
+                </a>
+              </label>
+              <el-input id="password"
+                        :type='passwordshow?"text":"password"'
+                        class="forminput"
+                        @mouseenter="PWlogoenter"
+                        @mouseleave="PWlogoleave"
+                        name="password"
+                        v-model="userinfo.password" />
+              <div class="pwshow"
+                   @click="passwordshow=!passwordshow"
+                   type="button"
+                   @mouseenter="PWlogoenter">
+                <img :src="pwshowimg">
+              </div>
+              <div class="invalid-feedback">
+                Password is required
+              </div>
+            </div>
+
+            <div class="form-group">
+              <el-checkbox type="checkbox"
+                           name="remember"
+                           id="remember">Remember Me</el-checkbox>
+            </div>
+            <el-button type="primary"
+                       class="btn btn-primary btn-block"
+                       @click="userLogin"
+                       :plain="okLogin"
+                       style="width: 200px; margin-left:150px">
+              Login
+            </el-button>
+            <div class="text-center">
+              Don' t have an account? <router-link to="/register"><a href="">Create One</a>
+              </router-link>
+            </div>
+          </form>
         </div>
-      </section>
+        <div class="footer">
+          Copyright &copy; 2023 &mdash; Your Company
+        </div>
+      </div>
+
     </body>
   </div>
 </template>
@@ -107,20 +84,18 @@ import { ElMessage } from 'element-plus';
 import debounce from "@/utils/debounce.js";
 import thorttle from "@/utils/thorttle.js";
 import { useRoute, useRouter } from 'vue-router';
-import Axios from "axios";
+import { submituser } from '@/store/user/index'
 name: 'Login';
 let logoimg = ref(require('@/pages/Login/image/neutral.png'))
 let pwshowimg = ref(require('@/pages/Login/image/pwshow.png'))
 let passwordshow = ref(false)
 let userinfo = reactive({
-  studentnumber: '',
+  cellphone: '',
   password: ''
 })
 const route = useRoute();
 const router = useRouter();
-// console.log(route.query.userphone);
-userinfo.studentnumber = route.query.userphone
-// user.studentnumber = ref(router.params.userphone)
+userinfo.cellphone = route.query.userphone
 let okLogin = ref(false);
 //鼠标悬停input logo变换
 
@@ -161,24 +136,17 @@ watch([passwordshow], () => {
 
 //节流
 //点击登录
-const userLogin = debounce(function () {
-  // console.log(user);
-  // let loginflag = false
-  // Axios({
-  //   url: `http://192.168.43.7:63010/auth/oauth/token?client_id=XcWebApp&client_secret=XcWebApp&grant_type=password`, data: {
-  //     password: user.password,
-  //     authType: "password",
-  //     cellphone: user.studentnumber
-  //   }, method: 'post'
-  // }).then(response => {
-  //   // console.log(response.data.data);
-  //   var jsonObj = JSON.parse(JSON.stringify(response.data.data));
-
-  // });
+const store = submituser();
+const userLogin = debounce(async function () {
+  store.$patch(state => {
+    state.user.cellphone = userinfo.cellphone
+    state.user.password = userinfo.password
+    console.log(state.user.cellphone, state.user.password);
+  })
+  await store.loginsubmit()
 
   if (1) {
-    // router.push({ path: "/home", query: { userphone: userinfo.studentnumber } });
-    router.push({ path: "/news", query: { userphone: userinfo.studentnumber } });
+    router.push({ path: "/news", query: { userphone: userinfo.cellphone } });
     ElMessage.success('登陆成功')
   }
   else {

@@ -39,6 +39,13 @@ html {
           .commentbox {
             display: flex;
 
+            .footerline {
+              position: absolute;
+              width: 700px;
+              left: 50px;
+              border-bottom: 1px solid #d1e8ff;
+            }
+
             .user {
               width: 150px;
               padding: 20px;

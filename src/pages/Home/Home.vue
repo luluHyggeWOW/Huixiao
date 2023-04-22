@@ -47,7 +47,7 @@ import Message from '@/pages/Home/Message/Message.vue'
 import Chat from '@/pages/Home/Message/Chat/Chat.vue'
 import Footer from '@/pages/Home/Footer/Footer.vue'
 
-import { components, ref, router } from 'vue'
+import { components, ref, router, watch } from 'vue'
 import { useRoute, useRouter } from "vue-router"
 
 name: 'Home'
@@ -66,6 +66,9 @@ const Shopshow = () => {
 
   $router.push('/shop')
 }
+
+//滚动条防抖
+
 
 </script>
 

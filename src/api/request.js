@@ -33,7 +33,7 @@ requests.interceptors.response.use((res) => {
 }, (err) => {
   //响应失败的回调函数
   alert(err.message);
-  return new Promise();
+  // return new Promise();
 });
 
 

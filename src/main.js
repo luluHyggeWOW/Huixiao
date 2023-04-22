@@ -14,7 +14,7 @@ import mitt from "mitt";
 const app = createApp(App)
 
 // main.js
-
+// ElementPlus.Dialog.props.lockScroll.default = false;
 app.config.globalProperties.$request = requests
 app.use(store).use(router).use(ElementPlus)
   .use(jquery).use(VueSplide).use(pinia).use(createPinia()).mount('#app')
