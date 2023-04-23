@@ -10,6 +10,7 @@ import requests from './api/api'
 import pinia from '@/store'
 import { createPinia } from 'pinia'
 import mitt from "mitt";
+import UUID from "vue3-uuid"
 
 const app = createApp(App)
 
@@ -17,5 +18,5 @@ const app = createApp(App)
 // ElementPlus.Dialog.props.lockScroll.default = false;
 app.config.globalProperties.$request = requests
 app.use(store).use(router).use(ElementPlus)
-  .use(jquery).use(VueSplide).use(pinia).use(createPinia()).mount('#app')
+  .use(jquery).use(VueSplide).use(pinia).use(createPinia()).use(UUID).mount('#app')
 app.config.globalProperties.mittBus = new mitt()

@@ -158,6 +158,7 @@ let timer = ref();
 let count = ref();
 let TIME_COUNT = ref(60)
 //发送验证码
+const store = submituser();
 const pushcode = debounce(async function () {
   if (!timer.value) {
     count.value = TIME_COUNT.value;
@@ -174,7 +175,7 @@ const pushcode = debounce(async function () {
     }, 1000);
 
     // alert("已发送，请注意查收");
-    const store = submituser();
+
     store.$patch(state => {
       state.register.password = userinfo.name
       state.register.cellphone = userinfo.phone
@@ -184,25 +185,19 @@ const pushcode = debounce(async function () {
     })
     await store.codesubmit()
     ElMessage.success('已发送，请注意查收')
-    if (1) {
-      router.push({ path: "/news", query: { userphone: userinfo.cellphone } });
-      ElMessage.success('登陆成功')
-    }
-    else {
-      ElMessage.error('账号或密码错误')
-    }
 
   }
 
 }, 500)
 const router = useRouter();
 const okregister = debounce(function () {
-  if (1) {
+  console.log();
+  if (userinfo.code == store.phonecode && userinfo.code != '') {
     ElMessage.success('注册成功')
     router.push({ path: "/login", query: { userphone: userinfo.phone } });
   }
   else {
-    ElMessage.error('请检查手机号或密码')
+    ElMessage.error('请检查验证码')
   }
 
 }, 500)

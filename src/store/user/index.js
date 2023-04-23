@@ -1,7 +1,8 @@
 
 import { defineStore } from 'pinia'
-import { repLogin, repphonecode } from '@/api/api';
-import { ref, computed, reactive } from 'vue'
+import { repLogin, repPhonecode, repRegister } from '@/api/api';
+import { ref, reactive } from 'vue'
+
 export const submituser = defineStore('user', () => {
 
   const user = reactive({
@@ -15,27 +16,48 @@ export const submituser = defineStore('user', () => {
     phonecode: ""
   })
 
+
   async function loginsubmit () {
     let data = new window.FormData();
     data.append('username', `{"password":${user.password},"authType":"password","cellphone":${user.cellphone}`);
     let result = await repLogin(data);
-    console.log('result', result);
+    console.log('loginresult', result);
+  }
+  async function registersubmit () {
+    let data = {
+      userPhone: register.cellphone,
+      userPassward: register.password,
+      userName: register.name,
+      sms: register.phonecode,
+    }
+    data.append('username', `{"password":${user.password},"authType":"password","cellphone":${user.cellphone}`);
+    let result = await repRegister(data);
+    console.log('registerresult', result);
   }
   async function codesubmit () {
     let phone = register.cellphone;
-    let result = await repLogin(phone);
-    console.log('result', result);
+    let result = await repPhonecode(phone);
+    if (result.code == 200) {
+      register.phonecode = result.data
+    }
+    else {
+      ElMessage.error('发送失败')
+    }
+    console.log('coderesult', result);
   }
+
   // const forumsList = () => {
   //   console.log('state', forumList.value)
   //   return forumList.value
   // }
   return {
+    user,
+    register,
     submituser,
     loginsubmit,
-    user,
+    registersubmit,
     codesubmit,
-    register
+
   }
 
 }

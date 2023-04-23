@@ -94,7 +94,7 @@ const userinfo = () => {
   console.log(scrollWidth);
   document.body.style.overflow = 'hidden';
   document.body.style.paddingRight = scrollWidth + 'px';
-  $router.push('/userinfo')
+  $router.push('/userinfo/basic')
 }
 onMounted(() => {
   window.addEventListener('scroll', handleScroll, true)

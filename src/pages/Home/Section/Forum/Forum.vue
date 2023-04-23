@@ -1,7 +1,6 @@
 <template>
   <div class="Forumbox">
     <div class="classes">
-
       <div class="body">
         <div class="left">
           <div class="head">
@@ -25,7 +24,8 @@
               <p class="question">{{list.t_date}}</p>
               <div class="more">
                 <img :src="list.t_img"
-                     alt="">
+                     alt=""
+                     v-if="list.t_img">
                 <span>{{list.t_date}}</span>
               </div>
               <div class="handle">
@@ -141,9 +141,10 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, toRaw, computed, watch, Created, resetFields } from 'vue'
+import { ref, reactive, onMounted, toRaw, computed, watch, resetFields } from 'vue'
 import { getForumList } from '@/store/forum/index'
 import { storeToRefs } from 'pinia';
+import { ElMessage } from 'element-plus';
 import Forumadd from './Forumadd/Forumadd.vue'
 
 
@@ -213,7 +214,6 @@ let Forum = reactive({
 let dialogFormVisible = ref(false);
 // const Forumaddref = ref(null)
 const dialogForm = () => {
-  console.log(dialogFormVisible.value);
   document.getElementsByClassName('Forumadd')[0].style.display = "block"
   dialogFormVisible.value = true
 }
@@ -222,6 +222,7 @@ let footerclass = ref('footer')
 const store = getForumList();
 async function like (index) {
   await store.changelike(index)
+
   if (1)
     document.getElementsByClassName("like")[0].style.backgroundColor = "#409EFF"
   // document.getElementsByClassName("likeimg")[0].src = "./image/liked.png"
@@ -232,6 +233,7 @@ async function like (index) {
 
 const morecomment = ref(null);
 const othercommentshowdiv = ref(null)
+//二级评论
 function othercommentshow (index) {
   if (morecomment.value[index].style.display == "block") {
     morecomment.value[index].style.display = "none"
@@ -242,7 +244,7 @@ function othercommentshow (index) {
   }
 
 }
-
+//鼠标移入移出
 const opencomment = () => {
   othercommentshow.value = !othercommentshow.value
 }
@@ -273,7 +275,12 @@ const lazyloading = () => {
     }
   }
 }
+//监听搜索框
 
+
+watch(store, (newvalue, oldvalue) => {
+  Forum.Forumlist = toRaw(newvalue.searchList)
+})
 
 
 onMounted(async () => {

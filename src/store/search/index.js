@@ -1,52 +1,68 @@
-import Vue from "vue";
-import Vuex from "vuex";
+
 import { defineStore } from 'pinia'
 import { reqSearchList } from '@/api/api';
-export const getSearchList = defineStore('counter', {
-  state: () => ({
+import { ref, computed, reactive } from 'vue'
+export const searchlist = defineStore('user', () => {
 
-    searchList: {}
-  }),
-  // const { name, doubleCount } = storeToRefs(store);
-  //mutations 修改state的唯一手段
-  // store.$patch({
+  const user = reactive({
+    cellphone: "",
+    password: ""
+  })
+  const register = reactive({
+    name: "",
+    cellphone: "",
+    password: "",
+    phonecode: ""
+  })
 
-  // })
-  // const mutations = {
-  //   GETSEARCHLIST (state, searchList) {
-  //     state.searchList = searchList
-  //   }
-  // };
-  // //计算属性 在项目中 为了简化数据而生
-  // //在项目当中 getters主要作用是 简化仓库中的数据（简化数据而生）
-  // //可以吧我们将来在组件当中需要用的数据简化一下 将来
-  getters: {
-    // 当前形参 state 当前仓库中的state 并非大仓库中的那个state
-    goodsList (state) {
-      //.如果服务器数据回来了是一个数组 加入网络不给力没网 返回的是undefind
-      return state.searchList.goodsList || [];
-    },
-    trademarkList () {
-      return state.searchList.trademarkList;
-    },
-    attrsList () {
-      return state.searchList.attrsList;
+  async function loginsubmit () {
+    let data = new window.FormData();
+    data.append('username', `{"password":${user.password},"authType":"password","cellphone":${user.cellphone}`);
+    let result = await repLogin(data);
+    console.log('loginresult', result);
+  }
+  async function registersubmit () {
+    let data = {
+      userPhone: register.cellphone,
+      userPassward: register.password,
+      userName: register.name,
+      sms: register.phonecode,
     }
-
-
-  },
-  actions: {
-    //获取search模块数据
-    async getSearchList (params = {}) {
-      //当前这reqSearchList这个函数在调用获取服务器数据的时候 至少传递一个参数（空对象)
-      //params形参 是当用户派发action的时候 第二个参数传递过来的 至少是一个空对象
-      let result = await reqSearchList(params);
-      if (result.code == 200) {
-        state.searchList = result.data.searchList
-      }
+    data.append('username', `{"password":${user.password},"authType":"password","cellphone":${user.cellphone}`);
+    let result = await repRegister(data);
+    console.log('registerresult', result);
+  }
+  async function codesubmit () {
+    let phone = register.cellphone;
+    let result = await repPhonecode(phone);
+    if (result.code == 200) {
+      register.phonecode = result.data
     }
+    else {
+      ElMessage.error('发送失败')
+    }
+    console.log('coderesult', result);
+  }
 
-  },
-})
+  // const forumsList = () => {
+  //   console.log('state', forumList.value)
+  //   return forumList.value
+  // }
+  return {
+    user,
+    register,
+    submituser,
+    loginsubmit,
+    registersubmit,
+    codesubmit,
+
+  }
+
+}
+
+)
+
+
+
 
 
