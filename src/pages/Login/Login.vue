@@ -39,7 +39,8 @@
                         @mouseenter="PWlogoenter"
                         @mouseleave="PWlogoleave"
                         name="password"
-                        v-model="userinfo.password" />
+                        v-model="userinfo.password"
+                        @keyup.enter="userLogin" />
               <div class="pwshow"
                    @click="passwordshow=!passwordshow"
                    type="button"
@@ -144,13 +145,14 @@ const userLogin = debounce(async function () {
     console.log(state.user.cellphone, state.user.password);
   })
   await store.loginsubmit()
-
-  if (1) {
-    router.push({ path: "/news", query: { userphone: userinfo.cellphone } });
-    ElMessage.success('登陆成功')
+  console.log(typeof (store.tokenflag));
+  if (typeof (store.tokenflag) == 'undefined') {
+    ElMessage.error('账号或密码错误')
   }
   else {
-    ElMessage.error('账号或密码错误')
+    ElMessage.success('登陆成功')
+    localStorage.setItem('huixiao', store.tokenflag.access_token)
+    router.push({ path: "/news", query: { userphone: userinfo.cellphone } });
   }
 }, 500)
 

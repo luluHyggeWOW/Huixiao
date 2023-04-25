@@ -38,7 +38,8 @@
                         style="width: 230px;"
                         class="forminput"
                         name="code"
-                        v-model="userinfo.code" />
+                        v-model="userinfo.code"
+                        maxlength="4" />
               <el-button id="codebtn"
                          type="primary"
                          class="forminput"
@@ -128,13 +129,15 @@ watch([userinfo, correct], (oldValue, newValue) => {
     if (reg_tel.test(newValue[0].phone)) {
       correct.codeclick = false
       newValue[1].phoneflag = false
+      newValue[1].codeclick = false
     } else {
       newValue[1].phoneflag = true
       newValue[1].messageflag = true
+      newValue[1].codeclick = true
     }
   }
   //验证两次密码
-  if (newValue[0].password == newValue[0].password2) {
+  if (newValue[0].password == newValue[0].password2 && newValue[0].password != '' && userinfo.code != '') {
     newValue[1].passwordflag = false
   }
   else {
@@ -145,9 +148,7 @@ watch([userinfo, correct], (oldValue, newValue) => {
   if (!newValue[1].phoneflag && !newValue[1].passwordflag) {
     newValue[1].registerclick = false
     newValue[1].messageflag = false
-    console.log('可以注册');
   } else {
-    console.log('no');
     newValue[1].registerclick = true
 
   }
@@ -166,38 +167,38 @@ const pushcode = debounce(async function () {
     timer.value = setInterval(() => {
       if (count.value > 0 && count.value <= TIME_COUNT.value) {
         count.value--;
-        // console.log("count----", count);
       } else {
         correct.codetimes = false;
         clearInterval(timer.value);
         timer.value = null;
       }
     }, 1000);
-
-    // alert("已发送，请注意查收");
-
     store.$patch(state => {
-      state.register.password = userinfo.name
+      state.register.name = userinfo.name
       state.register.cellphone = userinfo.phone
       state.register.password = userinfo.password
       state.register.phonecode = userinfo.code
-      console.log(state.register);
     })
     await store.codesubmit()
-    ElMessage.success('已发送，请注意查收')
-
   }
 
 }, 500)
 const router = useRouter();
-const okregister = debounce(function () {
-  console.log();
-  if (userinfo.code == store.phonecode && userinfo.code != '') {
+const okregister = debounce(async function () {
+  store.$patch(state => {
+    state.register.name = userinfo.name
+    state.register.cellphone = userinfo.phone
+    state.register.password = userinfo.password
+    state.register.phonecode = userinfo.code
+  })
+  await store.registersubmit()
+  console.log(111, store.reisterflag);
+  if (store.reisterflag.code == 200) {
     ElMessage.success('注册成功')
     router.push({ path: "/login", query: { userphone: userinfo.phone } });
   }
   else {
-    ElMessage.error('请检查验证码')
+    ElMessage.error('验证码错误')
   }
 
 }, 500)

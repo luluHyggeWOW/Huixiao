@@ -16,9 +16,9 @@ export const repForumlike = (data) => requests({
 //上传照片
 export const repForumimg = (data) => requests({ url: `/user/open/upload`, data, method: 'post' })
 //登录
-export const repLogin = (data) => requests({ url: `/auth/oauth/token?client_id=XcWebApp&client_secret=XcWebApp&grant_type=password`, data, method: 'post' })
+export const repLogin = (data) => requests({ url: `/auth/oauth/token?client_id=XcWebApp&client_secret=XcWebApp&grant_type=password`, data: data, method: 'post' })
 //注册
-export const repRegister = (data) => requests({ url: `/auth/oauth/token?client_id=XcWebApp&client_secret=XcWebApp&grant_type=password`, data, method: 'post' })
+export const repRegister = (data) => requests({ url: `/user/open/logon/`, data, method: 'post' })
 //验证码
 export const repPhonecode = (phone) => requests({ url: `/user/open/sedsms/${phone}`, method: 'get' })
 //获取用户信息

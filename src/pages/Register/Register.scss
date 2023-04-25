@@ -72,6 +72,11 @@ html {
           width: 360px;
           padding: 0px 0px 20px 70px;
           display: flex;
+
+          label {
+            font-size: 14px;
+            margin-top: 10px;
+          }
         }
       }
 

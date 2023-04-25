@@ -1,8 +1,7 @@
 //对于axios进行二次封装
 import router from "@/router";
 import axios from "axios";
-
-import store from '@/store'
+import { user } from '@/store/index'
 
 //1 利用axios对象的方法create 去创建一个 axios实例
 //2 request 就是axios 只不过稍微配置一下
@@ -18,17 +17,25 @@ requests.interceptors.request.use((config) => {
   //congif:配置对象，对象里面有一个属性很重要 headers请求头
   //进度条开始动
   // console.log(store);
-  // if (store.state.deatil.uuid_token) {
-  //   //给请求头添加一个字段 userTempId
-  //   config.headers.userTempId = store.state.deatil.uuid_token
+  // let store = user()
+  // if (store.user.token) {
+  //   //   //给请求头添加一个字段 userTempId
+  //   config.headers.userTempId = store.user.token
   // }
-  // nprogress.start();
+  // // nprogress.start();
   return config;
 });
 requests.interceptors.response.use((res) => {
   //成功的回调函数：服务器响莹数据回来以后 响莹拦截器可以检测到 可以做一些事
   //进度条结束
   // nprogress.done();
+  // const token = response.headers.token;
+  // if (token) {
+  //   window.localStorage.setItem('token', token)
+  // }
+  // response.headers.putuid = window.localStorage.getItem('token')
+  // if (response.data.code === 401) router.push({ name: 'Login' })
+  // return response
   return res.data;
 }, (err) => {
   //响应失败的回调函数
