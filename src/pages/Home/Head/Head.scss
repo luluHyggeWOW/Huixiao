@@ -1,4 +1,17 @@
 .headr {
+  .logo {
+    position: absolute;
+    top: 27%;
+    transform: translate(-820%, 0%);
+
+
+    img {
+      border-radius: 20px;
+      width: 200px;
+    }
+
+  }
+
   .el-menu-demo {
     background-color: #cbe5ff;
     justify-content: right;

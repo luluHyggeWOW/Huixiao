@@ -21,11 +21,11 @@
               <p class="username">{{list.t_uid}}</p>
             </div>
             <div class="questionbox">
-              <p class="question">{{list.t_date}}</p>
+              <p class="question">{{list.t_source}}</p>
               <div class="more">
                 <img :src="list.t_img"
                      alt=""
-                     v-if="list.t_img">
+                     v-if="list.t_img!='' ">
                 <span>{{list.t_date}}</span>
               </div>
               <div class="handle">
@@ -129,8 +129,8 @@
             </div>
           </div>
         </div>
-        <Forumadd :dialogFormVisible="dialogFormVisible"
-                  class="Forumadd"></Forumadd>
+        <Forumadd class="Forumadd"
+                  v-if="dialogFormVisible">qweqwe</Forumadd>
       </div>
     </div>
     <div>
@@ -213,10 +213,7 @@ let Forum = reactive({
 });
 let dialogFormVisible = ref(false);
 // const Forumaddref = ref(null)
-const dialogForm = () => {
-  document.getElementsByClassName('Forumadd')[0].style.display = "block"
-  dialogFormVisible.value = true
-}
+
 let comment = ref("我我我啊啊啊啊")
 let footerclass = ref('footer')
 const store = getForumList();
@@ -256,7 +253,7 @@ const pushcomment = () => {
 const handleScroll = () => {
   let scrollTop = document.documentElement.scrollTop;
   if (scrollTop >= 820) {
-    footerclass.value = "footer footeradd"
+    footerclass.value = "footeradd"
   } else {
     footerclass.value = "footer"
   }
@@ -271,15 +268,27 @@ const lazyloading = () => {
       Forum.Forumlist = Forum.allForumlist
     }
     else {
-      Forum.Forumlist = Forum.allForumlist.slice(0, 1 * Forum.nowPage)
+      Forum.Forumlist = Forum.allForumlist.slice(0, 10 * Forum.nowPage)
     }
   }
 }
+const dialogForm = () => {
+  const store = getForumList();
+  store.forumaddshow = true
+  dialogFormVisible.value = true
+}
 //监听搜索框
-
-
 watch(store, (newvalue, oldvalue) => {
-  Forum.Forumlist = toRaw(newvalue.searchList)
+  if (dialogFormVisible) {
+    if (store.searchtext != '') {
+      Forum.Forumlist = toRaw(newvalue.searchList)
+    }
+    else {
+      Forum.Forumlist = toRaw(store.forumList)
+    }
+  }
+  dialogFormVisible.value = store.forumaddshow
+
 })
 
 

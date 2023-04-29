@@ -1,23 +1,18 @@
 html {
   .Forumbox {
     position: absolute;
+    background-color: white;
 
     .classes {
 
       .head {
         display: flex;
         padding: 10px;
-        // font-size: 20px;
-
-        // height: 40px;
-
 
         .title {
-
           padding-left: 10px;
 
           p {
-
             font-size: 15px;
           }
         }
@@ -84,7 +79,7 @@ html {
                 span {
                   // position: absolute;
                   width: 430px;
-                  margin-left: 20px;
+                  // margin-left: 20px;
                   word-break: break-all;
                   word-wrap: break-word
                 }
@@ -201,7 +196,6 @@ html {
             background-color: rgb(244, 252, 255);
             box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
             border-radius: 0px 15px 0px 0px;
-
 
             .title {
               position: relative;
@@ -321,14 +315,12 @@ html {
           }
 
           .footeradd {
-            position: fixed;
-            top: 90px;
-            margin-top: -20px;
-
-            p {
-
-              padding: 20px 0px 0px 20px;
-            }
+            // position: relative;
+            position: -webkit-sticky;
+            position: sticky;
+            top: 20px;
+            left: 200px;
+            // margin-top: -20px;
           }
 
 

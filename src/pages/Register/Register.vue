@@ -2,6 +2,9 @@
   <div class="bg">
 
     <body class="my-login-page">
+      <div class="logo"><img src="./image/logo.png"
+             alt=""></div>
+
       <div class="box">
         <div class="brand">
           <img src="./image/neutral.png"

@@ -1,13 +1,20 @@
 body,
 html {
   background-color: #f7f9fb;
+
   // position: relative;
-
-
-
-
   .my-login-page {
+    .logo {
+      position: absolute;
 
+      top: 3%;
+      left: 3%;
+
+      img {
+        width: 200px;
+        border-radius: 20px;
+      }
+    }
 
     .box {
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
@@ -28,6 +35,9 @@ html {
       font-size: 14px;
       width: 500px;
       margin-top: 40px;
+      border-radius: 15px;
+
+
 
       .brand {
         height: 321px;

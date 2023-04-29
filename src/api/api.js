@@ -1,10 +1,13 @@
 import { method } from 'lodash';
 import requests from './request'
 
-//登录
-export const reqUserLogin = (data) => requests({ url: `/user/passport/login`, data, method: 'post' })
-//获取搜索内容
-export const reqSearchList = (searchtext) => requests({ url: `/talk/study_talk/search_source?source=${searchtext}`, method: 'get' })
+
+//获取论坛查询列表
+export const reqForumSearchList = (searchtext) => requests({ url: `/talk/study_talk/search_source?source=${searchtext}`, method: 'get' })
+//获取新闻查询列表
+export const reqNewsSearchList = (searchtext) => requests({ url: `/talk/study_talk/search_source?source=${searchtext}`, method: 'get' })
+//获取商城查询列表
+export const reqShopSearchList = (searchtext) => requests({ url: `/shop/mess/open/${searchtext}`, method: 'get' })
 //获取论坛列表
 export const reqForumList = () => requests({ url: `/talk/study_talk/all_studyTalk`, method: 'get' })
 //发帖子
@@ -22,12 +25,30 @@ export const repRegister = (data) => requests({ url: `/user/open/logon/`, data, 
 //验证码
 export const repPhonecode = (phone) => requests({ url: `/user/open/sedsms/${phone}`, method: 'get' })
 //获取用户信息
-export const repUserinfo = (phone) => requests({ url: `/user/open/sedsms/${phone}`, method: 'get' })
+export const repUserinfo = (token) => requests({ url: `/user/getuser/`, headers: { Authorization: `Bearer ${token}` }, method: 'get' })
+//修改用户信息
+export const repChangeUserinfo = (token, data) => requests({ url: `/user/upuser/`, headers: { Authorization: `Bearer ${token}` }, data, method: 'post' })
+//获取所有商品
+export const repShopList = () => requests({ url: `/shop/mess/open/get/1`, method: 'get' })
+//获取我的商品
+export const repgetMyShopList = (token) => requests({ url: `/shop/mess/getMyShop`, headers: { Authorization: `Bearer ${token}` }, method: 'get' })
+//获取我的论坛
+export const repgetMyForumList = (token) => requests({ url: ``, headers: { Authorization: `Bearer ${token}` }, method: 'get' })
+
+
+
+
 
 export default {
-  reqUserLogin,
-  reqSearchList,
+  reqForumSearchList,
+  reqNewsSearchList,
+  reqShopSearchList,
   reqForumList,
   repForumlike,
   repLogin,
+  repUserinfo,
+  repChangeUserinfo,
+  repShopList,
+  repgetMyShopList,
+  repgetMyForumList
 }

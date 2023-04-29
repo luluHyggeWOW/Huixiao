@@ -44,28 +44,6 @@ const router = createRouter({
           path: '/userinfo',
           name: 'userinfo',
           component: () => import('@/pages/Home/Head/Userinfo/Userinfo.vue'),
-          children: [
-            {
-              path: '/userinfo/basic',
-              name: 'basic',
-              component: () => import('@/pages/Home/Head/Userinfo/basic/basic.vue'),
-            },
-            {
-              path: '/userinfo/school',
-              name: 'school',
-              component: () => import('@/pages/Home/Head/Userinfo/school/school.vue')
-            },
-            // {
-            //   path: '/shop',
-            //   name: 'shop',
-            //   component: () => import('')
-            // },
-            // {
-            //   path: '/userinfo',
-            //   name: 'userinfo',
-            //   component: () => import('')
-            // },
-          ]
         },
       ]
     },

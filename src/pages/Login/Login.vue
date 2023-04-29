@@ -2,7 +2,10 @@
   <div class="bg">
 
     <body class="my-login-page">
+      <div class="logo"><img src="./image/logo.png"
+             alt=""></div>
       <div class="box">
+
         <div class="brand">
           <img :src="logoimg"
                alt="logo">
@@ -80,12 +83,15 @@
 </template>
 
 <script setup>
-import { ref, reactive, watch } from 'vue';
+import { ref, reactive, watch, onMounted } from 'vue';
 import { ElMessage } from 'element-plus';
 import debounce from "@/utils/debounce.js";
 import thorttle from "@/utils/thorttle.js";
 import { useRoute, useRouter } from 'vue-router';
 import { submituser } from '@/store/user/index'
+import { usermain } from '@/store/index'
+import axios from 'axios';
+
 name: 'Login';
 let logoimg = ref(require('@/pages/Login/image/neutral.png'))
 let pwshowimg = ref(require('@/pages/Login/image/pwshow.png'))
@@ -142,20 +148,27 @@ const userLogin = debounce(async function () {
   store.$patch(state => {
     state.user.cellphone = userinfo.cellphone
     state.user.password = userinfo.password
-    console.log(state.user.cellphone, state.user.password);
   })
   await store.loginsubmit()
-  console.log(typeof (store.tokenflag));
-  if (typeof (store.tokenflag) == 'undefined') {
+  const store2 = usermain();
+  if (store2.userinfo.usertoken == '') {
     ElMessage.error('账号或密码错误')
   }
   else {
     ElMessage.success('登陆成功')
-    localStorage.setItem('huixiao', store.tokenflag.access_token)
+    localStorage.setItem('huixiao', store2.userinfo.usertoken)
+    await store2.getuserinfo();
+    // store.$patch(state => {
+    //   state.user.cellphone = userinfo.cellphone
+    //   state.user.password = userinfo.password
+    //   console.log(state.user.cellphone, state.user.password);
+    // })
     router.push({ path: "/news", query: { userphone: userinfo.cellphone } });
   }
 }, 500)
+onMounted(() => {
 
+})
 
 </script>
 

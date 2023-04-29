@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import { repLogin, repPhonecode, repRegister } from '@/api/api';
 import { ref, reactive } from 'vue'
 import { ElMessage } from 'element-plus';
+import { usermain } from '@/store/index'
 
 export const submituser = defineStore('user', () => {
 
@@ -16,14 +17,23 @@ export const submituser = defineStore('user', () => {
     password: "",
     phonecode: ""
   })
-  const tokenflag = ref()
   const reisterflag = ref()
   async function loginsubmit () {
     let data = new window.FormData();
     // data.append('username', `{"password":${user.password},"authType":"password","cellphone":${user.cellphone}`);
     data.append('username', `{"password":"1234","authType":"password","cellphone":"12333333333"}`);
     let result = await repLogin(data);
-    tokenflag.value = result
+    const store = usermain()
+    if (result.access_token) {
+      store.$patch(state => {
+        state.userinfo.usertoken = result.access_token
+        state.userinfo.id = user.cellphone
+      })
+
+    } else {
+      ElMessage.error('登陆失败')
+    }
+
 
 
   }
@@ -57,7 +67,6 @@ export const submituser = defineStore('user', () => {
     loginsubmit,
     registersubmit,
     codesubmit,
-    tokenflag,
     reisterflag
 
   }

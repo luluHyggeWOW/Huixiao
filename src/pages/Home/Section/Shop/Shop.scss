@@ -6,7 +6,104 @@ html {
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     position: absolute;
     border-radius: 15px;
-    height: 1000px;
+    height: auto;
+
+    .shopbox {
+      column-count: 3;
+      column-gap: 0em;
+      width: 1150px;
+      flex-wrap: wrap;
+      margin: 45px 25px 25px 30px;
+      height: auto;
+
+      .shopdiv {
+        margin: 0;
+        width: 370px;
+        overflow: hidden;
+        height: auto;
+        margin-bottom: 10px;
+
+        .shopimg {
+          object-fit: cover;
+          width: 370px;
+          max-height: 740px;
+          min-height: 370px;
+
+        }
+
+        .shopuser {
+          height: auto;
+
+          .shoptitle {
+            width: 370px;
+            font-size: 17px;
+          }
+
+          .userdiv {
+            height: 40px;
+            display: flex;
+
+            .userimg {
+              width: 40px;
+              height: 40px;
+            }
+
+            .username {
+              // width: 0px;
+              margin-top: 10px;
+              margin-left: 20px;
+              color: #606266;
+              font-size: 16px;
+
+            }
+
+            .price {
+              position: relative;
+              width: 100px;
+              font-weight: 600;
+              // background-color: #ca6d55;
+              left: 120px;
+
+
+              span {
+                font-size: 30px;
+                float: right;
+                color: #e04212;
+                font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+                  'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+              }
+            }
+          }
+
+        }
+      }
+
+      .selldiv {
+        margin: 0;
+        width: 370px;
+        overflow: hidden;
+        height: 400px;
+        margin-bottom: 10px;
+        border-radius: 15px;
+        background-color: rgb(182, 221, 255);
+
+        .title {
+          img {
+            position: relative;
+            width: 40px;
+            left: 100px;
+            top: 5px
+          }
+
+          p {
+            position: relative;
+            top: -50px;
+            text-align: center;
+            font-size: 20px;
+          }
+        }
+      }
+    }
   }
 
 }

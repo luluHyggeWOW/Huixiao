@@ -41,31 +41,51 @@ html {
         // display: flex;
         position: absolute;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translate(-52%);
+        margin-top: 100px;
 
         .title {
           // z-index: 4;
           display: flex;
-
-          margin: 100px;
+          width: 1200px;
 
           div {
             background-image: linear-gradient(80deg, #62c8f4, #cfecfb);
-
-            width: 300px;
-            height: 80px;
+            width: 370px;
+            height: 100px;
             text-align: center;
             margin-left: 50px;
-            border-radius: 15px;
-            margin-top: 5px;
+            border-radius: 15px 15px 0px 0;
+            margin-top: 10px;
             transition: all 0.5s;
 
+            // display: flex;
             span {
+              font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+                'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+            }
+
+            .bigtitle {
+              width: 150px;
               position: relative;
-              top: 20px;
-              font-size: 25px;
-              font-family: "华文细黑";
-              font-weight: 500;
+              top: 5px; // top: -35px;
+              font-size: 40px;
+              font-weight: 600;
+            }
+
+            .smalltitle {
+              position: relative;
+              left: -160px;
+              top: 35px;
+
+            }
+
+            img {
+              position: relative;
+              top: -50px;
+              left: 110px;
+              width: 90px;
+              height: 80px;
             }
           }
 
@@ -81,10 +101,9 @@ html {
 
       .views {
         width: 1200px;
-        position: absolute;
+        position: relative;
         top: 200px;
         left: 18%;
-        // left: 50%;
         // transform: translate(-50%);
 
       }
@@ -123,6 +142,27 @@ html {
         bottom: 30px;
         transform: translateX(-100%);
         top: 150px;
+      }
+
+      .gotop {
+        position: fixed;
+        top: 93%;
+        z-index: 99;
+        left: 96%;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+
+        img {
+          width: 40px;
+
+        }
+      }
+
+      .gotop :hover {
+        box-shadow: 10px 10px 10px rgba(12, 21, 35, 0.12),
+          0 0 6px rgba(67, 6, 237, 0.04);
       }
 
 
