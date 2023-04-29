@@ -12,6 +12,7 @@ export const getForumList = defineStore('getlist', () => {
   const searchList = ref({})
   const searchtext = ref({})
   const myforum = ref({})
+  const moreforum = ref({})
   const addforumlist = reactive({
     title: '',
     class: '',
@@ -41,23 +42,9 @@ export const getForumList = defineStore('getlist', () => {
 
     }
   }
-  async function changelike (index) {
-    console.log(111, forumList.value[index]);
-    var d = new Date();
-    var year = String(d.getFullYear())
-    var month = d.getMonth() + 1;
-    if (month <= 9) {
-      month = `0${month}`
-    }
-    var day = String(d.getDate());
-    let time = year + month + day
-    let data = {
-      like_sid: forumList.value[index].t_id,
-      like_uid: forumList.value[index].t_uid,
-      like_data: time,
-    }
+  async function changelike (data) {
 
-    data = JSON.stringify(data)
+
     console.log(data);
     let result = await repForumlike(data);
     console.log(result);

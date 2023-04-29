@@ -1,7 +1,8 @@
 <template>
+  <div></div>
   <div class="box">
     <div class="div">
-      <el-dialog title="开始创作！"
+      <el-dialog title="发布商品！"
                  v-model="dialogFormVisible"
                  :close-on-click-modal=false
                  :modal=true
@@ -11,27 +12,12 @@
         <img src="./image/creation.png"
              alt="">
         <el-form :model="form">
-          <el-form-item label="标题：">
+          <el-form-item label="商品名称：">
             <el-input v-model="form.title"
                       autocomplete="off"></el-input>
           </el-form-item>
-          <el-form-item label="类别：">
-            <el-select v-model="form.cless"
-                       placeholder="请选择讨论类别"
-                       @change="changeclass">
-              <el-option label="生活"
-                         value="tiyu"></el-option>
-              <el-option label="学习"
-                         value="kaoyan"></el-option>
-              <el-option label="美食"
-                         value="kaoyan"></el-option>
-              <el-option label="娱乐"
-                         value="kaoyan"></el-option>
-              <el-option label="其他"
-                         value="kaoyan"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="内容：">
+
+          <el-form-item label="具体介绍：">
             <el-input type="textarea"
                       placeholder="请输入内容"
                       maxlength="100"
@@ -40,10 +26,26 @@
                       v-model="form.text">
             </el-input>
           </el-form-item>
-          <el-form-item label="图片：">
+          <el-form-item label="类&nbsp; &nbsp; &nbsp; 别：">
+            <el-select v-model="form.cless"
+                       placeholder="请选择讨论类别"
+                       @change="changeclass">
+              <el-option label="电子产品"
+                         value="tiyu"></el-option>
+              <el-option label="日用品"
+                         value="kaoyan"></el-option>
+              <el-option label="书本"
+                         value="kaoyan"></el-option>
+              <el-option label="服装类"
+                         value="kaoyan"></el-option>
+              <el-option label="其他"
+                         value="kaoyan"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="商品图片：">
             <el-upload action="http://8.130.115.231:63010/user/open/upload"
                        list-type="picture-card"
-                       :limit=1
+                       :limit=3
                        :on-change="upload"
                        :before-upload="beforeAvatarUpload"
                        accept=".jpg,.jpeg,.png,.gif,.bmp,.pdf,.JPG,.JPEG,.PBG,.GIF,.BMP,.PDF">
@@ -72,9 +74,9 @@
 <script setup>
 import { ref, reactive, getCurrentInstance, watch, toRaw } from 'vue';
 import { useRoute, useRouter } from "vue-router";
-import { getForumList } from '@/store/forum/index'
+import { getShopList } from '@/store/shop/index'
 import { ElMessage } from 'element-plus';
-name: 'Forumadd'
+name: 'Shopadd'
 let form = reactive({
   title: '',
   class: '',
@@ -87,7 +89,7 @@ let dialogFormVisible = ref(true)
 const changeclass = (e) => {
   form.class = e
 }
-const store = getForumList()
+const store = getShopList()
 async function dialogForm (val) {
   if (val == 'yes') {
     console.log(form.class);
@@ -108,21 +110,19 @@ async function dialogForm (val) {
   else {
     //是否保存
     store.$patch(state => {
-      state.addforumlist.title = ''
-      state.addforumlist.img = ''
-      state.addforumlist.class = ''
-      state.addforumlist.text = ''
+      state.addshoplist.title = ''
+      state.addshoplist.img = ''
+      state.addshoplist.class = ''
+      state.addshoplist.text = ''
     })
   }
-  document.getElementsByClassName('box')[0].style.display = "none"
-  dialogFormVisible.value = false
-  document.getElementsByTagName('body')[0].className = '';
   form.title = '';
   form.class = '';
   form.text = '';
   form.img = '';
-  const store2 = getForumList();
-  store2.forumaddshow = false
+  const store2 = getShopList();
+  store2.shopaddshow = false
+  dialogFormVisible.value = store2.shopaddshow
 }
 async function upload (file, fileList) {
   if (file.status == 'success') {
@@ -146,5 +146,5 @@ const beforeAvatarUpload = (file) => {
 
 </script>
 
-<style scoped lang="scss" src="./Forumadd.scss">
+<style scoped lang="scss" src="./Shopadd.scss">
 </style>

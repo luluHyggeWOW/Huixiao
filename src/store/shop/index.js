@@ -10,6 +10,13 @@ export const getShopList = defineStore('shop', () => {
   const shoplist = ref()
   const searchList = ref({})
   const myshop = ref({})
+  const addshoplist = reactive({
+    title: '',
+    class: '',
+    text: '',
+    img: 'null',
+  })
+  const shopaddshow = ref(false)
   async function getAllList () {
     let result = await repShopList();
     // console.log(result.data);
@@ -48,7 +55,9 @@ export const getShopList = defineStore('shop', () => {
     shoplist,
     getAllList,
     getmyShopList,
-    getShopSearchList
+    getShopSearchList,
+    shopaddshow,
+    addshoplist
   }
 
 }

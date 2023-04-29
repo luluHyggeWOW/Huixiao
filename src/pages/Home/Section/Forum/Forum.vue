@@ -30,7 +30,7 @@
               </div>
               <div class="handle">
                 <div>
-                  <button @click="like(index)"
+                  <button @click="like(list)"
                           class="like">
 
                     <p><img src="./image/like0.png"
@@ -40,7 +40,7 @@
                   </button>
                 </div>
                 <div>
-                  <button @click="othercommentshow(index)"
+                  <button @click="othercommentshow(list,index)"
                           class="othercommentshow"
                           ref="othercommentshowdiv">
                     <p><img src="./image/comment.png"
@@ -130,7 +130,7 @@
           </div>
         </div>
         <Forumadd class="Forumadd"
-                  v-if="dialogFormVisible">qweqwe</Forumadd>
+                  v-if="dialogFormVisible"></Forumadd>
       </div>
     </div>
     <div>
@@ -217,8 +217,22 @@ let dialogFormVisible = ref(false);
 let comment = ref("我我我啊啊啊啊")
 let footerclass = ref('footer')
 const store = getForumList();
-async function like (index) {
-  await store.changelike(index)
+async function like (list) {
+  console.log(list);
+  var d = new Date();
+  var year = String(d.getFullYear())
+  var month = d.getMonth() + 1;
+  if (month <= 9) {
+    month = `0${month}`
+  }
+  var day = String(d.getDate());
+  let time = year + month + day
+  let data = JSON.stringify({
+    "like_sid": list.t_id,
+    "like_uid": list.t_uid,
+    "like_data": time
+  })
+  await store.changelike(data)
 
   if (1)
     document.getElementsByClassName("like")[0].style.backgroundColor = "#409EFF"
@@ -231,7 +245,8 @@ async function like (index) {
 const morecomment = ref(null);
 const othercommentshowdiv = ref(null)
 //二级评论
-function othercommentshow (index) {
+function othercommentshow (list, index) {
+  console.log();
   if (morecomment.value[index].style.display == "block") {
     morecomment.value[index].style.display = "none"
     othercommentshowdiv.value[index].style.backgroundColor = "rgb(232, 247, 252)"

@@ -9,7 +9,7 @@ module.exports = defineConfig({
   devServer: {
     proxy: {
       '/api': {
-        target: '',//这里填入你要请求的接口的前缀
+        target: 'http://localhost:8080',//这里填入你要请求的接口的前缀
         changeOrigin: true,//虚拟的站点需要更管origin                  //是否https接口
         pathRewrite: {
           '^/api': 'api'//重写路径
