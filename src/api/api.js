@@ -12,7 +12,7 @@ export const reqShopSearchList = (searchtext) => requests({ url: `/shop/mess/ope
 export const reqForumList = () => requests({ url: `/talk/study_talk/all_studyTalk`, method: 'get' })
 //发帖子
 export const repAddForum = (data) => requests({ url: `/talk/study_talk/addtalk`, data, method: 'post' })
-//修改论坛喜欢
+//修改论坛二级喜欢
 export const repForumlike = (data) => requests({
   url: `/talk/talk_talk/like_talk`, data, headers: { 'Content-Type': 'application/json' }, method: 'post'
 })

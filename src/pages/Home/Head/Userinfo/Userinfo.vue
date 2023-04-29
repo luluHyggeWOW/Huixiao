@@ -56,14 +56,14 @@
           <p>用户昵称：</p>
           <div class="input">
             <el-input v-model="userinfo.name"
-                      placeholder="请输入内容"></el-input>
+                      placeholder="你什么都没留下"></el-input>
           </div>
         </div>
         <div class="div">
           <p>邮箱：</p>
           <div class="input">
             <el-input v-model="userinfo.email"
-                      placeholder="请输入内容"></el-input>
+                      placeholder="你什么都没留下"></el-input>
           </div>
         </div>
         <div class="div">
@@ -82,7 +82,7 @@
           <p>年龄：</p>
           <div class="input">
             <el-input v-model.number="userinfo.age"
-                      placeholder="请输入内容"></el-input>
+                      placeholder="你什么都没留下"></el-input>
 
           </div>
         </div>
@@ -91,7 +91,7 @@
           <div class="input"
                style=" width:500px;">
             <el-input type="textarea"
-                      placeholder="请输入内容"
+                      placeholder="你什么都没留下"
                       v-model="userinfo.introduct"
                       maxlength="30"
                       show-word-limit>
@@ -106,14 +106,14 @@
           <p>学校名称：</p>
           <div class="input">
             <el-input v-model="userinfo.school"
-                      placeholder="请输入内容"></el-input>
+                      placeholder="你什么都没留下"></el-input>
           </div>
         </div>
         <div class="div">
           <p>入学时间：</p>
           <div class="input">
             <el-input v-model="input"
-                      placeholder="请输入内容"></el-input>
+                      placeholder="你什么都没留下"></el-input>
           </div>
         </div>
 
@@ -121,7 +121,7 @@
           <p>专业：</p>
           <div class="input">
             <el-input v-model="input"
-                      placeholder="请输入内容"></el-input>
+                      placeholder="你什么都没留下"></el-input>
 
           </div>
         </div>
@@ -129,7 +129,7 @@
           <p>学历：</p>
           <div class="input">
             <el-input v-model="input"
-                      placeholder="请输入内容"></el-input>
+                      placeholder="你什么都没留下"></el-input>
 
           </div>
         </div>

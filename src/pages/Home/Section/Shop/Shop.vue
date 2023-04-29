@@ -1,8 +1,53 @@
 <template>
   <Shopadd class="Shopadd"
            v-if="Shopaddshow"></Shopadd>
-  <div class='box'>
+  <div class="Shopinfo"
+       v-if="Shopinfoshow">
+    <div class="colse"
+         @click="Shopinfoshow=!Shopinfoshow"><img src="./image/closebtn.png"
+           alt=""></div>
+    <div class="shopimg">
+      <el-carousel trigger="click"
+                   height="800px"
+                   style="border-radius: 15px 0px 0px 15px ;">
+        <el-carousel-item v-for="item in 4"
+                          :key="item">
+          <img src="./image/17-panda(1).png"
+               alt="">
+          {{ item }}
+        </el-carousel-item>
+      </el-carousel>
+    </div>
+    <div class="shopuser">
+      <div class="userimg">
+        <img src="./image/gotop.png"
+             alt="">
+      </div>
+      <div class="username">
+        <p>问问驱蚊器翁</p>
+      </div>
+      <span class="p">卖家信息</span>
+    </div>
 
+    <div class="shoptitle">
+      <hr>
+      <p>武切维奇无</p>
+      <span class="p">商品名称</span>
+    </div>
+    <div class="shoptext">
+      <p> 武切维奇无qweqweqwqweqwasdadaqqwewwwwww 武切维奇无qweqweqwqweqwasdadaqqwewwwwww 武切维奇无qweqweqwqweqwasdadaqqwewwwwww 武切维奇无qweqweqwqweqwasdadaqqwewwwwww</p>
+      <span class="p">商品详细</span>
+    </div>
+    <div class="shopprice">
+      <p>￥<span>99.02</span></p>
+    </div>
+    <div class="shopcar">
+      <img src="./image/shopcar.png"
+           alt="">
+      <p>加入购物车</p>
+    </div>
+  </div>
+  <div class='box'>
     <div class="shopbox">
       <div class="bearear">
         <div class="leftear">
@@ -36,8 +81,9 @@
         </div>
       </div>
       <div class="shopdiv"
-           v-for="list in ShopList.AllShopList"
-           :key="list.shopId">
+           v-for="(list) in ShopList.AllShopList"
+           :key="list.shopId"
+           @click="clickshopinfo(list)">
         <div class="shopimg">
           <img src="./image/Loginbkg.png"
                alt="">
@@ -68,24 +114,27 @@ let ShopList = reactive({
   AllShopList: '',
   NowShopList: '',
 });
+let list = [
+
+]
 let Shopaddshow = ref(false)
 let nowPage = ref(1)
 async function getAlllist () {
   const store = getShopList();
   await store.getAllList()
   ShopList.AllShopList = store.shoplist
-  console.log(store.shoplist);
-  store.shoplist.forEach((e, index) => {
-    if (index < 2) {
-      ShopList.twoShopList += e.value
-    }
-  });
-  console.log(ShopList.AllShopList);
 }
+let shopinfo
+let Shopinfoshow = ref(false)
+const store = getShopList()
 const Shopaddshowflag = () => {
   Shopaddshow.value = true;
+  store.shopaddshow = true
 }
-const store = getShopList();
+const clickshopinfo = (info) => {
+  Shopinfoshow.value = !Shopinfoshow.value
+  console.log(info);
+}
 watch(store, (newvalue, oldvalue) => {
   if (Shopaddshow) {
     if (store.searchtext != '') {
@@ -96,7 +145,6 @@ watch(store, (newvalue, oldvalue) => {
     }
   }
   Shopaddshow.value = store.shopaddshow
-  console.log(Shopaddshow.value);
 
 })
 

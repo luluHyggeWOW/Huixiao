@@ -48,6 +48,16 @@
                            alt=""><span>评论</span></p>
                   </button>
                 </div>
+                <div>
+                  <button @click="collect(list)"
+                          class="like">
+
+                    <p><img src="./image/collect.png"
+                           class="likeimg">
+                      <span>收藏</span>
+                    </p>
+                  </button>
+                </div>
 
               </div>
               <div class="morecomment"
@@ -234,9 +244,10 @@ async function like (list) {
   })
   await store.changelike(data)
 
-  if (1)
+  if (1) {
     document.getElementsByClassName("like")[0].style.backgroundColor = "#409EFF"
-  // document.getElementsByClassName("likeimg")[0].src = "./image/liked.png"
+    document.getElementsByClassName("likeimg")[0].src = "./image/liked.png"
+  }
   else {
     document.getElementsByClassName("like")[0].style.backgroundColor = "rgb(232, 247, 252);"
   }

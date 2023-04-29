@@ -144,6 +144,7 @@ const beforeAvatarUpload = (file) => {
 
 
 
+
 </script>
 
 <style scoped lang="scss" src="./Shopadd.scss">
