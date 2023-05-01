@@ -30,6 +30,19 @@
               </div>
               <div class="handle">
                 <div>
+                  <button @click="collect(list,index)"
+                          class="collect">
+                    <p>
+                      <img src="./image/collect.png"
+                           class="collectimg">
+                      <img src="./image/collected.png"
+                           class="collectedimg"
+                           style="display:none">
+                      <span>{{list.t_like_count}}</span>
+                    </p>
+                  </button>
+                </div>
+                <!-- <div>
                   <button @click="like(list)"
                           class="like">
 
@@ -38,7 +51,7 @@
                       <span>{{list.t_like_count}}</span>
                     </p>
                   </button>
-                </div>
+                </div> -->
                 <div>
                   <button @click="othercommentshow(list,index)"
                           class="othercommentshow"
@@ -46,16 +59,6 @@
                     <p><img src="./image/comment.png"
                            class="commentimg"
                            alt=""><span>评论</span></p>
-                  </button>
-                </div>
-                <div>
-                  <button @click="collect(list)"
-                          class="like">
-
-                    <p><img src="./image/collect.png"
-                           class="likeimg">
-                      <span>收藏</span>
-                    </p>
                   </button>
                 </div>
 
@@ -223,12 +226,12 @@ let Forum = reactive({
 });
 let dialogFormVisible = ref(false);
 // const Forumaddref = ref(null)
-
+let time = ref()
+let collected = ref(false)
 let comment = ref("我我我啊啊啊啊")
 let footerclass = ref('footer')
 const store = getForumList();
-async function like (list) {
-  console.log(list);
+const gettime = () => {
   var d = new Date();
   var year = String(d.getFullYear())
   var month = d.getMonth() + 1;
@@ -236,21 +239,48 @@ async function like (list) {
     month = `0${month}`
   }
   var day = String(d.getDate());
-  let time = year + month + day
-  let data = JSON.stringify({
-    "like_sid": list.t_id,
-    "like_uid": list.t_uid,
-    "like_data": time
-  })
-  await store.changelike(data)
+  time.value = `${year}-${month}-${day}`
+}
+//喜欢
+// async function like (list) {
+//   gettime();
+//   let data = JSON.stringify({
+//     "usc_sid": list.t_id,
+//     "usc_uid": list.t_uid,
+//     "usc_data": time.value,
+//     "tk_title": "test"
+//   })
+//   await store.changecollect(data)
 
-  if (1) {
-    document.getElementsByClassName("like")[0].style.backgroundColor = "#409EFF"
-    document.getElementsByClassName("likeimg")[0].src = "./image/liked.png"
+//   if (1) {
+//     document.getElementsByClassName("like")[0].style.backgroundColor = "#409EFF"
+//     document.getElementsByClassName("likeimg")[0].src = "./image/liked.png"
+//   }
+//   else {
+//     document.getElementsByClassName("like")[0].style.backgroundColor = "rgb(232, 247, 252);"
+//   }
+// }
+//收藏
+const collect = async (list, index) => {
+  gettime();
+  let data = {
+    "usc_sid": list.t_id,
+    "usc_uid": list.t_uid,
+    "usc_data": time.value,
+    "tk_title": "test"
+  }
+  await store.changecollect(data)
+  if (!collected.value) {
+    document.getElementsByClassName("collect")[index].style.backgroundColor = "#409EFF"
+    document.getElementsByClassName("collectimg")[index].style.display = "none"
+    document.getElementsByClassName("collectedimg")[index].style.display = "block"
   }
   else {
-    document.getElementsByClassName("like")[0].style.backgroundColor = "rgb(232, 247, 252);"
+    document.getElementsByClassName("collect")[index].style.backgroundColor = "rgb(232, 247, 252)"
+    document.getElementsByClassName("collectimg")[index].style.display = "block"
+    document.getElementsByClassName("collectedimg")[index].style.display = "none"
   }
+  collected.value = !collected.value
 }
 
 const morecomment = ref(null);
@@ -274,6 +304,7 @@ const opencomment = () => {
 const pushcomment = () => {
 
 }
+
 //调整footer
 
 const handleScroll = () => {
@@ -306,10 +337,10 @@ const dialogForm = () => {
 //监听搜索框
 watch(store, (newvalue, oldvalue) => {
   if (dialogFormVisible) {
-    if (store.searchtext != '') {
+    if (toRaw(newvalue).searchtext.value) {
       Forum.Forumlist = toRaw(newvalue.searchList)
     }
-    else {
+    else if (toRaw(newvalue).searchtext.value == '') {
       Forum.Forumlist = toRaw(store.forumList)
     }
   }
@@ -336,6 +367,7 @@ onMounted(async () => {
     Forum.allForumlist = toRaw(forumList.value);
     Forum.moreForumlist = true
   }
+
 })
 
 

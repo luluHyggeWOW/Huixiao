@@ -23,10 +23,11 @@
 import { ref, reactive, onMounted } from 'vue';
 import { storeToRefs } from 'pinia'
 import { getForumList } from '@/store/forum/index'
+import { getShopList } from '@/store/shop/index'
 import { useRoute, useRouter } from "vue-router"
 
 name: 'Search'
-let searchtext = ref('ce')
+let searchtext = ref('')
 
 const route = useRoute()
 const $router = useRouter()
@@ -43,16 +44,16 @@ async function SearchList (params) {
   } else if ($router.currentRoute.value.path == '/news') {
     const store2 = getForumList();
     store2.$patch(state => {
-      state2.searchtext = searchtext.value
+      state.searchtext = searchtext.value
     })
     await store2.getSearchList();
   }
   else if ($router.currentRoute.value.path == '/shop') {
-    const store3 = getForumList();
+    const store3 = getShopList();
     store3.$patch(state => {
-      state3.searchtext = searchtext.value
+      state.searchtext = searchtext.value
     })
-    await store.getSearchList();
+    await store3.getShopSearchList();
   }
 }
 

@@ -7,6 +7,7 @@ import { useRoute, useRouter } from "vue-router"
 
 export const usermain = defineStore('users', () => {
   const userinfo = reactive({
+    userId: "",
     userName: "",
     userType: "",
     userAvatar: "",
@@ -21,11 +22,12 @@ export const usermain = defineStore('users', () => {
     userAge: '',
     userUpdateTime: "",
     usertoken: '',
+    userimg: '',
   })
   const $router = useRouter()
   const temporaryUserinfo = reactive({})
+  let token = localStorage.getItem('huixiao')
   async function getuserinfo () {
-    let token = localStorage.getItem('huixiao')
     let result = await repUserinfo(token);
     if (!result) {
       ElMessageBox({
@@ -49,6 +51,7 @@ export const usermain = defineStore('users', () => {
       userinfo.userSchool = result.data.userSchool
       userinfo.userSex = result.data.userSex
       userinfo.userAge = result.data.userAge
+      userinfo.userId = result.data.userId
       let refs = toRefs(userinfo)
       for (const key in refs) {
         temporaryUserinfo[key] = refs[key].value

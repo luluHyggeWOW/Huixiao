@@ -1,6 +1,6 @@
 
 import { defineStore } from 'pinia'
-import { reqForumList, repForumlike, reqForumSearchList, repAddForum, repUploadimg } from '@/api/api';
+import { reqForumList, repForumcollect, reqForumSearchList, repAddForum, repUploadimg, repgetMyForumList } from '@/api/api';
 import { ref, reactive } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 import { usermain } from '@/store/index'
@@ -11,8 +11,9 @@ export const getForumList = defineStore('getlist', () => {
   const forumList = ref({})
   const searchList = ref({})
   const searchtext = ref({})
-  const myforum = ref({})
+  const myforum = ref([])
   const moreforum = ref({})
+  let token = localStorage.getItem("huixiao");
   const addforumlist = reactive({
     title: '',
     class: '',
@@ -21,11 +22,12 @@ export const getForumList = defineStore('getlist', () => {
   })
   const forumaddshow = ref(false)
   async function getList () {
-    let result = await reqForumList();
+    let result = await reqForumList(token);
     if (result.code == 200) {
       // console.log('result', result);
       forumList.value = result.data;
       searchList.value = result.data;
+      console.log(result.data);
     }
     else {
 
@@ -42,11 +44,8 @@ export const getForumList = defineStore('getlist', () => {
 
     }
   }
-  async function changelike (data) {
-
-
-    console.log(data);
-    let result = await repForumlike(data);
+  async function changecollect (data) {
+    let result = await repForumcollect(data, token);
     console.log(result);
     // if (result.code == 200) {
     //   console.log('result', result.data);
@@ -57,18 +56,19 @@ export const getForumList = defineStore('getlist', () => {
     // }
   }
   async function AddForum () {
-    console.log(1111, getForumList);
     let uuid = uuidv4()
     uuid = uuid.split("-").join("");
     var d = new Date();
     var year = d.getFullYear()
     var month = d.getMonth() + 1;
+
     if (month <= 9) {
       month = `0${month}`
     }
     var day = d.getDate();
+    console.log('day', day);
     if (day <= 9) {
-      month = `0${day}`
+      day = `0${day}`
     }
     let date = `${year}-${month}-${day}`;
     const store = usermain();
@@ -82,24 +82,26 @@ export const getForumList = defineStore('getlist', () => {
       t_like_count: 0,
       t_status: "正常",
     }
-    let result = await repAddForum(data);
+
+    let result = await repAddForum(data, token);
     if (result.code == 200) {
       console.log('result', result.data);
       ElMessage.success('发布成功！')
       //  result.data;
-
-
     }
     else {
       ElMessage.error('发布失败！')
     }
   }
   async function getmyForumList () {
-    let token = localStorage.getItem("huixiao");
-    let result = await repgetMyForumList(token);
-    console.log(result);
+    const store2 = usermain();
+    let id = store2.userinfo.userId
+    let result = await repgetMyForumList(id, token);
+    console.log('result', result);
     if (result.code == 200) {
+      console.log('data', result.data);
       myforum.value = result.data
+      console.log('myforum.value11', myforum.value);
     }
     else {
 
@@ -111,14 +113,15 @@ export const getForumList = defineStore('getlist', () => {
     getForumList,
     getList,
     forumList,
-    changelike,
+    changecollect,
     getSearchList,
     searchtext,
     searchList,
     AddForum,
     addforumlist,
     getmyForumList,
-    forumaddshow
+    forumaddshow,
+    myforum
   }
 
 }

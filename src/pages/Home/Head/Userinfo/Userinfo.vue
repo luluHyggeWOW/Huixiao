@@ -13,14 +13,14 @@
                  accept=".jpg,.jpeg,.png,.gif,.bmp,.pdf,.JPG,.JPEG,.PBG,.GIF,.BMP,.PDF">
         <div class="imgdiv"
              ref="userimgdiv">
-          <img :src="userinfo.img"
+          <img :src="userinfo.userAvatar"
                alt="">
           <div class="changeimg"><img src="./image/camera.png"
                  alt="">
           </div>
         </div>
       </el-upload>
-      <p @click="qq">{{userinfo.name}}</p>
+      <p>{{userinfo.name}}</p>
 
     </div>
     <div class="title">
@@ -37,15 +37,15 @@
         <el-tab-pane label="教育信息"
                      name="school">
         </el-tab-pane>
-        <el-tab-pane label="爱好信息"
-                     name="basic1"></el-tab-pane>
-        <el-tab-pane label="其他信息"
-                     name="basic2"></el-tab-pane>
+
         <el-tab-pane label="我的发帖"
                      name="myforum"></el-tab-pane>
         <el-tab-pane label="我的二手"
-                     name="myshop"
-                     @click="getmyShopList"></el-tab-pane>
+                     name="myshop"></el-tab-pane>
+        <el-tab-pane label="我的点赞/收藏"
+                     name="mylike"></el-tab-pane>
+        <el-tab-pane label="我的购物车"
+                     name="myshopcar"></el-tab-pane>
       </el-tabs>
 
     </div>
@@ -134,57 +134,67 @@
           </div>
         </div>
       </div>
-      <div class="myforuminfo"
+      <div class="forum myinfo"
            v-if=infopage.myforuminfo>
-        <div class="commentbox"
-             v-for="(list) in myForumList"
-             :key="list.t_id">
-          <div class="user">
-            <img alt=""
-                 :src="list.t_img">
-            <p class="username">{{list.t_uid}}</p>
-          </div>
-          <div class="questionbox">
-            <p class="question">{{list.t_date}}</p>
-            <div class="more">
+        <div class="all">
+          <div class="div"
+               v-for="(list,index) in infoList.myForumList"
+               :key="index">
+            <div class="img">
               <img :src="list.t_img"
-                   alt=""
-                   v-if="list.t_img">
+                   alt="">
+            </div>
+            <div class="title">
+              <p>1{{list.t_titile}}</p>
               <span>{{list.t_date}}</span>
             </div>
+            <div class="handle">
+              <el-button type="danger"
+                         style="width:100px;height:40px;cursor: pointer;"><img src="./image/delement.png"
+                     alt="">
+                <p>删除</p>
+              </el-button>
+
+            </div>
+
           </div>
-          <div class="footerline"></div>
 
         </div>
 
       </div>
-      <div class="myshopinfo"
-           v-if=infopage.myforuminfo>
-        <div class="commentbox"
-             v-for="(list) in myShopList"
-             :key="list.t_id">
-          <div class="user">
-            <img alt=""
-                 :src="list.t_img">
-            <p class="username">{{list.t_uid}}</p>
-          </div>
-          <div class="questionbox">
-            <p class="question">{{list.t_date}}</p>
-            <div class="more">
-              <img :src="list.t_img"
-                   alt=""
-                   v-if="list.t_img">
-              <span>{{list.t_date}}</span>
+      <div class="shop myinfo"
+           v-if=infopage.myshopinfo>
+        <div class="all">
+          <div class="div"
+               v-for="(list,index) in infoList.myShopList"
+               :key="index">
+            <div class="img">
+              <img :src="list.urlList[0]"
+                   alt="">
             </div>
+            <div class="title">
+              <p>{{list.shopName}}</p>
+              <span>{{list.shopIntuoduct}}</span>
+            </div>
+            <div class="handle"
+                 @click="deletemyshop(list.shopId)">
+              <el-button type="danger"
+                         style="width:100px;height:40px;"><img src="./image/delement.png"
+                     alt="">
+                <p>删除</p>
+              </el-button>
+
+            </div>
+
           </div>
-          <div class="footerline"></div>
 
         </div>
 
       </div>
     </div>
     <div class="btn"
-         @click="pushinfo">
+         @click="pushinfo"
+         v-if="btnshow">
       <el-button type="primary"
                  style="width:150px;height:50px;font-size:20px;">提交</el-button>
     </div>
@@ -212,36 +222,47 @@ const userinfo = reactive({
   introduct: '',
   school: '',
 })
+const btnshow = ref(true)
 const infopage = reactive({
   basicinfo: true,
   schoolinfo: false,
-  myforuminfo: false
+  myforuminfo: false,
+  myshopinfo: false,
 })
-const myForumList = ref({})
-const myShopList = ref({})
+const infoList = reactive({
+  myForumList: '',
+  myShopList: '',
+})
 
 const userimgdiv = ref(null)
-const basicbtn = (tab, event) => {
+const basicbtn = async (tab, event) => {
   infopage.schoolinfo = false
   infopage.basicinfo = false
   infopage.myforuminfo = false
+  infopage.myshopinfo = false
   if (tab.props.name == 'basic') {
     infopage.basicinfo = true
+    btnshow.value = true
   }
   else if (tab.props.name == 'school') {
     infopage.schoolinfo = true
+    btnshow.value = true
   }
   else if (tab.props.name == 'myforum') {
     infopage.myforuminfo = true
+    btnshow.value = false
     const store1 = getForumList();
-    store1.getmyForumList()
-    myForumList.value = store1.myforum
+    await store1.getmyForumList()
+    infoList.myForumList = store1.myforum
+    console.log('myforum.value', store1.myforum);
+    console.log('myForumList', infoList.myForumList);
   }
   else if (tab.props.name == 'myshop') {
     infopage.myshopinfo = true
+    btnshow.value = false
     const store2 = getShopList();
-    store2.getmyShopList()
-    myShopList.value = store2.myforum
+    await store2.getmyShopList()
+    infoList.myShopList = store2.myshoplist
   }
   else {
 
@@ -268,7 +289,31 @@ const handleAvatarSuccess = (file) => {
   ElMessage.success('头像修改成功！');
   userinfo.img = toRaw(file).data;
 }
+const deletemyshop = async (id) => {
+  ElMessageBox({
+    title: '是否删除',
+    message: '删除后无法回档',
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'error',
 
+  }).then(async (status) => {
+    if (status == 'confirm') {
+      let store = getShopList()
+      store.$patch(state => {
+        state.deleteshopid = id
+      })
+      await store.deletemyShop()
+      await store.getmyShopList()
+      myShopList.value = store.myshoplist
+    }
+  }).catch((status) => {
+    if (status == 'cancel') {
+
+    }
+  })
+
+}
 
 const closebox = () => {
   document.body.style.overflow = 'auto';
@@ -291,6 +336,7 @@ function pushinfo (params) {
       store.temporaryUserinfo.userSchool = userinfo.school;
       store.temporaryUserinfo.userSex = userinfo.sex;
       store.temporaryUserinfo.userAge = userinfo.age;
+      store.temporaryUserinfo.userimg = userinfo.img;
       await store.changeuserinfo();
 
     }
@@ -304,19 +350,18 @@ function pushinfo (params) {
 async function getuser (params) {
   const store = usermain();
   await store.getuserinfo();
-
+  console.log(store.userinfo);
   userinfo.name = store.userinfo.userName;
   userinfo.email = store.userinfo.userEmail;
   userinfo.introduct = store.userinfo.userIntroduct;
   userinfo.school = store.userinfo.userSchool;
   userinfo.sex = store.userinfo.userSex;
   userinfo.age = store.userinfo.userAge;
+  // userinfo.img = store.userinfo.userAge;
 }
 const getmyForumList = async () => {
 }
-const getmyShopList = () => {
 
-}
 onMounted(() => {
   userimg(userimgdiv.value)
   getuser()

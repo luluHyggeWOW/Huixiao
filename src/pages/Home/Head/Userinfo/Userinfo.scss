@@ -64,9 +64,11 @@
         }
 
         .changeimgadd {
+          cursor: pointer;
           background-color: #606266;
 
           img {
+            cursor: pointer;
             display: block;
             opacity: 1;
           }
@@ -147,157 +149,105 @@
 
       }
 
-      .myforuminfo {
-        .commentbox {
-          display: flex;
+      .myinfo {
+        webkit-scrollbar {
 
-          .footerline {
-            position: absolute;
-            width: 700px;
-            left: 50px;
-            border-bottom: 1px solid #d1e8ff;
+          display: none;
+          /* Chrome Safari */
+
+        }
+
+        .all {
+          position: absolute;
+          width: 1000px;
+          height: 450px;
+          margin-left: 100px;
+          margin-top: 0px;
+          overflow: scroll;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          overflow-x: hidden;
+
+          .element::-webkit-scrollbar {
+            display: none;
           }
 
-          .user {
-            width: 150px;
-            padding: 20px;
 
-            img {
+          .div {
+            margin: 0px;
+            height: 100px;
+            width: 800px;
+            margin-bottom: 10px;
+
+            .img {
+              position: absolute;
+              margin: 0;
               width: 100px;
-              border-radius: 100%;
-            }
-
-            .username {
-              text-align: center;
-            }
-          }
-
-          .questionbox {
-            padding-right: 20px;
-            width: 860px;
-
-            .question {
-              font-size: 25px;
-              font-weight: 700;
-            }
-
-            .more {
-              position: relative;
-              min-height: 80px;
-              display: flex;
-              width: 600px;
-              margin-bottom: 20px;
+              height: 100px;
 
               img {
-                width: 150px;
-                border-radius: 0px;
+                width: 100px;
+                height: 100px;
+              }
+            }
+
+            .title {
+              position: relative;
+              // background-color: azure;
+              width: 800px;
+              height: 100px;
+              margin-left: 120px;
+              margin-top: -200px;
+              display: list-item;
+              border-bottom: 1px solid rgb(115, 174, 242);
+
+              // left: 200px;
+              p {
+                margin-top: 0px;
+                font-size: 20px;
               }
 
               span {
-                // position: absolute;
-                width: 430px;
-                margin-left: 20px;
+                margin-top: -10px;
+                width: 700px;
+                // height: 0px;
+                font-size: 17px;
+                word-wrap: break-word;
                 word-break: break-all;
-                word-wrap: break-word
+                text-overflow: ellipsis;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                /*想省略几行就写几*/
+                -webkit-box-orient: vertical;
+                color: #909399;
               }
-
-
             }
 
             .handle {
-              display: flex;
-              margin-bottom: 10px;
+              cursor: pointer;
+              margin-top: 50px;
+              margin-left: 20px;
 
-              div {
-                margin-right: 20px;
+              img {
+                margin-left: 45px;
+                position: absolute;
+                width: 20px;
+              }
 
-                button {
-                  background-color: rgb(232, 247, 252);
-                  // background-color: rgb(47, 182, 255);
-                  width: auto;
-                  height: 30px;
-                  border: 0px;
-                  text-align: center;
-                  display: flex;
-                  border-radius: 5px;
-
-                  p {
-                    margin-top: 6px;
-
-                    img {
-                      width: 20px;
-                      margin-top: -2px;
-                      margin-right: 2px;
-
-                    }
-
-                    span {
-
-                      margin-left: 10px;
-                      margin-right: 10px;
-                      font-size: 15px;
-                      position: relative;
-                      top: -4px;
-                      left: 0px;
-                    }
-                  }
-                }
-
-                button:hover {
-                  background-color: rgb(168, 230, 251);
-                }
+              p {
+                margin-left: 10px;
+                font-size: 18px;
 
               }
 
             }
 
 
-            .morecomment {
-              display: none;
-
-              .pushcomment {
-                position: relative;
-                width: 60px;
-                height: 30px;
-                font-size: 15px;
-                margin-left: 570px;
-                margin-top: -70px;
-              }
-
-              .othercommentbox {
-                margin-top: -22px;
-                border: 1px solid rgb(230, 222, 222);
-                border-radius: 0px 0px 15px 15px;
-
-                .othercommentdiv {
-                  display: flex;
-
-                  .otheruse {
-                    width: 50px;
-                    padding: 10px;
-
-                    img {
-                      width: 50px;
-                    }
-
-                    p {
-                      text-align: center;
-                      font-size: 10px;
-                    }
-                  }
-
-                  .othercomment {
-                    p {
-                      font-size: 13px;
-                      margin-right: 20px;
-                    }
-                  }
-                }
-              }
-            }
           }
-
         }
+
       }
     }
 

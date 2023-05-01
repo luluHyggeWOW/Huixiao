@@ -8,25 +8,34 @@
                  :modal=true
                  :showClose=false
                  :lock-scroll="false"
-                 width="800px">
+                 width="800px"
+                 destroy-on-close="true">
         <img src="./image/creation.png"
              alt="">
         <el-form :model="form">
           <el-form-item label="商品名称：">
             <el-input v-model="form.title"
-                      autocomplete="off"></el-input>
+                      autocomplete="off"
+                      placeholder="请输入商品名称"></el-input>
           </el-form-item>
 
           <el-form-item label="具体介绍：">
             <el-input type="textarea"
-                      placeholder="请输入内容"
+                      placeholder="请输入具体介绍"
                       maxlength="100"
                       autocomplete="off"
                       show-word-limit
                       v-model="form.text">
             </el-input>
           </el-form-item>
-          <el-form-item label="类&nbsp; &nbsp; &nbsp; 别：">
+          <el-form-item label="商品价格：">
+            <el-input placeholder="请输入价格"
+                      autocomplete="off"
+                      v-model.number="form.price"
+                      type="number">
+            </el-input>
+          </el-form-item>
+          <el-form-item label="商品类别：">
             <el-select v-model="form.cless"
                        placeholder="请选择讨论类别"
                        @change="changeclass">
@@ -81,7 +90,10 @@ let form = reactive({
   title: '',
   class: '',
   text: '',
-  img: '',
+  price: '',
+  img: []
+
+  ,
 })
 
 let dialogFormVisible = ref(true)
@@ -96,13 +108,14 @@ async function dialogForm (val) {
     if (form.title != '' && form.text != '' && form.class != '') {
       store.$patch(state => {
         console.log(form.class);
-        state.addforumlist.title = form.title
-        state.addforumlist.img = form.img
-        state.addforumlist.class = form.class
-        state.addforumlist.text = form.text
+        state.addshoplist.title = form.title
+        state.addshoplist.img = form.img
+        state.addshoplist.class = form.class
+        state.addshoplist.text = form.text
+        state.addshoplist.price = form.price
       })
-      await store.AddForum()
-      location.reload();
+      await store.AddShop()
+      // location.reload();
     } else {
       ElMessage.error('信息不能为空哦！')
     }
@@ -120,26 +133,21 @@ async function dialogForm (val) {
   form.class = '';
   form.text = '';
   form.img = '';
-  const store2 = getShopList();
-  store2.shopaddshow = false
-  dialogFormVisible.value = store2.shopaddshow
+  form.price = '';
+  store.shopaddshow = false
+  dialogFormVisible.value = false
 }
 async function upload (file, fileList) {
   if (file.status == 'success') {
-    form.img = await toRaw(file).response.data;
+    // form.img.push('1')
+    form.img.push(await toRaw(file).response.data)
+    console.log(form.img);
   }
 }
-const beforeAvatarUpload = (file) => {
-  const isJPG = file.type === 'image/jpeg/png'
-  const isLt2M = file.size / 1024 / 1024 < 2
-
-  if (!isJPG) {
-    ElMessage.error('上传头像图片只能是 JPG 格式!')
-  }
-  if (!isLt2M) {
-    ElMessage.error('上传头像图片大小不能超过 2MB!')
-  }
-}
+watch(store, (newvalue, oldvalue) => {
+  dialogFormVisible.value = toRaw(newvalue).shopaddshow.value
+  console.log(dialogFormVisible.value, toRaw(newvalue).shopaddshow.value);
+})
 
 
 

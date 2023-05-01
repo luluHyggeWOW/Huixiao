@@ -91,6 +91,7 @@ html {
                 display: flex;
                 margin-bottom: 10px;
 
+
                 div {
                   margin-right: 20px;
 
@@ -103,15 +104,16 @@ html {
                     text-align: center;
                     display: flex;
                     border-radius: 5px;
+                    cursor: pointer;
 
                     p {
                       margin-top: 6px;
+                      display: flex;
 
                       img {
                         width: 20px;
                         margin-top: -2px;
                         margin-right: 2px;
-
                       }
 
                       span {
@@ -120,7 +122,7 @@ html {
                         margin-right: 10px;
                         font-size: 15px;
                         position: relative;
-                        top: -4px;
+                        margin-top: 0px;
                         left: 0px;
                       }
                     }

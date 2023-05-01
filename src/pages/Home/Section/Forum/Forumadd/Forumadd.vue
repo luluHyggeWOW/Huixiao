@@ -99,8 +99,9 @@ async function dialogForm (val) {
         state.addforumlist.class = form.class
         state.addforumlist.text = form.text
       })
+
       await store.AddForum()
-      location.reload();
+      store.getgetList()
     } else {
       ElMessage.error('信息不能为空哦！')
     }
