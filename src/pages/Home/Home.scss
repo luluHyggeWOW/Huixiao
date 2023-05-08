@@ -18,6 +18,7 @@ html {
     display: none;
   }
 
+
   .app {
 
     header {
@@ -25,6 +26,17 @@ html {
       left: 0;
       right: 0;
       z-index: 3;
+      animation: headfly-in 0.5s cubic-bezier(0, 0, 0.3, 1) forwards;
+
+      @keyframes headfly-in {
+        from {
+          transform: translate(0, -100%);
+        }
+
+        to {
+          transform: translate(0, 0%);
+        }
+      }
     }
 
     body {
@@ -33,31 +45,48 @@ html {
       display: flex;
 
       Nav {
-        z-index: 2;
+        z-index: 0;
       }
 
 
       section {
         // display: flex;
+        width: 1180px;
         position: absolute;
         left: 50%;
-        transform: translate(-52%);
-        margin-top: 100px;
+        // margin-top: 100px;
+        // top: 5%;
+        transform: translate(-50%);
+        animation: sectionfly-in 0.5s cubic-bezier(0, 0, 0.3, 1) forwards;
+
+        @keyframes sectionfly-in {
+          from {
+            margin-top: -100px;
+          }
+
+          to {
+            margin-top: 110px;
+          }
+        }
 
         .title {
           // z-index: 4;
           display: flex;
-          width: 1200px;
+          width: 1180px;
+          cursor: pointer;
+          justify-content: space-between;
 
           div {
             background-image: linear-gradient(80deg, #62c8f4, #cfecfb);
             width: 370px;
-            height: 100px;
+            height: 110px;
             text-align: center;
-            margin-left: 50px;
-            border-radius: 15px 15px 0px 0;
+            // margin-left: 50px;
+
+            border-radius: 15px 15px 15px 15px;
             margin-top: 10px;
             transition: all 0.5s;
+            cursor: pointer !important;
 
             // display: flex;
             span {
@@ -94,19 +123,33 @@ html {
             transition: all 0.5s;
             // background-image: url(./image/Loginbkg.png);
             // opacity: 0.5;
+            cursor: pointer;
           }
 
         }
       }
 
+
       .views {
         width: 1200px;
         position: relative;
-        top: 200px;
-        left: 18%;
-        // transform: translate(-50%);
+        margin: auto;
+        z-index: 1;
+        margin-top: 11%;
+        animation: viewsfly-in 0.5s cubic-bezier(0, 0, 0.3, 1) forwards;
 
+        @keyframes viewsfly-in {
+          from {
+
+            margin-top: 1005px;
+          }
+
+          to {
+            margin-top: 205px;
+          }
+        }
       }
+
 
       .winodws {
         width: 400px;
@@ -122,17 +165,27 @@ html {
         position: fixed;
         left: 100%;
         bottom: 30px;
-        transform: translateX(-100%);
         top: 150px;
+        animation: mesfly-in 0.5s cubic-bezier(0, 0, 0.3, 1) forwards;
+        z-index: 0;
+
+        @keyframes mesfly-in {
+          from {
+            transform: translateX(-0%);
+          }
+
+          to {
+            transform: translateX(-100%);
+          }
+        }
       }
 
       .Chat {
         position: fixed;
         left: 50%;
         top: 20%;
-        transform: translateX(-50%);
-
-
+        transform: translate(-50%, 0);
+        z-index: 20;
       }
 
       .shop {
@@ -140,7 +193,7 @@ html {
         position: fixed;
         left: 100%;
         bottom: 30px;
-        transform: translateX(-100%);
+        transform: translate(-100%, 0);
         top: 150px;
       }
 
@@ -168,4 +221,6 @@ html {
 
     }
   }
+
+
 }

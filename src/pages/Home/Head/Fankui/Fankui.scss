@@ -1,0 +1,300 @@
+* {
+
+  .box {
+    position: fixed;
+    top: 110px;
+    width: 1200px;
+    height: 800px;
+    background-color: rgb(245, 245, 245);
+    display: flex;
+    border-radius: 15px;
+    // margin-top: -200px;
+    // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+
+    animation: useringofly-in 0.5s cubic-bezier(0, 0, 0.3, 1) forwards;
+
+    @keyframes useringofly-in {
+      from {
+        top: -45%;
+      }
+
+      to {
+        top: 11%;
+      }
+    }
+
+    .closebox {
+      position: absolute;
+      left: 1160px;
+      top: 10px;
+      cursor: pointer;
+      z-index: 99;
+
+      img {
+        width: 25px;
+        cursor: pointer;
+      }
+    }
+
+    .top {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      height: 200px;
+      background-image: url(./image/fankuibg2.png);
+      background-size: cover;
+      border-radius: 15px;
+
+      p {
+        margin-left: 100px;
+        margin-top: 20px;
+        font-size: 40px;
+        letter-spacing: 6px;
+      }
+    }
+
+    .title {
+      position: absolute;
+      display: flex;
+      top: 100px;
+
+      div {
+        padding-right: 20px;
+      }
+    }
+
+    .body {
+      position: absolute;
+      display: flex;
+      top: 100px;
+
+      div {
+        width: 1178px;
+        height: 530px;
+        top: 380px;
+        background-color: white;
+        margin-left: -15px;
+        font-size: 20px;
+        border-radius: 0px 0px 15px 15px;
+      }
+    }
+
+    .infobox {
+      position: absolute;
+      top: 200px;
+      width: 100%;
+      height: 100%;
+      display: list-item;
+      list-style: none;
+
+      .div {
+
+        margin-left: 50px;
+        width: 100%;
+        padding-top: 20px;
+        display: flex;
+
+        p {
+          margin-top: 20px;
+          width: 150px;
+        }
+
+        .input {
+          margin-top: 10px;
+          display: flex;
+          width: 300px;
+          height: 50px;
+
+          .solutioninfo {
+            margin-top: 10px;
+          }
+        }
+
+        .sexdiv {
+          margin-top: 20px;
+        }
+
+
+      }
+
+      .myinfo {
+        webkit-scrollbar {
+
+          display: none;
+          /* Chrome Safari */
+
+        }
+
+        .all {
+          position: absolute;
+          width: 1000px;
+          height: 550px;
+          margin-left: 100px;
+          margin-top: 0px;
+          overflow: scroll;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          overflow-x: hidden;
+
+          .element::-webkit-scrollbar {
+            display: none;
+          }
+
+
+          .div {
+            margin: 0px;
+            height: 100px;
+            width: 800px;
+            margin-bottom: 10px;
+
+            .img {
+              position: absolute;
+              margin: 0;
+              width: 100px;
+              height: 100px;
+
+              img {
+                width: 100px;
+                height: 100px;
+              }
+            }
+
+            .title {
+              position: relative;
+              // background-color: azure;
+              width: 800px;
+              height: 100px;
+              margin-left: 120px;
+              margin-top: -90px;
+              display: list-item;
+              border-bottom: 1px solid rgb(115, 174, 242);
+
+              // left: 200px;
+              p {
+                margin-top: 0px;
+                font-size: 20px;
+                width: 600px;
+                word-wrap: break-word;
+                word-break: break-all;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                /*想省略几行就写几*/
+                -webkit-box-orient: vertical;
+              }
+
+              .weizhi {
+                width: auto;
+                font-size: 17px;
+              }
+
+              .text {
+                display: flex;
+                width: 660px;
+              }
+
+              span {
+                margin-top: -10px;
+                width: 700px;
+                // height: 0px;
+                font-size: 17px;
+                word-wrap: break-word;
+                word-break: break-all;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                /*想省略几行就写几*/
+                -webkit-box-orient: vertical;
+                color: #909399;
+              }
+
+              .laiyuan {
+                width: 600px;
+                margin-top: 0px;
+              }
+            }
+
+
+
+            .handle {
+              margin-top: 80px;
+              margin-left: 20px;
+              display: flex;
+              cursor: pointer;
+              z-index: 99;
+
+              div {
+                cursor: pointer;
+                margin-left: 10px;
+              }
+
+              img {
+                margin-left: 45px;
+                position: absolute;
+                width: 20px;
+              }
+
+              p {
+                margin-left: 10px;
+                font-size: 18px;
+
+              }
+
+
+
+            }
+
+            .myfankui {
+              margin-left: -50px;
+            }
+
+
+            .time {
+              position: absolute;
+              // top: 0px;
+              left: 850px;
+              margin-top: -15px;
+              // margin-top: 50px;
+              // margin-left: -100px;
+
+              p {
+                // width: 500px;
+                color: #909399;
+              }
+
+
+            }
+
+          }
+
+          .MyForum {
+            .title {
+              span {
+                width: 600px;
+              }
+            }
+          }
+        }
+
+      }
+
+
+    }
+
+    .btn {
+      position: relative;
+      top: 720px;
+      left: 850px;
+      cursor: pointer;
+      // z-index: 99;
+    }
+  }
+
+
+}

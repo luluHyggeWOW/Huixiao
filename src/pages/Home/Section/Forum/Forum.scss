@@ -1,8 +1,10 @@
 html {
-  .Forumbox {
-    position: absolute;
-    background-color: white;
 
+  .Forumbox {
+
+    position: absolute;
+
+    // background-color: white;
     .classes {
 
       .head {
@@ -29,7 +31,8 @@ html {
           height: auto;
           background-color: rgb(244, 252, 255);
           box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-          border-radius: 15px 0px 0px 15px;
+          border-radius: 15px;
+          min-height: 1510px;
 
           .commentbox {
             display: flex;
@@ -52,6 +55,12 @@ html {
 
               .username {
                 text-align: center;
+                width: 150px;
+
+                p {
+                  width: 100px;
+                  word-break: break-word;
+                }
               }
             }
 
@@ -77,6 +86,7 @@ html {
                 }
 
                 span {
+                  margin-left: 10px;
                   // position: absolute;
                   width: 430px;
                   // margin-left: 20px;
@@ -90,7 +100,7 @@ html {
               .handle {
                 display: flex;
                 margin-bottom: 10px;
-
+                cursor: pointer;
 
                 div {
                   margin-right: 20px;
@@ -122,7 +132,7 @@ html {
                         margin-right: 10px;
                         font-size: 15px;
                         position: relative;
-                        margin-top: 0px;
+                        margin-top: -1px;
                         left: 0px;
                       }
                     }
@@ -130,6 +140,10 @@ html {
 
                   button:hover {
                     background-color: rgb(168, 230, 251);
+                  }
+
+                  .btnadd {
+                    background-color: #69b4fe;
                   }
 
                 }
@@ -152,7 +166,7 @@ html {
                   width: 60px;
                   height: 30px;
                   font-size: 15px;
-                  margin-left: 570px;
+                  margin-left: 530px;
                   margin-top: -70px;
                 }
 
@@ -160,6 +174,7 @@ html {
                   margin-top: -22px;
                   border: 1px solid rgb(230, 222, 222);
                   border-radius: 0px 0px 15px 15px;
+                  margin-bottom: 5px;
 
                   .othercommentdiv {
                     display: flex;
@@ -168,20 +183,48 @@ html {
                       width: 50px;
                       padding: 10px;
 
+                      // height: 10px;
                       img {
                         width: 50px;
+                        border-radius: 50%;
+                        margin-left: 4px;
                       }
 
                       p {
-                        text-align: center;
-                        font-size: 10px;
+                        // text-align: center;
+                        width: 500px;
+                        // height: 100px;
+                        font-size: 15px;
+                        margin-left: 70px;
+                        margin-top: -30px;
+                        word-wrap: break-word;
+                        word-break: break-all;
+                        overflow: hidden;
                       }
                     }
 
                     .othercomment {
                       p {
+
+                        // display: -webkit-box;
                         font-size: 13px;
-                        margin-right: 20px;
+                        // margin-right: 20px;
+                        margin-top: 70px;
+                        margin-left: -60px;
+                        width: 55px;
+                        word-wrap: break-word;
+                        word-break: break-all;
+                        overflow: hidden;
+                        text-align: center;
+                      }
+                    }
+
+                    .deleteothercommentbtn {
+                      margin-left: 450px;
+                      margin-top: 40px;
+
+                      span {
+                        font-size: 10px;
                       }
                     }
                   }
@@ -202,9 +245,13 @@ html {
           .creation {
             width: 100%;
             height: 240px;
-            background-color: rgb(244, 252, 255);
+            // background-color: transparent;
+            background-image: url(./image/dt3.webp);
+            background-color: rgba(244, 252, 255, 0.5);
+            background-size: cover;
             box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-            border-radius: 0px 15px 0px 0px;
+            border-radius: 15px;
+            // opacity: 0.1;
 
             .title {
               position: relative;
@@ -220,6 +267,8 @@ html {
 
               p {
                 font-size: 20px;
+                color: white;
+
               }
             }
 
@@ -227,14 +276,15 @@ html {
               margin: 20px;
               width: 100%px;
               height: 100px;
-              background-color: rgb(224, 238, 250);
+              background-color: rgba(224, 238, 250, 0.5);
               border-radius: 15px;
 
               span {
                 position: relative;
                 font-size: 20px;
                 margin-left: 10px;
-                top: 5px
+                top: 5px;
+                color: rgba(0, 0, 0, 1);
               }
 
               p {
@@ -252,9 +302,25 @@ html {
             }
 
             .addbtn {
+              z-index: 20;
               text-align: center;
+              cursor: pointer;
+              // background-color: rgba();
+              color: rgba(224, 238, 250, 1);
             }
+
+            // .addbtn:hover {
+            //   opacity: 1;
+            // }
           }
+
+          // .creation :before {
+
+          //   background-attachment: fixed;
+          //   position: absolute;
+          //   z-index: 999;
+          //   opacity: 0.5;
+          // }
 
           .hotforum {
             margin-top: 30px;
@@ -262,7 +328,7 @@ html {
             height: 400px;
             background-color: rgb(244, 252, 255);
             box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-            border-radius: 0px 0px 0px 0px;
+            border-radius: 15px;
 
             .title {
               position: relative;
@@ -284,6 +350,8 @@ html {
 
             .hotbox {
               margin-top: 30px;
+              height: 300px;
+              margin-bottom: 50px;
 
               .hotdiv {
 
@@ -296,7 +364,7 @@ html {
                   font-size: 20px;
                   font-weight: 700;
                   margin-right: 20px;
-                  top: -20px;
+                  top: -23px;
                 }
 
                 span {
@@ -312,10 +380,11 @@ html {
             // // z-index: 4;
             background-color: rgb(244, 252, 255);
             box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-            border-radius: 0px 0px 15px 0px;
+            border-radius: 15px;
             position: relative;
             width: 370px;
-            height: 900px;
+            height: 800px;
+            // height: auto;
 
             p {
               padding: 20px 0px 0px 20px;
@@ -324,17 +393,54 @@ html {
           }
 
           .footeradd {
-            // position: relative;
-            position: -webkit-sticky;
-            position: sticky;
-            top: 20px;
-            left: 200px;
-            // margin-top: -20px;
+            position: fixed;
+            // transform: translateZ(-50%);
+            top: 20px; // margin-top: 680px;
+
+            p {
+
+              height: 30;
+              padding: 20px 0px 0px 20px;
+            }
+
+            .p1 {
+              margin-top: 0px;
+            }
+
           }
 
 
         }
       }
     }
+
+    .hrfooter {
+      position: relative;
+      // bottom: 0;
+      // top: 100px;
+      height: 20px;
+      bottom: 0;
+      z-index: 20;
+      margin-top: 0px;
+      text-align: center;
+      color: #69b4fe;
+      // display: inline-block;
+      position: relative;
+      top: -0.7em;
+      font-size: 1em;
+      padding: 0 0.5em;
+
+    }
+
+    // .hrfooter::before {
+    //   content: "";
+    //   display: block;
+    //   border-bottom: 1px solid #69b4fe;
+    //   margin: 0 auto;
+    //   width: 60%;
+
+    // }
   }
+
+
 }

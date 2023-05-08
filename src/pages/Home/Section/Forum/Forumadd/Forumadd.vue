@@ -99,9 +99,9 @@ async function dialogForm (val) {
         state.addforumlist.class = form.class
         state.addforumlist.text = form.text
       })
-
       await store.AddForum()
       store.getgetList()
+      dialogFormVisible.value = store2.forumaddshow = false
     } else {
       ElMessage.error('信息不能为空哦！')
     }
@@ -116,14 +116,14 @@ async function dialogForm (val) {
     })
   }
   document.getElementsByClassName('box')[0].style.display = "none"
-  dialogFormVisible.value = false
   document.getElementsByTagName('body')[0].className = '';
   form.title = '';
   form.class = '';
   form.text = '';
   form.img = '';
   const store2 = getForumList();
-  store2.forumaddshow = false
+  dialogFormVisible.value = store2.forumaddshow = false
+  // dialogFormVisible.value = false
 }
 async function upload (file, fileList) {
   if (file.status == 'success') {
@@ -131,17 +131,17 @@ async function upload (file, fileList) {
   }
 }
 const beforeAvatarUpload = (file) => {
-  const isJPG = file.type === 'image/jpeg/png'
   const isLt2M = file.size / 1024 / 1024 < 2
 
-  if (!isJPG) {
-    ElMessage.error('上传头像图片只能是 JPG 格式!')
-  }
   if (!isLt2M) {
-    ElMessage.error('上传头像图片大小不能超过 2MB!')
+    ElMessage.error('上传图片大小不能超过 2MB!')
   }
 }
+watch([() => store.shopaddshow], (newvalue, oldvalue) => {
 
+  dialogFormVisible.value = store.forumaddshow
+  console.log('forumadd', dialogFormVisible.value);
+})
 
 
 

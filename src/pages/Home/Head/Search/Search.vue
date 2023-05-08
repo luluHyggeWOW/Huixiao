@@ -25,7 +25,8 @@ import { storeToRefs } from 'pinia'
 import { getForumList } from '@/store/forum/index'
 import { getShopList } from '@/store/shop/index'
 import { useRoute, useRouter } from "vue-router"
-
+import { ElMessage, ElMessageBox } from 'element-plus';
+import debounce from "@/utils/debounce.js";
 name: 'Search'
 let searchtext = ref('')
 
@@ -33,8 +34,7 @@ const route = useRoute()
 const $router = useRouter()
 
 
-async function SearchList (params) {
-  console.log($router.currentRoute.value.path);
+const SearchList = debounce(async function () {
   if ($router.currentRoute.value.path == '/forum') {
     const store1 = getForumList();
     store1.$patch(state => {
@@ -42,11 +42,12 @@ async function SearchList (params) {
     })
     await store1.getSearchList();
   } else if ($router.currentRoute.value.path == '/news') {
-    const store2 = getForumList();
-    store2.$patch(state => {
-      state.searchtext = searchtext.value
-    })
-    await store2.getSearchList();
+    // const store2 = getForumList();
+    // store2.$patch(state => {
+    //   state.searchtext = searchtext.value
+    // })
+    // await store2.getSearchList();
+    ElMessage.warning('新闻暂不支持搜索哦')
   }
   else if ($router.currentRoute.value.path == '/shop') {
     const store3 = getShopList();
@@ -55,7 +56,9 @@ async function SearchList (params) {
     })
     await store3.getShopSearchList();
   }
-}
+}, 500)
+
+
 
 
 onMounted(() => {

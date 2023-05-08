@@ -13,85 +13,101 @@
             </div>
           </div>
           <div class="commentbox"
-               v-for="(list,index) in Forum.Forumlist"
+               v-for="(list,index) in Forum.allForumlist"
                :key="list.t_id">
             <div class="user">
               <img alt=""
-                   :src="list.t_img">
-              <p class="username">{{list.t_uid}}</p>
+                   :src="list.user_avatar">
+              <div class="username">
+                <p>{{list.user_name}}</p>
+              </div>
             </div>
             <div class="questionbox">
-              <p class="question">{{list.t_source}}</p>
+              <p class="question">{{list.t_titile}}</p>
               <div class="more">
                 <img :src="list.t_img"
                      alt=""
                      v-if="list.t_img!='' ">
-                <span>{{list.t_date}}</span>
+                <span>{{list.t_source}}</span>
               </div>
               <div class="handle">
                 <div>
-                  <button @click="collect(list,index)"
-                          class="collect">
-                    <p>
-                      <img src="./image/collect.png"
-                           class="collectimg">
-                      <img src="./image/collected.png"
-                           class="collectedimg"
-                           style="display:none">
-                      <span>{{list.t_like_count}}</span>
-                    </p>
-                  </button>
-                </div>
-                <!-- <div>
-                  <button @click="like(list)"
-                          class="like">
-
+                  <button @click="like(list,index)"
+                          class="like"
+                          v-if="!list.liked">
                     <p><img src="./image/like0.png"
                            class="likeimg">
                       <span>{{list.t_like_count}}</span>
                     </p>
                   </button>
-                </div> -->
+                  <button @click="deletelike(list,index)"
+                          class="like btnadd"
+                          v-if="list.liked">
+                    <p><img src="./image/like1.png"
+                           class="likeimg">
+                      <span>{{list.t_like_count}}</span>
+                    </p>
+                  </button>
+                </div>
                 <div>
-                  <button @click="othercommentshow(list,index)"
+                  <button @click="collect(list,index)"
+                          class="collect"
+                          v-if="!list.collent">
+                    <p>
+                      <img src="./image/collect.png"
+                           class="collectimg">
+                      <span>{{list.t_usc_count}}</span>
+                    </p>
+                  </button>
+                  <button @click="deletecollect(list,index)"
+                          class="collect btnadd"
+                          v-if="list.collent">
+                    <p>
+                      <img src="./image/collected.png"
+                           class="collectedimg">
+                      <span>{{list.t_usc_count}}</span>
+                    </p>
+                  </button>
+                </div>
+
+                <div>
+                  <button @click="othercommentshow(list.t_id,index)"
                           class="othercommentshow"
                           ref="othercommentshowdiv">
                     <p><img src="./image/comment.png"
                            class="commentimg"
-                           alt=""><span>评论</span></p>
+                           ><span>评论</span></p>
                   </button>
                 </div>
 
               </div>
               <div class="morecomment"
-                   ref="morecomment">
+                   >
                 <el-input type="textarea"
                           class="youcomment"
                           v-model="comment"
                           maxlength="100"
-                          :autosize="{ minRows: 2, maxRows: 4}" />
+                          :autosize="{ minRows: 2, maxRows: 4}"
+                          placeholder="发表你的评论" />
                 <el-button class="pushcomment"
-                           type="primary">发表</el-button>
+                           type="primary"
+                           @click="commentforum(list,index)">评论</el-button>
                 <div class="othercommentbox"
-                     v-if="othercommentshow">
-                  <div class="othercommentdiv">
+                     v-if="othercommentshow"
+                    >
+                  <div class="othercommentdiv"
+                       v-for="(commentlist,i) in Forum.allForumlist[index].comment"
+                       :key="i" @mouseenter="deleteothercommentbtn(index,i,'enter',commentlist.tk_uid==userid)" @mouseleave="deleteothercommentbtn(index,i,'leave',commentlist.tk_uid==userid)">
                     <div class="otheruse">
-                      <img src="./image/neutral.png"
+                      <img :src="commentlist.user_avatar"
                            alt="">
-                      <p>我是帅哥是是是</p>
+                      <p>{{commentlist.tk_source}}</p>
                     </div>
-                    <div class="othercomment">
-                      <p>为什么呜呜呜 呜呜呜为什么呜呜呜 呜呜呜 为什么呜呜呜 呜呜呜为什么呜呜呜 呜呜呜为什么呜呜呜 呜呜呜为什</p>
+                    <div class="othercomment" >
+                      <p>{{commentlist.user_name ?commentlist.user_name:`未命名者${commentlist.tk_uid.slice(0,5)}`}}</p>
                     </div>
-                  </div>
-                  <div class="othercommentdiv">
-                    <div class="otheruse">
-                      <img src="./image/neutral.png"
-                           alt="">
-                      <p>我是帅哥是是是</p>
-                    </div>
-                    <div class="othercomment">
-                      <p>为什么呜呜呜 呜呜呜为什么呜呜呜 呜呜呜 为什么呜呜呜 呜呜呜为什么呜呜呜 呜呜呜为什么呜呜呜 呜呜呜为什</p>
+                    <div class="deleteothercommentbtn" v-if="commentlist.tk_uid==userid" style="display:none">
+                      <el-button type="danger" size="mini" style="width:70px"  @click="deletecomment(commentlist,index,i)"><span>删除评论</span></el-button>
                     </div>
                   </div>
                 </div>
@@ -103,7 +119,8 @@
         </div>
         <div class="right">
           <div class="creation">
-            <div class="title"><img src="./image/creation.png">
+            <div class="title"><img src="./image/creation.png"
+                   style="width:32px">
               <p>创作中心</p>
             </div>
             <div class="text">
@@ -115,9 +132,11 @@
             <div class="addbtn"
                  @click="dialogForm">
               <el-button type="primary"
-                         style="width:200px; height:50px;font-size:18px"><img src="./image/add.png"
+                         style="width:200px; height:50px;font-size:18px; cursor: pointer;"><img src="./image/add.png"
                      alt=""
-                     style="width:25px">开始创作</el-button>
+                     style="width:25px">
+                <p>开始创作</p>
+              </el-button>
             </div>
           </div>
           <div class="hotforum">
@@ -129,106 +148,59 @@
             </div>
             <div class="hotbox">
               <div class="hotdiv"
-                   v-for="(list,index) in hotforum"
+                   v-for="(list,index) in hotforum.value"
                    :key="index">
-                <p class="top">{{index+1}}</p><span>{{list.title}}</span>
+                <p class="top">{{index+1}}</p><span>{{list.evnTitle}}</span>
               </div>
             </div>
-            <div :class="
-                           footerclass">
-              <p>联系我们 © 2023 青钢影007LT</p>
+            <div :class="footerclass">
+              <p class="p1">联系我们 © 2023 青钢影007LT</p>
               <p>举报邮箱：jubao龙涛@www.com</p>
               <p>服务热线：888-888-8888</p>
             </div>
           </div>
         </div>
-        <Forumadd class="Forumadd"
-                  v-if="dialogFormVisible"></Forumadd>
+
       </div>
     </div>
-    <div>
-
+    <footer>
+    <div class="hrfooter">
+      <p>&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;
+        我是有底线的
+        &ndash;&ndash;&ndash;&ndash;&ndash;&ndash;</p>
     </div>
+  </footer>
   </div>
-
+  <Forumadd class="Forumadd"
+            v-if="Forumaddshow"></Forumadd>
+  
 </template>
 
 <script setup>
 import { ref, reactive, onMounted, toRaw, computed, watch, resetFields } from 'vue'
 import { getForumList } from '@/store/forum/index'
+import { usermain } from '@/store/index'
 import { storeToRefs } from 'pinia';
 import { ElMessage } from 'element-plus';
+import debounce from "@/utils/debounce.js";
 import Forumadd from './Forumadd/Forumadd.vue'
-
+import { v4 as uuidv4 } from 'uuid'
 
 name: 'Forum'
 
-let titles = reactive([
-  {
-    id: 1,
-    title: "高数",
-  },
-  {
-    id: 2,
-    title: "英语",
-  },
-  {
-    id: 3,
-    title: "线性代数",
-  }
-  ,
-  {
-    id: 4,
-    title: "体育",
-  }
-  ,
-  {
-    id: 5,
-    title: "形势与政策",
-  }
 
-])
-let hotforum = reactive([
-  {
-    id: 1,
-    title: "七国集团外长会反对中国试图以七国集团外长会反对中国试图以",
-    likeed: false,
-  },
-  {
-    id: 2,
-    title: "同事的工资是自己的 2-3 倍,事的工资是自己的 2-3 倍",
-    likeed: false,
-  }
-  ,
-  {
-    id: 3,
-    title: "多城今年首次冲上 30℃",
-    likeed: false,
-  }
-  ,
-  {
-    id: 4,
-    title: "七国集团外长会反对中国试图以武力单方面改变台海现状",
-    likeed: false,
-  }
-  ,
-  {
-    id: 5,
-    title: "为什么在《原神》游戏中升级等级到 80 就不建议再升到 90 呢？",
-    likeed: false,
-  }
-])
+let hotforum = reactive([])
 let Forum = reactive({
   Forumlist: '',
   allForumlist: '',
   moreForumlist: '',
   nowPage: 1,
 });
-let dialogFormVisible = ref(false);
+  const store2=usermain();
 // const Forumaddref = ref(null)
 let time = ref()
 let collected = ref(false)
-let comment = ref("我我我啊啊啊啊")
+let comment = ref("")
 let footerclass = ref('footer')
 const store = getForumList();
 const gettime = () => {
@@ -239,136 +211,187 @@ const gettime = () => {
     month = `0${month}`
   }
   var day = String(d.getDate());
+  if (day <= 9) {
+    day = `0${day}`
+  }
   time.value = `${year}-${month}-${day}`
 }
-//喜欢
-// async function like (list) {
-//   gettime();
-//   let data = JSON.stringify({
-//     "usc_sid": list.t_id,
-//     "usc_uid": list.t_uid,
-//     "usc_data": time.value,
-//     "tk_title": "test"
-//   })
-//   await store.changecollect(data)
+// const loginflag=ref(localStorage.getItem("huixiao"))
+//删除我的评论
+const deletecomment= async(list,index,i)=>{
+  await store.DeleteMycomment(list.tk_id).then((result)=>{
+    document.getElementsByClassName('morecomment')[index].
+    getElementsByClassName('othercommentdiv')[i].style.display='none';
+  })
 
-//   if (1) {
-//     document.getElementsByClassName("like")[0].style.backgroundColor = "#409EFF"
-//     document.getElementsByClassName("likeimg")[0].src = "./image/liked.png"
-//   }
-//   else {
-//     document.getElementsByClassName("like")[0].style.backgroundColor = "rgb(232, 247, 252);"
-//   }
-// }
+}
 //收藏
-const collect = async (list, index) => {
+const collect = debounce(async (list, index) => {
   gettime();
   let data = {
     "usc_sid": list.t_id,
-    "usc_uid": list.t_uid,
     "usc_data": time.value,
     "tk_title": "test"
   }
   await store.changecollect(data)
-  if (!collected.value) {
-    document.getElementsByClassName("collect")[index].style.backgroundColor = "#409EFF"
-    document.getElementsByClassName("collectimg")[index].style.display = "none"
-    document.getElementsByClassName("collectedimg")[index].style.display = "block"
+  Forum.allForumlist[index].collent = true
+  Forum.allForumlist[index].t_usc_count++
+},300)
+const deletecollect = debounce(async (list, index) => {
+  await store.DeleteForumcollect(list.t_id)
+  Forum.allForumlist[index].collent = false
+  Forum.allForumlist[index].t_usc_count--
+},300)
+//喜欢
+const like = debounce(async (list, index) => {
+  let data = {
+    "t_like_tid": list.t_id,
+    "t_like_title": "test"
   }
-  else {
-    document.getElementsByClassName("collect")[index].style.backgroundColor = "rgb(232, 247, 252)"
-    document.getElementsByClassName("collectimg")[index].style.display = "block"
-    document.getElementsByClassName("collectedimg")[index].style.display = "none"
-  }
-  collected.value = !collected.value
-}
-
-const morecomment = ref(null);
+  await store.changelike(data).then(()=>{
+  Forum.allForumlist[index].liked = true
+  Forum.allForumlist[index].t_like_count++
+  })
+  
+},300)
+const deletelike = debounce(async (list, index) => {
+  console.log('deletelike');
+  await store.DeleteForumlike(list.t_id).then(()=>{
+ Forum.allForumlist[index].liked = false
+  Forum.allForumlist[index].t_like_count--
+  })
+ 
+},300)
+const userid=ref('')
 const othercommentshowdiv = ref(null)
+const ForumCollectLike=ref(1)
 //二级评论
-function othercommentshow (list, index) {
-  console.log();
-  if (morecomment.value[index].style.display == "block") {
-    morecomment.value[index].style.display = "none"
-    othercommentshowdiv.value[index].style.backgroundColor = "rgb(232, 247, 252)"
+const othercommentshow = debounce(async (tid, index) => {
+  userid.value=store2.userinfo.userId
+  await store.getForumCommenttList(tid);
+  let commentlist = [];
+  store.ForumCommenttList.forEach(e => {
+    commentlist.push({
+      tk_data: e.tk_data,
+      tk_id: e.tk_id,
+      tk_source: e.tk_source,
+      tk_tid: e.tk_tid,
+      tk_uid: e.tk_uid,
+      user_avatar: e.user_avatar,
+      user_name: e.user_name
+    })
+  });
+  Forum.allForumlist[index].comment = commentlist
+  document.getElementsByClassName('morecomment')[index]
+  if (document.getElementsByClassName('morecomment')[index].style.display == "block") {
+    document.getElementsByClassName('morecomment')[index].style.display = "none"
+    document.getElementsByClassName('othercommentshow')[index].style.backgroundColor = "rgb(232, 247, 252)"
+    document.getElementsByClassName('commentimg')[index].src=require('@/pages/Home/Section/Forum/image/comment.png');
+      
   } else {
-    morecomment.value[index].style.display = "block"
-    othercommentshowdiv.value[index].style.backgroundColor = "#409EFF"
+    document.getElementsByClassName('morecomment')[index].style.display = "block"
+    document.getElementsByClassName('othercommentshow')[index].style.backgroundColor = "#69b4fe"
+    document.getElementsByClassName('commentimg')[index].src=require('@/pages/Home/Section/Forum/image/commented.png')
+    
+    
   }
 
+},300)
+//添加评论
+const commentforum = async (list, index) => {
+  if(comment.value!=''){
+ gettime()
+  let uuid = uuidv4()
+  uuid = uuid.split("-").join("");
+  let data = {
+    tk_id: uuid,   //评论id
+    tk_tid: list.t_id,    //评论帖子ID
+    tk_source: comment.value,   //评论内容
+    tk_data: time.value  //发表评论的时间
+  }
+  await store.pushForumComment(data)
+  othercommentshow(list.t_id, index)
+  comment.value=''
 }
-//鼠标移入移出
-const opencomment = () => {
-  othercommentshow.value = !othercommentshow.value
+else{
+  ElMessage.warning('评论不能为空哦')
 }
-const pushcomment = () => {
-
 }
-
+//子评论删除按钮显示
+const deleteothercommentbtn=(index,i,val,ismy)=>{
+  console.log(ismy);
+  if(ismy){
+  if(val=='leave'){
+    document.getElementsByClassName('morecomment')[index].
+    getElementsByClassName('deleteothercommentbtn')[i].style.display='none';
+    console.log(index,i);
+  }else{
+    document.getElementsByClassName('morecomment')[index].
+    getElementsByClassName('deleteothercommentbtn')[i].style.display='block';
+  }
+  }
+}
 //调整footer
 
 const handleScroll = () => {
   let scrollTop = document.documentElement.scrollTop;
   if (scrollTop >= 820) {
-    footerclass.value = "footeradd"
+    footerclass.value = "footer footeradd"
   } else {
-    footerclass.value = "footer"
+    footerclass.value = "footer "
   }
 }
-//懒加载
 
-const lazyloading = () => {
-  let scrollTop = document.documentElement.scrollTop;
-  if (scrollTop >= Forum.nowPage * 1500) {
-    Forum.nowPage++;
-    if (Forum.nowPage * 10 >= Forum.allForumlist.length) {
-      Forum.Forumlist = Forum.allForumlist
+const getmoreForumList = () => {
+  if (document.documentElement.scrollTop + window.innerHeight === document.documentElement.scrollHeight) {
+    if (store.isAlllist) {
+      getAllList();
     }
-    else {
-      Forum.Forumlist = Forum.allForumlist.slice(0, 10 * Forum.nowPage)
-    }
+
   }
 }
+let Forumaddshow = ref(store.forumaddshow)
 const dialogForm = () => {
-  const store = getForumList();
   store.forumaddshow = true
-  dialogFormVisible.value = true
 }
+const gethotForumList=async()=>{
+  await store.gethotForumList()
+  hotforum.value=store.hotForumList
+}
+
 //监听搜索框
-watch(store, (newvalue, oldvalue) => {
-  if (dialogFormVisible) {
-    if (toRaw(newvalue).searchtext.value) {
-      Forum.Forumlist = toRaw(newvalue.searchList)
-    }
-    else if (toRaw(newvalue).searchtext.value == '') {
-      Forum.Forumlist = toRaw(store.forumList)
-    }
+watch([()=>store,()=>store.searchList], (newvalue, oldvalue) => {
+  if(newvalue[1]!=oldvalue[1]){
+    Forum.allForumlist=store.searchList
+    Forum.nowPage=1;
+    console.log(Forum.allForumlist);
   }
-  dialogFormVisible.value = store.forumaddshow
+
 
 })
 
+const getAllList= async()=>{
+  await store.getList();
+  Forum.allForumlist = store.forumList;
+  console.log('Forum.allForumlist',Forum.allForumlist);
+    Forum.allForumlist = [...Forum.allForumlist]
+    
+}
+watch(() => store.forumaddshow, (newvalue, oldvalue) => {
+  Forumaddshow.value = newvalue
+  // Shopaddshow.value = newvalue[0]
+})
 
 onMounted(async () => {
   window.addEventListener('scroll', handleScroll, true)
-  window.addEventListener('scroll', lazyloading, true)
-
-  await store.getList()
-  store.forumsList
-  const { forumList } = storeToRefs(store)
-
-  //懒加载判断
-  if (toRaw(forumList.value).length <= 10) {
-    Forum.Forumlist = toRaw(forumList.value);
-    Forum.moreForumlist = false
-  }
-  else {
-    Forum.Forumlist = toRaw(forumList.value).slice(0, 10);
-    Forum.allForumlist = toRaw(forumList.value);
-    Forum.moreForumlist = true
-  }
-
+  // window.addEventListener('scroll', lazyloading, true)
+  window.addEventListener('scroll', getmoreForumList, true)
+  gethotForumList()
+  getAllList()
 })
+// beforeRouteEnter(async () => {
+ 
+// })
 
 
 

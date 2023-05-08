@@ -58,7 +58,9 @@
                      class="text">密&ensp;&ensp;&ensp;&ensp;码：</label>
               <el-input class="forminput"
                         type="password"
-                        v-model="userinfo.password" />
+                        v-model="userinfo.password"
+                        :minlength="6"
+                        :maxlength="18" />
               <!-- <div class="pwshow" @click="pwshow">
                       <img src="./image/pwnoshow.png" alt="">
                     </div> -->
@@ -89,13 +91,14 @@
 
             </div>
             <div class="text-center">
-              Welcome to register <router-link to="/login"><a href="register.html">Return to login</a>
+              欢迎注册！ <router-link to="/login"><a href="register.html">返回登录</a>
               </router-link>
             </div>
           </form>
         </div>
         <div class="footer">
-          Copyright &copy; 2023 &mdash; Your Company
+          2023 &mdash;&copy; Huixiao
+
         </div>
       </div>
 
@@ -111,7 +114,7 @@ import { ElMessage } from 'element-plus';
 import { submituser } from '@/store/user/index'
 name: 'register'
 let userinfo = reactive({
-  name: '王俏栋',
+  name: '',
   phone: '',
   code: '',
   password: '',

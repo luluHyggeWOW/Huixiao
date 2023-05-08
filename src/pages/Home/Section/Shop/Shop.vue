@@ -1,21 +1,32 @@
 <template>
-  <Shopadd class="Shopadd"
-           v-if="Shopaddshow"></Shopadd>
+  <Shopadd v-if="shopaddshow"></Shopadd>
   <div class="Shopinfo"
        v-if="Shopinfoshow">
     <div class="colse"
          @click="Shopinfoshow=!Shopinfoshow"><img src="./image/closebtn.png"
            alt=""></div>
+
     <div class="shopimg">
       <el-carousel trigger="click"
-                   height="800px"
-                   style="border-radius: 15px 0px 0px 15px ;">
+                   height="600px"
+                   style="border-radius: 15px 0px 0px 0px ;"
+                   ref="carousel">
         <el-carousel-item v-for="(item,index) in shopinfo.urlList"
                           :key="index">
           <img :src="item"
                alt="">
         </el-carousel-item>
       </el-carousel>
+
+    </div>
+    <div class="allishopmg">
+      <div class="imglist">
+        <div v-for="(item,index) in shopinfo.urlList"
+             :key="index"
+             @click="changeshoplistimg(index)"><img :src="item"
+               alt=""></div>
+
+      </div>
     </div>
     <div class="shopuser">
       <div class="userimg">
@@ -42,13 +53,13 @@
     </div>
     <div class="shopbtn">
       <div class="shopcar"
-           @click="joinshopcar">
+           @click="handle('joinshopcar',shopinfo.shopId)">
         <img src="./image/shopcar.png"
              alt="">
         <p>加入购物车</p>
       </div>
       <div class="shopbuy"
-           @click="buy">
+           @click="handle('buy',shopinfo.shopId)">
         <img src="./image/shopbuy.png"
              alt="">
         <p>全款拿下</p>
@@ -56,6 +67,7 @@
 
     </div>
   </div>
+
   <div class='box'>
     <div class="shopbox">
       <!-- <div class="bearear">
@@ -98,7 +110,9 @@
                alt="">
         </div>
         <div class="shopuser">
-          <p class="shoptitle">{{list.shopName}}:{{list.shopIntuoduct}}</p>
+          <div class="shoptitle">
+            <p>{{list.shopName}}：<span>{{list.shopIntuoduct}}</span></p>
+          </div>
           <div class="userdiv">
             <img :src="list.userUrl"
                  alt=""
@@ -118,36 +132,30 @@
 import { ref, reactive, onMounted, watch, toRaw } from 'vue'
 import { getShopList } from '@/store/shop/index'
 import Shopadd from './Shopadd/Shopadd.vue'
+import debounce from "@/utils/debounce.js";
 name: 'Shop'
 let ShopList = reactive({
   AllShopList: '',
   NowShopList: '',
   nowPage: 1,
 });
-let list = [
-
-]
-let Shopaddshow = ref(false)
+let AllShopList = ref({})
 let nowPage = ref(1)
-async function getAlllist () {
-  const store = getShopList();
+let carousel = ref()
+const store = getShopList();
+
+const getAlllists = (async () => {
   await store.getAllList()
-  if (ShopList.nowPage == 1) {
-    ShopList.AllShopList = store.shoplist
-    ShopList.nowPage++
-  }
-  else {
-    store.shoplist.forEach(e => {
-      console.log(e);
-      ShopList.AllShopList.push(e)
-    });
-  }
-}
+  ShopList.AllShopList = store.shoplist
+  // ShopList.AllShopList.push('')
+  ShopList.AllShopList = [...ShopList.AllShopList]
+  ShopList.nowPage++
+  console.log('ShopList.AllShopList', ShopList.AllShopList);
+})
 let shopinfo = ref()
 let Shopinfoshow = ref(false)
-const store = getShopList()
+let shopaddshow = ref(store.shopaddshow)
 const Shopaddshowflag = () => {
-  Shopaddshow.value = true;
   store.shopaddshow = true
 }
 const clickshopinfo = (info) => {
@@ -157,29 +165,46 @@ const clickshopinfo = (info) => {
 }
 const getmoreShopList = () => {
   if (document.documentElement.scrollTop + window.innerHeight === document.documentElement.scrollHeight) {
-    console.log("滚动条到底了！");
-    getAlllist();
+    if (store.isAlllist) {
+      getAlllists();
+    }
+
   }
 }
-watch(store, (newvalue, oldvalue) => {
-  if (typeof (toRaw(newvalue).searchtext.value) == 'string') {
-    if (toRaw(newvalue).searchtext.value) {
-      ShopList.AllShopList = toRaw(newvalue.searchList)
-      console.log(ShopList.AllShopList);
-      console.log(1);
+const handle = async (val, id) => {
+  if (val == 'buy') {
+    await store.BuyShop(id)
+  }
+  else {
+    await store.JoinShopCar(id)
+  }
+}
+
+watch([() => store, () => store.shopaddshow, () => store.searchList, () => store.shoplist], (newvalue, oldvalue) => {
+  if (typeof (toRaw(newvalue[0]).searchtext.value) == 'string') {
+    if (toRaw(newvalue[0]).searchtext.value) {
+      ShopList.AllShopList = toRaw(newvalue[0].searchList)
     } else {
-      ShopList.AllShopList = toRaw(store.shoplist)
-      console.log(2);
+      ShopList.AllShopList = toRaw(store.shopalist)
     }
   }
-  Shopaddshow.value = store.shopaddshow
+  shopaddshow.value = newvalue[1]
+  if (newvalue[2]) {
+    ShopList.AllShopList = toRaw(newvalue[0].searchList)
+  }
+  if (newvalue[3]) {
+    console.log('qweqweqw', newvalue[3]);
+    // ShopList.AllShopList = toRaw(newvalue[0].shoplist)
+  }
+
 })
-
-
-onMounted(async () => {
+const changeshoplistimg = (index) => {
+  carousel.value.setActiveItem(index)
+}
+onMounted(() => {
   window.addEventListener('scroll', getmoreShopList, true)
-  getAlllist()
-  console.log(ShopList.AllShopList);
+  getAlllists()
+  console.log('刚开始');
 })
 </script>
 

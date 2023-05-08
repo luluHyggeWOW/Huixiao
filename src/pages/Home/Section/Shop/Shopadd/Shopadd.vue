@@ -1,5 +1,4 @@
 <template>
-  <div></div>
   <div class="box">
     <div class="div">
       <el-dialog title="发布商品！"
@@ -9,7 +8,8 @@
                  :showClose=false
                  :lock-scroll="false"
                  width="800px"
-                 destroy-on-close="true">
+                 destroy-on-close="true"
+                 style="z-index=99">
         <img src="./image/creation.png"
              alt="">
         <el-form :model="form">
@@ -40,13 +40,13 @@
                        placeholder="请选择讨论类别"
                        @change="changeclass">
               <el-option label="电子产品"
-                         value="tiyu"></el-option>
+                         value="dianzi"></el-option>
               <el-option label="日用品"
-                         value="kaoyan"></el-option>
+                         value="riyong"></el-option>
               <el-option label="书本"
-                         value="kaoyan"></el-option>
+                         value="book"></el-option>
               <el-option label="服装类"
-                         value="kaoyan"></el-option>
+                         value="fuzhuang"></el-option>
               <el-option label="其他"
                          value="kaoyan"></el-option>
             </el-select>
@@ -115,7 +115,9 @@ async function dialogForm (val) {
         state.addshoplist.price = form.price
       })
       await store.AddShop()
-      // location.reload();
+      await store.getAllList()
+      location.reload();
+      // store.shopaddshow = false
     } else {
       ElMessage.error('信息不能为空哦！')
     }
@@ -135,7 +137,6 @@ async function dialogForm (val) {
   form.img = '';
   form.price = '';
   store.shopaddshow = false
-  dialogFormVisible.value = false
 }
 async function upload (file, fileList) {
   if (file.status == 'success') {
@@ -144,10 +145,10 @@ async function upload (file, fileList) {
     console.log(form.img);
   }
 }
-watch(store, (newvalue, oldvalue) => {
-  dialogFormVisible.value = toRaw(newvalue).shopaddshow.value
-  console.log(dialogFormVisible.value, toRaw(newvalue).shopaddshow.value);
-})
+// watch(store, (newvalue, oldvalue) => {
+//   dialogFormVisible.value = toRaw(newvalue).shopaddshow.value
+//   console.log(dialogFormVisible.value, toRaw(newvalue).shopaddshow.value);
+// })
 
 
 

@@ -2,13 +2,13 @@
 import router from "@/router";
 import axios from "axios";
 import { user } from '@/store/index'
-
+import { ElMessage } from 'element-plus';
 //1 利用axios对象的方法create 去创建一个 axios实例
 //2 request 就是axios 只不过稍微配置一下
 const requests = axios.create({
   //配置对象
   //基础路径，发请求路径应当会出现api
-  baseURL: "http://8.130.115.231:63010",
+  baseURL: "http://101.43.241.101:63010",
   //代表请求超时时间5s
   timeout: 5000
 });
@@ -39,7 +39,16 @@ requests.interceptors.response.use((res) => {
   return res.data;
 }, (err) => {
   //响应失败的回调函数
-  alert(err.message);
+  if (err.response.status == 401) {
+    ElMessage.warning('登录后才能操作哦！')
+  }
+  else if (err.response.status == 503) {
+    ElMessage.warning('服务器正在维护！')
+  }
+  else {
+    ElMessage.warning(err.message)
+  }
+
   // return new Promise();
 });
 

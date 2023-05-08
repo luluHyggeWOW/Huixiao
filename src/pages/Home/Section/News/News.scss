@@ -3,20 +3,23 @@
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   position: absolute;
   border-radius: 15px;
+  width: 1200px;
 
   .title {
-    // width: 300px;
-    // height: 140px;
-
     position: absolute;
     top: 50px;
     left: 50%;
-    transform: translate(-50%, -50%);
 
     span {
       font-size: 60px;
       font-weight: 1000px;
     }
+  }
+
+  .biaodian {
+    width: 5px;
+    height: 5px;
+    background-color: #909399;
   }
 
   .imghot {
@@ -58,6 +61,8 @@
 
     }
 
+
+
     .hotnews {
       position: relative;
       top: 30px;
@@ -76,9 +81,9 @@
 
         p {
           position: absolute;
-          top: -18px;
-          left: 50px;
-          font-size: 20px;
+          top: -27px;
+          left: 40px;
+          font-size: 25px;
         }
 
 
@@ -90,6 +95,7 @@
         margin-left: 50px;
         width: 500px;
         padding: 0;
+        margin-top: 20px;
         // height: 70px;
         // border-bottom: 1px solid #a4cffa;
         height: 54px;
@@ -99,6 +105,7 @@
         // justify-content: center;
         cursor: pointer;
         border-radius: 15px;
+        display: flex;
 
         p {
           width: 450px;
@@ -129,6 +136,7 @@
         p {
           font-size: 25px;
           width: 500px;
+          color: rgb(111, 111, 223);
         }
       }
     }
@@ -150,6 +158,10 @@
       position: relative;
       margin-left: 50px;
       margin-top: 40px;
+      // background-image: url(./image/bluebg2.png);
+      // width: 150px;
+      // height: 40px;
+      // border-radius: 20px;
 
       img {
         width: 30px;
@@ -157,21 +169,126 @@
 
       p {
         position: relative;
-        top: -53px;
-        left: 60px;
-        font-size: 20px;
-
+        top: -60px;
+        left: 40px;
+        font-size: 25px;
       }
     }
 
     .allnewstext {
       position: relative;
-      top: -30px;
+      top: -50px;
 
-      p {
-        margin: 20px 40px 20px 40px;
+
+      .titlediv {
+        position: relative;
+        cursor: pointer;
+        margin-left: 40px;
+        margin-right: 40px;
+        // margin-bottom: 0px;
+        padding-top: 0px;
+        padding-bottom: 5px;
+        border-radius: 15px 15px 0 0;
+
+
+        .biaodian {
+          // display: flex;
+          position: relative;
+          width: 5px;
+          height: 5px;
+          margin-left: 5px;
+
+          top: 35px
+        }
+
+        p {
+          margin-left: 20px;
+          font-size: 20px;
+          margin-right: 40px;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          /* 最多显示2行文本 */
+          -webkit-box-orient: vertical;
+          /* 垂直排列文本 */
+          overflow: hidden;
+        }
+
       }
+
+      .titledivadd {
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
+      }
+
+      .alldiv {
+        margin-left: 40px;
+        margin-right: 40px;
+        // height: 200px;
+        background-color: white;
+        position: relative;
+        border-radius: 0px 0px 15px 15px;
+        margin-bottom: 10px;
+        transition: all .3s ease-in-out;
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+        opacity: 1;
+
+        .text {
+          padding: 10px;
+          color: #606266;
+          font-size: 18px;
+          height: 200px;
+          overflow: hidden;
+        }
+
+        .time {
+          position: absolute;
+          bottom: 15px;
+          right: 10px;
+          color: #606266;
+        }
+
+        .packup {
+          position: absolute;
+          background-color: #cce4fc;
+          bottom: 0px;
+          width: 100%;
+          height: 15px;
+          cursor: pointer;
+          border-radius: 0 0 15px 15px;
+
+          img {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+
+          }
+        }
+
+        .packup:hover {
+          background-color: #abd1f8;
+        }
+      }
+
+      .alldivadd {
+        height: 0px;
+        overflow: hidden;
+        opacity: 0;
+
+      }
+
+
+
     }
 
+    .allnewstext :hover {
+      p {
+        color: rgb(111, 111, 223);
+
+      }
+
+      .biaodian {
+        background-color: rgb(111, 111, 223);
+      }
+    }
   }
 }

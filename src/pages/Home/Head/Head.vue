@@ -1,36 +1,48 @@
 <template>
   <div class="headr">
-
     <el-menu class="el-menu-demo"
              mode="horizontal"
              :id="head">
-      <div class="logo"><img src="./image/logo.png"
+      <div class="logo"
+           @click=" $router.push('/news')"><img src="./image/logo.png"
              alt=""></div>
-      <Search></Search>
+      <Search v-if="searchshow()"></Search>
 
       <el-sub-menu index="5"
                    class="userimg">
-        <template #title><img src="./image/neutral.png"
+        <template #title><img :src="userimg"
                alt=""></template>
         <el-menu-item index="2-1"
-                      @click="userinfo">我的资料</el-menu-item>
-        <el-menu-item index="2-2">选项2</el-menu-item>
-        <el-menu-item index="2-3">选项3</el-menu-item>
+                      @click="userinfo"
+                      v-if="loginflag"
+                      class="elmenuitem">我的资料</el-menu-item>
+        <el-menu-item index="2-2"
+                      @click="gologin()"
+                      v-if="!loginflag"
+                      class="elmenuitem">去登录</el-menu-item>
+        <el-menu-item index="2-3"
+                      @click="deletelogin()"
+                      v-if="loginflag"
+                      class="elmenuitem">退出登录</el-menu-item>
       </el-sub-menu>
-      <el-menu-item index="1">处理中心</el-menu-item>
-      <el-sub-menu index="2">
-        <template #title>我的工作台</template>
-        <el-menu-item index="2-1">选项1</el-menu-item>
-        <el-menu-item index="2-2">选项2</el-menu-item>
-        <el-menu-item index="2-3">选项3</el-menu-item>
-        <el-sub-menu index="2-4">
-          <template #title>选项4</template>
-          <el-menu-item index="2-4-1">选项1</el-menu-item>
-          <el-menu-item index="2-4-2">选项2</el-menu-item>
-          <el-menu-item index="2-4-3">选项3</el-menu-item>
-        </el-sub-menu>
-      </el-sub-menu>
-      <el-menu-item index="4">联系我们</el-menu-item>
+      <el-menu-item index="1"
+                    @click="fankui"><img src="./image/fankui.png"
+             alt=""
+             style="width:20px">反馈中心</el-menu-item>
+      <el-menu-item index="2"
+                    style="40px"
+                    disabled><img src="./image/xiuli.png"
+             alt=""
+             style="width:30px">
+        处理中心
+      </el-menu-item>
+      <el-menu-item index="3"
+                    style="40px"
+                    disabled><img src="./image/gongju.png"
+             alt=""
+             style="width:20px">
+        实用工具
+      </el-menu-item>
 
     </el-menu>
 
@@ -38,9 +50,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import Search from '@/pages/Home/Head/Search/Search.vue'
-
+import { usermain } from '@/store/index'
 import { useRoute, useRouter } from "vue-router"
 
 const route = useRoute()
@@ -49,7 +61,9 @@ name: 'Headr'
 
 let navshow = ref(true);
 let searchtext = ref("");
-
+let loginflag = ref(localStorage.getItem("huixiao"))
+const store = usermain();
+const userimg = ref(require('./image/neutral.png'))
 addEventListener('resize', () => {
 
 })
@@ -72,10 +86,39 @@ const userinfo = () => {
   document.body.style.paddingRight = scrollWidth + 'px';
   $router.push('/userinfo')
 }
-onMounted(() => {
+const gologin = () => {
+  $router.push('/login')
+}
+const deletelogin = () => {
+  localStorage.removeItem("huixiao");
+  location.reload()
+}
+const fankui = () => {
+  $router.push('/fankui')
+}
+const getuserimg = async () => {
+  const store = usermain();
+  if (loginflag.value) {
+    await store.getuserinfo().then(() => {
+      userimg.value = store.userinfo.userAvatar
+    })
+  }
+  else {
+    userimg.value = require('./image/neutral.png')
+  }
+}
+onMounted(async () => {
   window.addEventListener('scroll', handleScroll, true)
-
+  getuserimg()
 })
+const searchshow = () => {
+  if ($router.currentRoute.value.path == '/forum' || $router.currentRoute.value.path == '/news' || $router.currentRoute.value.path == '/shop') {
+    return true
+  }
+  else {
+    return false
+  }
+}
 //滚动条防抖
 
 </script>

@@ -15,7 +15,7 @@
           <form class="my-login-validation"
                 novalidate="">
             <div class="form-group">
-              <label for="email">Student Number</label>
+              <label for="email">手机号</label>
               <el-input @mouseenter="SNlogoenter"
                         @mouseleave="SNlogoleave"
                         type="email"
@@ -25,15 +25,14 @@
                         maxlength="11"
                         width="200px" />
               <div class="invalid-feedback">
-                Email is invalid
+                &nbsp;
               </div>
             </div>
 
             <div class="form-group">
-              <label for="password">Password
+              <label for="password">密码
                 <a href="forgot.html"
                    class="float-right">
-                  Forgot Password?
                 </a>
               </label>
               <el-input id="password"
@@ -51,30 +50,32 @@
                 <img :src="pwshowimg">
               </div>
               <div class="invalid-feedback">
-                Password is required
+                &nbsp;
               </div>
             </div>
 
             <div class="form-group">
-              <el-checkbox type="checkbox"
+              &nbsp;
+              <!-- <el-checkbox type="checkbox"
                            name="remember"
-                           id="remember">Remember Me</el-checkbox>
+                           id="remember"></el-checkbox> -->
             </div>
             <el-button type="primary"
                        class="btn btn-primary btn-block"
                        @click="userLogin"
                        :plain="okLogin"
-                       style="width: 200px; margin-left:150px">
-              Login
+                       style="width: 200px; margin-left:150px;">
+              登录
             </el-button>
             <div class="text-center">
-              Don' t have an account? <router-link to="/register"><a href="">Create One</a>
+              没有账户？<router-link to="/register"><a href="">点击注册</a>
               </router-link>
             </div>
           </form>
         </div>
         <div class="footer">
-          Copyright &copy; 2023 &mdash; Your Company
+          2023 &mdash;&copy; Huixiao
+          <!-- Copyright &copy; 2023 &mdash; -->
         </div>
       </div>
 
@@ -155,16 +156,19 @@ const userLogin = debounce(async function () {
     ElMessage.error('账号或密码错误')
   }
   else {
-    ElMessage.success('登陆成功')
-    localStorage.setItem('huixiao', store2.userinfo.usertoken)
-    await store2.getuserinfo();
-    // store.$patch(state => {
+    await store2.getuserinfo().then(() => {
+      console.log('login', store2.userinfo);
+      router.push({ path: "/news", query: { userphone: userinfo.cellphone } });
+    })
+
+    // store2.$patch(state => {
     //   state.user.cellphone = userinfo.cellphone
     //   state.user.password = userinfo.password
     //   console.log(state.user.cellphone, state.user.password);
     // })
-    router.push({ path: "/news", query: { userphone: userinfo.cellphone } });
+
   }
+
 }, 500)
 onMounted(() => {
 

@@ -49,13 +49,13 @@
         <img src="./image/gotop.png"
              alt="">
       </div>
+      <div>
+
+      </div>
     </body>
 
-    <footer>
-      <!-- <Footer></Footer> -->
-    </footer>
-
   </div>
+
 </template>
 
 <script setup>
@@ -64,8 +64,10 @@ import Nav from '@/pages/Home/Nav/Nav.vue'
 import Message from '@/pages/Home/Message/Message.vue'
 import Chat from '@/pages/Home/Message/Chat/Chat.vue'
 import Footer from '@/pages/Home/Footer/Footer.vue'
+import Shopadd from '@/pages/Home/Section/Shop/Shopadd/Shopadd.vue'
+import Forumadd from '@/pages/Home/Section/Forum/Forumadd/Forumadd.vue'
 
-import { components, ref, router, watch } from 'vue'
+import { components, ref, router, watch, onMounted } from 'vue'
 import { useRoute, useRouter } from "vue-router"
 
 name: 'Home'
@@ -88,7 +90,15 @@ const gotop = () => {
   document.documentElement.scrollTop = 0;
 }
 //滚动条防抖
+window.onload = function () {
+  // 将滚动位置回到顶部
+  window.scrollTo(0, 0);
+}
 
+
+onMounted(() => {
+
+})
 
 </script>
 

@@ -45,6 +45,11 @@ const router = createRouter({
           name: 'userinfo',
           component: () => import('@/pages/Home/Head/Userinfo/Userinfo.vue'),
         },
+        {
+          path: '/fankui',
+          name: 'fankui',
+          component: () => import('@/pages/Home/Head/Fankui/Fankui.vue'),
+        },
       ]
     },
 

@@ -1,4 +1,39 @@
 * {
+  .dialogFormdiv {
+    // z-index: 99;
+    // border-bottom: 1px solid rgb(207, 230, 248);
+    // height: 100%;
+    // width: 100%;
+    // position: absolute;
+
+    // top: -200px;
+    // left: -200px;
+    // background-color: #d8e0ee;
+
+    img {
+      position: absolute;
+      top: 16px;
+      left: 100px;
+      width: 32px;
+    }
+
+    .el-icon-plus {
+      // width: 200px;
+      font-size: 50px;
+      font-weight: 100;
+      margin-top: -10px;
+      color: rgb(181, 178, 178);
+    }
+  }
+
+  // .dialog {
+  //   z-index: 99;
+  //   width: 100%;
+  //   height: 100%;
+  //   background-color: #606266;
+  //   position: absolute;
+  // }
+
   .box {
     position: fixed;
     top: 110px;
@@ -7,15 +42,28 @@
     background-color: rgb(245, 245, 245);
     display: flex;
     border-radius: 15px;
-
+    // margin-top: -200px;
     // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+
+    animation: useringofly-in 0.5s cubic-bezier(0, 0, 0.3, 1) forwards;
+
+    @keyframes useringofly-in {
+      from {
+        top: -45%;
+      }
+
+      to {
+        top: 11%;
+      }
+    }
 
     .closebox {
       position: absolute;
       left: 1160px;
       top: 10px;
       cursor: pointer;
+      z-index: 99;
 
       img {
         width: 25px;
@@ -24,14 +72,19 @@
     }
 
     .top {
-      position: relative;
-      margin-left: 50px;
+      position: absolute;
+      // margin-left: 50px;
+      background-image: url(./image/fankuibg2.png);
+      width: 100%;
+      background-size: cover;
+      border-radius: 15px;
 
       .imgdiv {
         width: 150px;
         height: 150px;
         border-radius: 50%;
         margin: 30px;
+        margin-left: 100px;
 
         img {
 
@@ -47,10 +100,10 @@
         .changeimg {
           position: absolute;
           top: 30px;
-          left: 30px;
+          left: 100px;
           width: 150px;
           height: 150px;
-          border-radius: 50%;
+          border-radius: 15px;
           z-index: 10;
           cursor: pointer;
           opacity: 0.5;
@@ -81,11 +134,12 @@
 
 
       p {
-        width: 200px;
+        width: 300px;
         position: absolute;
         font-size: 30px;
         top: 50px;
         left: 250px;
+        margin-left: 50px;
       }
     }
 
@@ -205,6 +259,7 @@
               p {
                 margin-top: 0px;
                 font-size: 20px;
+                width: 600px;
               }
 
               span {
@@ -225,10 +280,19 @@
               }
             }
 
+
+
             .handle {
-              cursor: pointer;
               margin-top: 50px;
-              margin-left: 20px;
+              margin-left: 10px;
+              display: flex;
+              cursor: pointer;
+              z-index: 99;
+
+              div {
+                cursor: pointer;
+                margin-left: 10px;
+              }
 
               img {
                 margin-left: 45px;
@@ -242,19 +306,72 @@
 
               }
 
+              .buy {
+                margin-left: -110px;
+              }
+
+            }
+
+            .shopcar {
+              z-index: 10;
+
+              span {
+                width: 400px;
+              }
+            }
+
+            .ForumCollect {
+
+              // margin-left: 200px;
+              img {
+                margin-left: 35px;
+              }
+            }
+
+            .MyForum {
+              position: relative;
+              margin-left: 0px;
+
             }
 
 
+            .time {
+              position: absolute;
+              // top: 0px;
+              left: 850px;
+              margin-top: -35px;
+              // margin-top: 50px;
+              // margin-left: -100px;
+
+              p {
+                // width: 500px;
+                color: #909399;
+              }
+
+
+            }
+
+          }
+
+          .MyForum {
+            .title {
+              span {
+                width: 600px;
+              }
+            }
           }
         }
 
       }
+
+
     }
 
     .btn {
       position: relative;
       top: 720px;
-      left: 750px
+      left: 950px;
+      cursor: pointer;
     }
   }
 

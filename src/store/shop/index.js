@@ -1,14 +1,19 @@
 
 import { defineStore } from 'pinia'
-import { repShopList, repgetMyShopList, reqShopSearchList, repdeleteMyForumList, repaddShop } from '@/api/api';
+import {
+  repShopList, repgetMyShopList, reqShopSearchList, repdeleteMyForumList, repaddShop,
+  repBuyShop, repJoinShopCar, repgetMyShopCar, repgetMyBuyShop, repBuyOnShopCar,
+  repDeleteOnShopCar, repDeleteMyShop, repgetClassShopList
+} from '@/api/api';
 import { ref, reactive } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { usermain } from '@/store/index'
 import { useRoute, useRouter } from "vue-router"
-
+import debounce from "@/utils/debounce.js";
 export const getShopList = defineStore('shop', () => {
 
   const shoplist = ref()
+  const list = []
   const searchList = ref({})
   const myshoplist = ref({})
   const addshoplist = reactive({
@@ -19,18 +24,28 @@ export const getShopList = defineStore('shop', () => {
     price: '',
   })
   const firstshoplist = ref([])
-  const page = ref(0)
+  const page = ref(1)
+  const isAlllist = ref(true)
   const $router = useRouter()
   const searchtext = ref({})
   const shopaddshow = ref(false)
-  const deleteshopid = ref({})
+  const myshopcarlist = ref({})
+  const getMyBuyShopList = ref({})
+
   let token = localStorage.getItem("huixiao");
   async function getAllList () {
-    let result = await repShopList(page.value, token);
-    page.value++
-    // console.log(result.data);
-    if (result.code == 200) {
-      shoplist.value = result.data
+    let result = await repShopList(page.value);
+    console.log(page.value, result,);
+    if (result.code == 200 || result.code.length > 0) {
+      page.value++
+      // .push(result.data)
+      result.data.forEach(e => {
+        list.push(e)
+      });
+      shoplist.value = list
+      console.log('page.value++', page.value);
+      console.log('list', list);
+      console.log('piniashoplist.value', shoplist.value);
     } else {
       ElMessage.error('列表获取失败')
     }
@@ -44,8 +59,10 @@ export const getShopList = defineStore('shop', () => {
         searchList.value = result.data;
       }
       else {
-
       }
+    }
+    else {
+      searchList.value = shoplist.value
     }
   }
   async function getmyShopList () {
@@ -58,8 +75,18 @@ export const getShopList = defineStore('shop', () => {
 
     }
   }
-  async function deletemyShop () {
-    let result = await repdeleteMyForumList(deleteshopid.value, token);
+  async function getmyShopCarList () {
+    let result = await repgetMyShopCar(token);
+    console.log("getMyShopCar", result);
+    if (result.code == 200) {
+      myshopcarlist.value = result.data
+    }
+    else {
+
+    }
+  }
+  async function deletemyShop (deleteshopid) {
+    let result = await repDeleteMyShop(deleteshopid, token);
     console.log(" getmyShopList", result);
     if (result.code == 200) {
       ElMessage.success('删除成功')
@@ -68,12 +95,12 @@ export const getShopList = defineStore('shop', () => {
       ElMessage.error('删除成功')
     }
   }
-
   async function AddShop () {
     let data = {
       shopName: addshoplist.title,
       shopIntuoduct: addshoplist.text,
       shopPrice: addshoplist.price,
+      shopClass: addshoplist.class,
       url: [
       ]
     }
@@ -82,9 +109,7 @@ export const getShopList = defineStore('shop', () => {
     });
 
     // data = JSON.stringify(data)
-    console.log('data', data);
     let result = await repaddShop(data, token);
-    console.log("getmyShopList", result);
     if (result == undefined) {
       ElMessage.error('发布失败')
       ElMessageBox({
@@ -104,6 +129,63 @@ export const getShopList = defineStore('shop', () => {
 
     }
   }
+  async function BuyShop (BuyShopid) {
+    let result = await repBuyShop(BuyShopid, token);
+    console.log("BuyShop", result);
+    if (result.code == 200) {
+      ElMessage.success('购买成功')
+
+
+    }
+  }
+  async function BuyOnShopCar (BuyShopid) {
+    let result = await repBuyOnShopCar(BuyShopid, token);
+    console.log("BuyShopOnShopCar", result);
+    if (result.code == 200) {
+      ElMessage.success('购买成功')
+    }
+    else {
+      ElMessage.error('购买失败')
+    }
+  }
+  async function DeleteOnShopCar (BuyShopid) {
+    let result = await repDeleteOnShopCar(BuyShopid, token);
+    if (result.code == 200) {
+      ElMessage.success('移除成功')
+    }
+    else {
+      ElMessage.error('移除失败')
+    }
+  }
+  async function JoinShopCar (JoinShopCarid) {
+    let result = await repJoinShopCar(JoinShopCarid, token);
+    console.log("JoinShopCar", result);
+
+    if (result.code == 200) {
+      ElMessage.success('加入购物车成功')
+
+
+    }
+  }
+  async function getMyBuyShop () {
+    let result = await repgetMyBuyShop(token);
+    console.log("getMyBuyShopList", result);
+    if (result.code == 200) {
+      getMyBuyShopList.value = result.data
+      // ElMessage.success('加入购物车成功')
+    }
+  }
+  async function getClassShopList (title) {
+    let result = await repgetClassShopList(title);
+    console.log("getClassShopList", result);
+    if (result.code == 200) {
+      searchList.value = result.data
+    }
+  }
+  function ClassisAll () {
+    console.log(1111);
+    searchList.value = shoplist.value
+  }
 
   return {
     getShopList,
@@ -117,9 +199,21 @@ export const getShopList = defineStore('shop', () => {
     searchList,
     myshoplist,
     deletemyShop,
-    deleteshopid,
     AddShop,
-    firstshoplist
+    firstshoplist,
+    BuyShop,
+    JoinShopCar,
+    getmyShopCarList,
+    myshopcarlist,
+    getMyBuyShopList,
+    getMyBuyShop,
+    BuyOnShopCar,
+    DeleteOnShopCar,
+    getClassShopList,
+    page,
+    isAlllist,
+    ClassisAll
+
   }
 
 }

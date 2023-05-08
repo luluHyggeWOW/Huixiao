@@ -1,4 +1,5 @@
-html {
+* {
+
   .box {
     width: 1200px;
     padding: 0;
@@ -11,14 +12,15 @@ html {
 
     .shopbox {
       column-count: 3;
-      column-gap: 0em;
+      column-gap: 10px;
+      column-fill: auto;
       width: 1150px;
       flex-wrap: wrap;
-      margin: 45px 25px 25px 30px;
+      margin: 45px 25px 25px 15px;
       height: auto;
-      // direction: rtl;
       display: flex;
       flex-direction: row-reverse;
+      z-index: 0;
 
       .bearear {
         position: relative;
@@ -60,8 +62,11 @@ html {
         margin: 0;
         width: 370px;
         overflow: hidden;
-        height: auto;
+        height: 500px;
         margin-bottom: 10px;
+        border-radius: 15px;
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.03);
+        break-inside: avoid-column;
 
         .shopimg {
           position: relative;
@@ -73,7 +78,8 @@ html {
           img {
 
             width: 370px;
-            height: auto;
+            height: 370px;
+            overflow: hidden;
             max-height: 740px;
             min-height: 370px;
             transition: transform 0.3s ease-out;
@@ -94,6 +100,20 @@ html {
           .shoptitle {
             width: 370px;
             font-size: 17px;
+            height: 75px;
+            overflow: hidden;
+
+
+            p {
+              font-size: 20px;
+
+              span {
+                font-size: 17px;
+                // height: 30px;
+                text-overflow: ellipsis;
+
+              }
+            }
           }
 
           .userdiv {
@@ -142,13 +162,16 @@ html {
         margin: 0;
         width: 370px;
         overflow: hidden;
-        height: 400px;
+        height: 500px;
         margin-bottom: 10px;
         border-radius: 20px 20px 15px 15px;
+        // margin-bottom: 80px;
+        background: linear-gradient(to bottom, #cce8f6, white);
+        background-image: url(./image/dt1.gif);
         background-color: #cce8f6;
-        margin-bottom: 80px;
-
+        background-size: cover;
         box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+        // opacity: 0.1;
 
         .title {
           margin-top: 10px;
@@ -175,7 +198,7 @@ html {
           margin-top: -30px;
           margin-left: 35px;
           width: 300px;
-          height: 100px;
+          height: 200px;
           background-color: #f3f9fc;
           border-radius: 15px;
 
@@ -197,7 +220,7 @@ html {
 
         .btn {
           position: absolute;
-          top: 300px;
+          top: 350px;
           left: 90px;
           // z-index: 1;
 
@@ -216,7 +239,7 @@ html {
 
       .bluebear {
         position: absolute;
-        margin-top: 20px;
+        margin-top: 0px;
         margin-left: -20px;
         width: 200px;
         opacity: 0.4;
@@ -227,21 +250,28 @@ html {
     }
   }
 
+
+
   .Shopinfo {
+
     position: fixed;
-    top: 53%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: linear-gradient(to top, white, #afe4ff);
-    width: 1000px;
-    height: 800px;
+    transform: translateZ(0);
+    transform: translate3d(0, 0, 0);
+    // top: 50%;
+    // left: 50%;
+    // transform: translateY(-13%);
+    // background: linear-gradient(to left, white, #a7dcf6);
+    background-color: rgb(237, 255, 255);
+    width: 1200px;
+    height: 700px;
     z-index: 20;
     border-radius: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
 
+
     .colse {
       position: absolute;
-      left: 960px;
+      left: 1160px;
       top: 10px;
       cursor: pointer;
       z-index: 20;
@@ -255,27 +285,72 @@ html {
     .shopimg {
       padding: 0;
       margin: 0;
-      width: 400px;
+      width: 600px;
       overflow: hidden;
-      background: skyblue;
-      border-radius: 15px 0px 0px 15px;
+      height: 700px;
+      border-radius: 15px 0px 0px 0px;
+      // overflow: -moz-scrollbars-none;
+      // display: flex;
+      background: linear-gradient(to left, rgb(237, 255, 255), #afe4ff);
 
       img {
+        // overflow-y: hidden;
+        // display: flex;
         position: absolute;
-        width: 400px;
-        min-height: 400px;
-        max-height: 800px;
+        width: 600px;
+        min-height: 600px;
+        max-height: 600px;
         top: 50%;
         transform: translate(0, -50%);
         border-radius: 0px;
         // border-radius: 15px 0px 0px 15px;
       }
+
+
+    }
+
+    .allishopmg {
+      position: absolute;
+      bottom: 0px;
+      // top: 600px;
+      width: 600px;
+      height: 100px;
+      // background-color: #606266;
+
+      .imglist {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+
+        // height: 200px;
+        div {
+          margin-top: 2px;
+          margin-left: 10px;
+          border: 1px solid rgb(168, 166, 166);
+          border-radius: 5px;
+
+          img {
+            cursor: pointer;
+            width: 90px;
+            height: 90px;
+            border-radius: 5px;
+          }
+        }
+
+        div:hover {
+          border: 1px solid rgb(5, 96, 188);
+        }
+      }
+
+
+
     }
 
     .shopuser {
       position: absolute;
       top: 0px;
-      left: 400px;
+      left: 600px;
       width: 600px;
       height: 150px;
       display: flex;
@@ -319,7 +394,7 @@ html {
 
       position: absolute;
       top: 130px;
-      left: 430px;
+      left: 630px;
 
       p {
         font-size: 40px;
@@ -338,13 +413,13 @@ html {
     .shoptext {
       position: absolute;
       top: 250px;
-      left: 430px;
+      left: 630px;
       width: 500px;
 
       .p {
         position: absolute;
         width: 100px;
-        top: 300px;
+        top: 200px;
         left: 470px;
         color: #909399;
       }
@@ -352,8 +427,8 @@ html {
 
     .shopprice {
       position: absolute;
-      top: 600px;
-      left: 400px;
+      top: 500px;
+      left: 600px;
       width: 600px;
       background-image: url(./image/bluebaground.png);
       height: 100px;
@@ -373,19 +448,21 @@ html {
 
     .shopbtn {
       position: absolute;
-      top: 725px;
-      left: 670px;
+      top: 625px;
+      left: 870px;
       width: 300px;
       height: 50px;
       border-radius: 30px;
       cursor: pointer;
       display: flex;
+      z-index: 99;
 
       .shopcar {
         width: 150px;
         height: 50px;
         border-radius: 30px 0 0 30px;
         background-color: #50b5fd;
+        cursor: pointer;
       }
 
       .shopbuy {
@@ -393,6 +470,7 @@ html {
         height: 50px;
         border-radius: 0 30px 30px 0;
         background-color: #1e87d1;
+        cursor: pointer;
       }
 
       img {
