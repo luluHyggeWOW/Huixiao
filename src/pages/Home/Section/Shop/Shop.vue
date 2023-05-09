@@ -86,15 +86,7 @@
 
   <div class='box'>
     <div class="shopbox">
-      <!-- <div class="bearear">
-        <div class="leftear">
-          <div class="sear"></div>
-        </div>
-        <div class="rightear">
-          <div class="sear">
-          </div>
-        </div>
-      </div> -->
+
       <div class="selldiv">
         <div class="title"> <img src="./image/sell.png"
                alt="">
@@ -120,7 +112,8 @@
       <div class="shopdiv"
            v-for="(list) in ShopList.AllShopList"
            :key="list.shopId"
-           @click="clickshopinfo(list)">
+           @click="clickshopinfo(list)"
+           v-if="ShopList.AllShopList">
         <div class="shopimg">
           <img :src="list.urlList[0]"
                alt="">
@@ -175,6 +168,7 @@ let Shopinfoshow = ref(false)
 let shopaddshow = ref(store.shopaddshow)
 const Shopaddshowflag = () => {
   store.shopaddshow = true
+  console.log('AllShopList', AllShopList.value);
 }
 const clickshopinfo = (info) => {
   shopinfo = info
@@ -211,12 +205,12 @@ watch([() => store, () => store.shopaddshow, () => store.searchList, () => store
     }
   }
   shopaddshow.value = newvalue[1]
-  if (newvalue[2]) {
-    ShopList.AllShopList = toRaw(newvalue[0].searchList)
+  if (toRaw(newvalue[2]).length) {
+    ShopList.AllShopList = newvalue[2]
   }
-  if (newvalue[3]) {
-    console.log('qweqweqw', newvalue[3]);
-    // ShopList.AllShopList = toRaw(newvalue[0].shoplist)
+  if (newvalue[3].value) {
+    // console.log('qweqweqw', newvalue[3]);
+    ShopList.AllShopList = toRaw(newvalue[0].shoplist)
   }
 
 })

@@ -183,6 +183,7 @@ export const getShopList = defineStore('shop', () => {
   function ClassisAll () {
     console.log(1111);
     searchList.value = shoplist.value
+    console.log(shoplist.value);
   }
 
   return {

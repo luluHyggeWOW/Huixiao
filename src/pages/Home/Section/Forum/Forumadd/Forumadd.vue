@@ -7,6 +7,7 @@
                  :modal=true
                  :showClose=false
                  :lock-scroll="false"
+                 :on-remove="handleRemove"
                  width="800px">
         <img src="./image/creation.png"
              alt="">
@@ -88,12 +89,11 @@ const changeclass = (e) => {
   form.class = e
 }
 const store = getForumList()
+const store2 = getForumList();
 async function dialogForm (val) {
   if (val == 'yes') {
-    console.log(form.class);
     if (form.title != '' && form.text != '' && form.class != '') {
       store.$patch(state => {
-        console.log(form.class);
         state.addforumlist.title = form.title
         state.addforumlist.img = form.img
         state.addforumlist.class = form.class
@@ -103,11 +103,12 @@ async function dialogForm (val) {
       store.$patch(state => {
         store.page = 1;
       })
-
       await store.getList()
       dialogFormVisible.value = store2.forumaddshow = false
     } else {
       ElMessage.error('信息不能为空哦！')
+      dialogFormVisible.value = store2.forumaddshow = true
+      console.log(111, dialogFormVisible.value);
     }
   }
   else {
@@ -118,16 +119,16 @@ async function dialogForm (val) {
       state.addforumlist.class = ''
       state.addforumlist.text = ''
     })
+    dialogFormVisible.value = store2.forumaddshow = false
   }
-  document.getElementsByClassName('box')[0].style.display = "none"
-  document.getElementsByTagName('body')[0].className = '';
+  // document.getElementsByClassName('box')[0].style.display = "none"
+  // document.getElementsByTagName('body')[0].className = '';
   form.title = '';
   form.class = '';
   form.text = '';
   form.img = '';
-  const store2 = getForumList();
-  dialogFormVisible.value = store2.forumaddshow = false
-  // dialogFormVisible.value = false
+
+
 }
 async function upload (file, fileList) {
   if (file.status == 'success') {
@@ -140,6 +141,11 @@ const beforeAvatarUpload = (file) => {
   if (!isLt2M) {
     ElMessage.error('上传图片大小不能超过 2MB!')
   }
+}
+const handleRemove = (file) => {
+  console.log(toRaw(file).response.data);
+  form.img = form.img.filter((item) => item !== toRaw(file).response.data);
+  console.log(form.img);
 }
 watch([() => store.shopaddshow], (newvalue, oldvalue) => {
 

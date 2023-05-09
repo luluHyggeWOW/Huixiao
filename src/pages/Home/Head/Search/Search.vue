@@ -42,11 +42,6 @@ const SearchList = debounce(async function () {
     })
     await store1.getSearchList();
   } else if ($router.currentRoute.value.path == '/news') {
-    // const store2 = getForumList();
-    // store2.$patch(state => {
-    //   state.searchtext = searchtext.value
-    // })
-    // await store2.getSearchList();
     ElMessage.warning('新闻暂不支持搜索哦')
   }
   else if ($router.currentRoute.value.path == '/shop') {

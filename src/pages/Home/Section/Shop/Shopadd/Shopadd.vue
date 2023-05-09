@@ -7,9 +7,7 @@
                  :modal=true
                  :showClose=false
                  :lock-scroll="false"
-                 width="800px"
-                 destroy-on-close="true"
-                 style="z-index=99">
+                 width="800px">
         <img src="./image/creation.png"
              alt="">
         <el-form :model="form">
@@ -56,7 +54,7 @@
                        list-type="picture-card"
                        :limit=3
                        :on-change="upload"
-                       :before-upload="beforeAvatarUpload"
+                       :on-remove="handleRemove"
                        accept=".jpg,.jpeg,.png,.gif,.bmp,.pdf,.JPG,.JPEG,.PBG,.GIF,.BMP,.PDF">
               <div class="el-icon-plus">
                 +</div>
@@ -105,7 +103,7 @@ const store = getShopList()
 async function dialogForm (val) {
   if (val == 'yes') {
     console.log(form.class);
-    if (form.title != '' && form.text != '' && form.class != '') {
+    if (form.title != '' && form.text != '' && form.class != '' && form.img != '') {
       store.$patch(state => {
         console.log(form.class);
         state.addshoplist.title = form.title
@@ -116,8 +114,10 @@ async function dialogForm (val) {
       })
       await store.AddShop()
       await store.getAllList()
+      store.shopaddshow = false
       location.reload();
       // store.shopaddshow = false
+      store.shopaddshow = false
     } else {
       ElMessage.error('信息不能为空哦！')
     }
@@ -129,6 +129,7 @@ async function dialogForm (val) {
       state.addshoplist.img = ''
       state.addshoplist.class = ''
       state.addshoplist.text = ''
+      store.shopaddshow = false
     })
   }
   form.title = '';
@@ -136,19 +137,20 @@ async function dialogForm (val) {
   form.text = '';
   form.img = '';
   form.price = '';
-  store.shopaddshow = false
+
 }
 async function upload (file, fileList) {
   if (file.status == 'success') {
     // form.img.push('1')
     form.img.push(await toRaw(file).response.data)
-    console.log(form.img);
   }
 }
-// watch(store, (newvalue, oldvalue) => {
-//   dialogFormVisible.value = toRaw(newvalue).shopaddshow.value
-//   console.log(dialogFormVisible.value, toRaw(newvalue).shopaddshow.value);
-// })
+const handleRemove = (file) => {
+  console.log(toRaw(file).response.data);
+  form.img = form.img.filter((item) => item !== toRaw(file).response.data);
+  console.log(form.img);
+}
+
 
 
 
