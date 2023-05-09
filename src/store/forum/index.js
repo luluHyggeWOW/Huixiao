@@ -26,7 +26,6 @@ export const getForumList = defineStore('getlist', () => {
   const isAlllist = ref(true)
   const page = ref(1)
   const hotForumList = ref({})
-  let token = localStorage.getItem("huixiao");
   const addforumlist = reactive({
     title: '',
     class: '',
@@ -38,11 +37,9 @@ export const getForumList = defineStore('getlist', () => {
   const allrealylist = ref();
   async function getList () {
     let result = await reqForumList(page.value)
-    token = localStorage.getItem("huixiao");
     if (result.code == 200 && result.data.length) {
       await Forumlikedcollect(result.data)
-      console.log(token);
-      if (token != null) {
+      if (localStorage.getItem("huixiao") != null) {
         allrealylist.value.forEach(e => {
           list.push(e)
         });
@@ -75,7 +72,7 @@ export const getForumList = defineStore('getlist', () => {
   }
   async function changecollect (data) {
 
-    let result = await repForumcollect(data, token);
+    let result = await repForumcollect(data, localStorage.getItem("huixiao"));
     if (result.code != 200) {
       ElMessage.warning('已收藏')
     } else {
@@ -85,7 +82,7 @@ export const getForumList = defineStore('getlist', () => {
   }
   async function changelike (data) {
 
-    let result = await repForumlike(data, token);
+    let result = await repForumlike(data, localStorage.getItem("huixiao"));
     if (!result) {
       console.log(result);
     }
@@ -97,16 +94,17 @@ export const getForumList = defineStore('getlist', () => {
 
   }
   async function AddForum () {
-    let uuid = uuidv4()
-    uuid = uuid.split("-").join("");
-    const store = usermain();
+    let uuidv4 = require('uuid').v4;
+    const uuid = uuidv4().replace(/-/g, '');  // 生成 UUID 并替换掉横线
+    const numberOnly = uuid.match(/\d+/g).join('');  // 获取字符串中的数字部分
     let data = {
-      t_id: uuid,
+      t_id: numberOnly,
+      t_titile: `#${addforumlist.class} ${addforumlist.title}`,
       t_img: addforumlist.img,
       t_source: addforumlist.text,
-      t_title: `#${addforumlist.class} ${addforumlist.title}`,
+
     }
-    let result = await repAddForum(data, token);
+    let result = await repAddForum(data, localStorage.getItem("huixiao"));
     if (result.code == 200) {
       ElMessage.success('发布成功！')
       //  result.data;
@@ -116,7 +114,7 @@ export const getForumList = defineStore('getlist', () => {
     }
   }
   async function AddChangeMyForumList (data) {
-    let result = await repChangeMyForumList(data, token);
+    let result = await repChangeMyForumList(data, localStorage.getItem("huixiao"));
     if (result.code == 200) {
       ElMessage.success('修改成功！')
       //  result.data;
@@ -128,7 +126,7 @@ export const getForumList = defineStore('getlist', () => {
   async function getmyForumList () {
     const store2 = usermain();
     let id = store2.userinfo.userId
-    let result = await repgetMyForumList(id, token);
+    let result = await repgetMyForumList(id, localStorage.getItem("huixiao"));
     if (result.code == 200) {
       myforum.value = result.data
     }
@@ -136,7 +134,7 @@ export const getForumList = defineStore('getlist', () => {
     }
   }
   async function getmyForumCollectList () {
-    let result = await repgetMyForumCollectList(token);
+    let result = await repgetMyForumCollectList(localStorage.getItem("huixiao"));
     if (result.code == 200) {
       myForumCollectList.value = result.data
     }
@@ -156,7 +154,7 @@ export const getForumList = defineStore('getlist', () => {
 
   }
   async function pushForumComment (data) {
-    let result = await reppushForumComment(data, token);
+    let result = await reppushForumComment(data, localStorage.getItem("huixiao"));
     if (result.code == 200) {
       ElMessage.success('评论成功！')
     }
@@ -166,7 +164,7 @@ export const getForumList = defineStore('getlist', () => {
 
   }
   async function DeleteForumcollect (id) {
-    let result = await reqDeleteForumcollect(id, token);
+    let result = await reqDeleteForumcollect(id, localStorage.getItem("huixiao"));
     if (result.code == 200) {
       ElMessage.success('取消成功！')
     }
@@ -176,7 +174,7 @@ export const getForumList = defineStore('getlist', () => {
 
   }
   async function DeleteMyForum (id) {
-    let result = await repDeleteMyForum(id, token);
+    let result = await repDeleteMyForum(id, localStorage.getItem("huixiao"));
     if (result.code == 200) {
       ElMessage.success('取消成功！')
     }
@@ -186,7 +184,7 @@ export const getForumList = defineStore('getlist', () => {
 
   }
   async function getForumCollectflag (data) {
-    let result = await repForumCollectflag(data, token);
+    let result = await repForumCollectflag(data, localStorage.getItem("huixiao"));
     if (result) {
       if (result.code == 200) {
         ForumCollectflag.value = result.data
@@ -197,7 +195,7 @@ export const getForumList = defineStore('getlist', () => {
     }
   }
   async function getForumlikeflag (data) {
-    let result = await repForumlikeflag(data, token);
+    let result = await repForumlikeflag(data, localStorage.getItem("huixiao"));
     if (result) {
       if (result.code == 200) {
         Forumlikeflag.value = result.data
@@ -207,7 +205,7 @@ export const getForumList = defineStore('getlist', () => {
     }
   }
   async function DeleteForumlike (id) {
-    let result = await repDeleteForumlike(id, token);
+    let result = await repDeleteForumlike(id, localStorage.getItem("huixiao"));
     if (result.code == 200) {
       ElMessage.success('取消成功！')
     }
@@ -307,7 +305,7 @@ export const getForumList = defineStore('getlist', () => {
     }
   }
   async function DeleteMycomment (id) {
-    let result = await repDeleteMycomment(id, token);
+    let result = await repDeleteMycomment(id, localStorage.getItem("huixiao"));
     if (result.code == 200) {
       ElMessage.success('删除成功！')
     }

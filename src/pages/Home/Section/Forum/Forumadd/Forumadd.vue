@@ -20,15 +20,15 @@
                        placeholder="请选择讨论类别"
                        @change="changeclass">
               <el-option label="生活"
-                         value="tiyu"></el-option>
+                         value="生活"></el-option>
               <el-option label="学习"
-                         value="kaoyan"></el-option>
+                         value="学习"></el-option>
               <el-option label="美食"
-                         value="kaoyan"></el-option>
+                         value="美食"></el-option>
               <el-option label="娱乐"
-                         value="kaoyan"></el-option>
+                         value="娱乐"></el-option>
               <el-option label="其他"
-                         value="kaoyan"></el-option>
+                         value="其他"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="内容：">
@@ -100,7 +100,11 @@ async function dialogForm (val) {
         state.addforumlist.text = form.text
       })
       await store.AddForum()
-      store.getgetList()
+      store.$patch(state => {
+        store.page = 1;
+      })
+
+      await store.getList()
       dialogFormVisible.value = store2.forumaddshow = false
     } else {
       ElMessage.error('信息不能为空哦！')
