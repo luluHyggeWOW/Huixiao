@@ -53,16 +53,32 @@
     </div>
     <div class="shopbtn">
       <div class="shopcar"
+           v-if="shopinfoisjoinshopcar"
            @click="handle('joinshopcar',shopinfo.shopId)">
         <img src="./image/shopcar.png"
              alt="">
         <p>加入购物车</p>
       </div>
+      <div class="shopcar"
+           v-if="!shopinfoisjoinshopcar"
+           style="opacity:0.5 ; cursor: no-drop;">
+        <img src="./image/shopcar.png"
+             alt="">
+        <p>已加购物车</p>
+      </div>
       <div class="shopbuy"
+           v-if="shopinfoisbuy"
            @click="handle('buy',shopinfo.shopId)">
         <img src="./image/shopbuy.png"
              alt="">
         <p>全款拿下</p>
+      </div>
+      <div class="shopbuy"
+           v-if="!shopinfoisbuy"
+           style="opacity:0.5 ; cursor: no-drop;">
+        <img src="./image/shopbuy.png"
+             alt="">
+        <p>已经购买</p>
       </div>
 
     </div>
@@ -153,6 +169,8 @@ const getAlllists = (async () => {
   console.log('ShopList.AllShopList', ShopList.AllShopList);
 })
 let shopinfo = ref()
+let shopinfoisbuy = ref(true)
+let shopinfoisjoinshopcar = ref(true)
 let Shopinfoshow = ref(false)
 let shopaddshow = ref(store.shopaddshow)
 const Shopaddshowflag = () => {
@@ -161,7 +179,9 @@ const Shopaddshowflag = () => {
 const clickshopinfo = (info) => {
   shopinfo = info
   Shopinfoshow.value = !Shopinfoshow.value
-
+  shopinfoisbuy.value = true
+  shopinfoisjoinshopcar.value = true
+  console.log('shopinfo', shopinfo);
 }
 const getmoreShopList = () => {
   if (document.documentElement.scrollTop + window.innerHeight === document.documentElement.scrollHeight) {
@@ -174,9 +194,11 @@ const getmoreShopList = () => {
 const handle = async (val, id) => {
   if (val == 'buy') {
     await store.BuyShop(id)
+    shopinfoisbuy.value = false;
   }
   else {
     await store.JoinShopCar(id)
+    shopinfoisjoinshopcar.value = false
   }
 }
 

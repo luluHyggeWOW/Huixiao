@@ -72,7 +72,7 @@
            alt=""></div>
     <div class="top">
       <el-upload class="avatar-uploader"
-                 action="http://8.130.115.231:63010/user/open/upload"
+                 action="http://101.43.241.101:63010/user/open/upload"
                  :show-file-list="false"
                  :before-upload="beforeAvatarUpload"
                  :on-success="handleAvatarSuccess"
@@ -311,7 +311,7 @@
             </div>
             <div class="title">
               <p>{{list.buyShopName}}</p>
-              <span>{{list.buyShopIntuoduct}}</span>
+              <span style="width:600px ;padding-right:100px">{{list.buyShopIntuoduct}}</span>
             </div>
             <div class="time">
               <p>加入时间：<br>{{list.buyData}}</p>
@@ -321,7 +321,7 @@
                 <el-button type="primary"
                            style="width:100px ;height:40px;"
                            @click="myshopcarhandle('buy',list.buyShopId)">
-                  <img src="./image/delement.png"
+                  <img src="./image/shopbuy.png"
                        alt="">
                   <p>购买</p>
                 </el-button>

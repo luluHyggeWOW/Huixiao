@@ -257,7 +257,7 @@
     position: fixed;
     transform: translateZ(0);
     transform: translate3d(0, 0, 0);
-    // top: 50%;
+    top: 13%;
     // left: 50%;
     // transform: translateY(-13%);
     // background: linear-gradient(to left, white, #a7dcf6);
@@ -386,6 +386,7 @@
     }
 
     .shoptitle {
+
       hr {
         width: 540px;
         height: 0.5px;
@@ -399,6 +400,12 @@
       p {
         font-size: 40px;
         font-weight: 600;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 480px;
+        height: 50px;
+        overflow-wrap: break-word;
       }
 
       .p {

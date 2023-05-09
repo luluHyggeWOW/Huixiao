@@ -32,7 +32,7 @@ export const getShopList = defineStore('shop', () => {
   const myshopcarlist = ref({})
   const getMyBuyShopList = ref({})
 
-  let token = localStorage.getItem("huixiao");
+
   async function getAllList () {
     let result = await repShopList(page.value);
     console.log(page.value, result,);
@@ -66,7 +66,7 @@ export const getShopList = defineStore('shop', () => {
     }
   }
   async function getmyShopList () {
-    let result = await repgetMyShopList(token);
+    let result = await repgetMyShopList(localStorage.getItem("huixiao"));
     console.log(" getmyShopList", result);
     if (result.code == 200) {
       myshoplist.value = result.data
@@ -76,7 +76,7 @@ export const getShopList = defineStore('shop', () => {
     }
   }
   async function getmyShopCarList () {
-    let result = await repgetMyShopCar(token);
+    let result = await repgetMyShopCar(localStorage.getItem("huixiao"));
     console.log("getMyShopCar", result);
     if (result.code == 200) {
       myshopcarlist.value = result.data
@@ -86,7 +86,7 @@ export const getShopList = defineStore('shop', () => {
     }
   }
   async function deletemyShop (deleteshopid) {
-    let result = await repDeleteMyShop(deleteshopid, token);
+    let result = await repDeleteMyShop(deleteshopid, localStorage.getItem("huixiao"));
     console.log(" getmyShopList", result);
     if (result.code == 200) {
       ElMessage.success('删除成功')
@@ -109,7 +109,7 @@ export const getShopList = defineStore('shop', () => {
     });
 
     // data = JSON.stringify(data)
-    let result = await repaddShop(data, token);
+    let result = await repaddShop(data, localStorage.getItem("huixiao"));
     if (result == undefined) {
       ElMessage.error('发布失败')
       ElMessageBox({
@@ -130,16 +130,14 @@ export const getShopList = defineStore('shop', () => {
     }
   }
   async function BuyShop (BuyShopid) {
-    let result = await repBuyShop(BuyShopid, token);
+    let result = await repBuyShop(BuyShopid, localStorage.getItem("huixiao"));
     console.log("BuyShop", result);
     if (result.code == 200) {
       ElMessage.success('购买成功')
-
-
     }
   }
   async function BuyOnShopCar (BuyShopid) {
-    let result = await repBuyOnShopCar(BuyShopid, token);
+    let result = await repBuyOnShopCar(BuyShopid, localStorage.getItem("huixiao"));
     console.log("BuyShopOnShopCar", result);
     if (result.code == 200) {
       ElMessage.success('购买成功')
@@ -149,7 +147,7 @@ export const getShopList = defineStore('shop', () => {
     }
   }
   async function DeleteOnShopCar (BuyShopid) {
-    let result = await repDeleteOnShopCar(BuyShopid, token);
+    let result = await repDeleteOnShopCar(BuyShopid, localStorage.getItem("huixiao"));
     if (result.code == 200) {
       ElMessage.success('移除成功')
     }
@@ -158,7 +156,7 @@ export const getShopList = defineStore('shop', () => {
     }
   }
   async function JoinShopCar (JoinShopCarid) {
-    let result = await repJoinShopCar(JoinShopCarid, token);
+    let result = await repJoinShopCar(JoinShopCarid, localStorage.getItem("huixiao"));
     console.log("JoinShopCar", result);
 
     if (result.code == 200) {
@@ -168,7 +166,7 @@ export const getShopList = defineStore('shop', () => {
     }
   }
   async function getMyBuyShop () {
-    let result = await repgetMyBuyShop(token);
+    let result = await repgetMyBuyShop(localStorage.getItem("huixiao"));
     console.log("getMyBuyShopList", result);
     if (result.code == 200) {
       getMyBuyShopList.value = result.data

@@ -154,8 +154,8 @@
               </div>
             </div>
             <div :class="footerclass">
-              <p class="p1">联系我们 © 2023 青钢影007LT</p>
-              <p>举报邮箱：jubao龙涛@www.com</p>
+              <p class="p1">联系我们 © 2023 慧校huixiao: )</p>
+              <p>支持邮箱：www.1344085034@qq.com</p>
               <p>服务热线：888-888-8888</p>
             </div>
           </div>

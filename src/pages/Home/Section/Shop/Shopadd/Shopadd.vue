@@ -40,19 +40,19 @@
                        placeholder="请选择讨论类别"
                        @change="changeclass">
               <el-option label="电子产品"
-                         value="dianzi"></el-option>
+                         value="电子产品"></el-option>
               <el-option label="日用品"
-                         value="riyong"></el-option>
+                         value="日用品"></el-option>
               <el-option label="书本"
-                         value="book"></el-option>
+                         value="书本"></el-option>
               <el-option label="服装类"
-                         value="fuzhuang"></el-option>
+                         value="服装"></el-option>
               <el-option label="其他"
-                         value="kaoyan"></el-option>
+                         value="其他"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="商品图片：">
-            <el-upload action="http://8.130.115.231:63010/user/open/upload"
+            <el-upload action="http://101.43.241.101:63010/user/open/upload"
                        list-type="picture-card"
                        :limit=3
                        :on-change="upload"

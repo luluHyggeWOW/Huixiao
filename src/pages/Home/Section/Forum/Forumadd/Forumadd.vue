@@ -41,7 +41,7 @@
             </el-input>
           </el-form-item>
           <el-form-item label="图片：">
-            <el-upload action="http://8.130.115.231:63010/user/open/upload"
+            <el-upload action="http://101.43.241.101:63010/user/open/upload"
                        list-type="picture-card"
                        :limit=1
                        :on-change="upload"
