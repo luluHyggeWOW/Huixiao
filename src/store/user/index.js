@@ -69,6 +69,9 @@ export const submituser = defineStore('user', () => {
     if (result.code == 200) {
       ElMessage.success('验证码发送成功')
     }
+    else if (result.code == 400) {
+      ElMessage.error('手机号已注册')
+    }
     else {
       ElMessage.error('验证码发送失败')
     }

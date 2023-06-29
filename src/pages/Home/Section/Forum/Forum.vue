@@ -282,6 +282,7 @@ const othercommentshow = debounce(async (tid, index) => {
     })
   });
   Forum.allForumlist[index].comment = commentlist
+  console.log(document.getElementsByClassName('morecomment')[index]);
   document.getElementsByClassName('morecomment')[index]
   if (document.getElementsByClassName('morecomment')[index].style.display == "block") {
     document.getElementsByClassName('morecomment')[index].style.display = "none"
@@ -319,9 +320,11 @@ else{
 }
 //子评论删除按钮显示
 const deleteothercommentbtn=(index,i,val,ismy)=>{
-  console.log(ismy);
+  console.log(ismy,document.getElementsByClassName('morecomment')[index].
+  addEventListenergetElementsByClassName('deleteothercommentbtn')[i].style)
   if(ismy){
-  if(val=='leave'){
+  if(val=='leave'&&document.getElementsByClassName('morecomment')[index].
+    getElementsByClassName('deleteothercommentbtn')[i].style){
     document.getElementsByClassName('morecomment')[index].
     getElementsByClassName('deleteothercommentbtn')[i].style.display='none';
     console.log(index,i);

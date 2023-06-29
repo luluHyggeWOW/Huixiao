@@ -3,12 +3,14 @@
   .box {
     width: 1200px;
     padding: 0;
+    // margin-top: -4%;
     background-color: rgb(244, 252, 255);
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-    position: absolute;
+    // position: absolute;
     border-radius: 15px;
     height: auto;
     min-height: 1000px;
+
 
     .shopbox {
       column-count: 3;
@@ -16,11 +18,13 @@
       column-fill: auto;
       width: 1150px;
       flex-wrap: wrap;
-      margin: 45px 25px 25px 15px;
+      margin: 0px 25px 25px 15px;
       height: auto;
       display: flex;
       flex-direction: row-reverse;
       z-index: 0;
+      // margin-left: 10px;
+      padding-top: 35px;
 
       .bearear {
         position: relative;
@@ -59,7 +63,7 @@
 
       .shopdiv {
 
-        margin: 0;
+        margin: 0px;
         width: 370px;
         overflow: hidden;
         height: 500px;
@@ -257,7 +261,7 @@
     position: fixed;
     transform: translateZ(0);
     transform: translate3d(0, 0, 0);
-    top: 13%;
+    top: -1.5%;
     // left: 50%;
     // transform: translateY(-13%);
     // background: linear-gradient(to left, white, #a7dcf6);
