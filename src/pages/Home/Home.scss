@@ -39,6 +39,7 @@ html {
       }
     }
 
+
     body {
       position: relative;
 
@@ -50,12 +51,11 @@ html {
 
 
       section {
-        // display: flex;
         width: 1180px;
-        position: absolute;
+        margin: auto;
+        z-index: 0;
+        position: fixed;
         left: 50%;
-        // margin-top: 100px;
-        // top: 5%;
         transform: translate(-50%);
         animation: sectionfly-in 0.5s cubic-bezier(0, 0, 0.3, 1) forwards;
 
@@ -132,22 +132,23 @@ html {
 
       .views {
         width: 1200px;
-        position: relative;
         margin: auto;
-        z-index: 1;
-        margin-top: 11%;
+
+        position: fixed;
+        left: 50%;
+        top: 24%;
+        transform: translate(-50%);
         animation: viewsfly-in 0.5s cubic-bezier(0, 0, 0.3, 1) forwards;
 
-        @keyframes viewsfly-in {
-          from {
+        // @keyframes viewsfly-in {
+        //   from {
+        //     margin-top: 100%;
+        //   }
 
-            margin-top: 1005px;
-          }
-
-          to {
-            margin-top: 205px;
-          }
-        }
+        //   to {
+        //     margin-top: 205px;
+        //   }
+        // }
       }
 
 

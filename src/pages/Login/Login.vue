@@ -18,10 +18,10 @@
               <label for="email">手机号</label>
               <el-input @mouseenter="SNlogoenter"
                         @mouseleave="SNlogoleave"
-                        type="email"
+                        :controls=false
                         class="forminput"
                         name="cellphone"
-                        v-model="userinfo.cellphone"
+                        v-model.number="userinfo.cellphone"
                         maxlength="11"
                         width="200px" />
               <div class="invalid-feedback">
@@ -69,6 +69,10 @@
             </el-button>
             <div class="text-center">
               没有账户？<router-link to="/register"><a href="">点击注册</a>
+              </router-link>
+            </div>
+            <div class="text-center changepassword">
+              <router-link to="/forgetpassword"><a href="">忘记密码</a>
               </router-link>
             </div>
           </form>
@@ -146,28 +150,9 @@ watch([passwordshow], () => {
 //点击登录
 const store = submituser();
 const userLogin = debounce(async function () {
-  store.$patch(state => {
-    state.user.cellphone = userinfo.cellphone
-    state.user.password = userinfo.password
-  })
-  await store.loginsubmit()
-  const store2 = usermain();
-  if (store2.userinfo.usertoken == '') {
-    ElMessage.error('账号或密码错误')
-  }
-  else {
-    await store2.getuserinfo().then(() => {
-      console.log('login', store2.userinfo);
-      router.push({ path: "/news", query: { userphone: userinfo.cellphone } });
-    })
-
-    // store2.$patch(state => {
-    //   state.user.cellphone = userinfo.cellphone
-    //   state.user.password = userinfo.password
-    //   console.log(state.user.cellphone, state.user.password);
-    // })
-
-  }
+  let data = new window.FormData();
+  data.append('username', `{"password":${userinfo.password},"authType":"password","cellphone":${userinfo.cellphone}}`);
+  await store.loginsubmit(data)
 
 }, 500)
 onMounted(() => {

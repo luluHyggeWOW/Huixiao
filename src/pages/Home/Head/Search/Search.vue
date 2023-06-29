@@ -3,13 +3,10 @@
     <div class="searchlist">
 
     </div>
-    <input type="text"
-           v-model="searchtext">
+    <input type="text" v-model="searchtext">
     <!-- <button>搜索</button> -->
     <div class="btn">
-      <img src="./image/find.png"
-           alt=""
-           @click="SearchList">
+      <img src="./image/find.png" alt="" @click="SearchList">
     </div>
     <!-- <div style="background:red">
       111111

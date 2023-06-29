@@ -5,6 +5,7 @@ import { user } from '@/store/index'
 import { ElMessage } from 'element-plus';
 //1 利用axios对象的方法create 去创建一个 axios实例
 //2 request 就是axios 只不过稍微配置一下
+
 const requests = axios.create({
   //配置对象
   //基础路径，发请求路径应当会出现api
@@ -39,8 +40,16 @@ requests.interceptors.response.use((res) => {
   return res.data;
 }, (err) => {
   //响应失败的回调函数
+  // console.log(route.path);
+  const currentRoute = router.currentRoute
   if (err.response.status == 401) {
-    ElMessage.warning('登录后才能操作哦！')
+    if (currentRoute.value.path == '/login') {
+      ElMessage.error('账号或密码错误！')
+    }
+    else {
+      ElMessage.warning('登录后才能操作哦！')
+    }
+
   }
   else if (err.response.status == 503) {
     ElMessage.warning('服务器正在维护！')

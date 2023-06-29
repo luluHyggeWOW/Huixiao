@@ -1,13 +1,16 @@
 .headr {
   .logo {
-    position: absolute;
-    top: 27%;
-    transform: translate(-820%, 0%);
-    cursor: pointer;
+    max-width: 200px;
+    position: fixed;
+    top: 20%;
+    left: 1%;
+    z-index: 99;
+    // transform: translate(-820%, 0%); 
+    // cursor: pointer;
 
     img {
       border-radius: 20px;
-      width: 200px;
+      max-width: 200px;
     }
 
   }
@@ -83,4 +86,12 @@
     height: 50px;
     border-radius: 50%;
   }
+}
+
+@media screen and (max-width: 700px) {
+
+  .logo {
+    display: none;
+  }
+
 }

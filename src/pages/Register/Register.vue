@@ -2,76 +2,45 @@
   <div class="bg">
 
     <body class="my-login-page">
-      <div class="logo"><img src="./image/logo.png"
-             alt=""></div>
+      <div class="logo"><img src="./image/logo.png" alt=""></div>
 
       <div class="box">
         <div class="brand">
-          <img src="./image/neutral.png"
-               alt="logo">
-          <img src="./image/Message2.png"
-               alt=""
-               class="message"
-               v-if="correct.messageflag">
+          <img src="./image/neutral.png" alt="logo">
+          <img src="./image/Message2.png" alt="" class="message" v-if="correct.messageflag">
         </div>
         <div class="card-body">
           <h4 class="card-title">Register</h4>
-          <form method="POST"
-                class="my-login-validation"
-                novalidate="">
+          <form method="POST" class="my-login-validation" novalidate="">
             <div class="form-group">
-              <label for="name"
-                     class="text">本站昵称：</label>
-              <el-input class="forminput"
-                        name="name"
-                        v-model="userinfo.name" />
+              <label for="name" class="text">本站昵称：</label>
+              <el-input class="forminput" name="name" v-model="userinfo.name" />
             </div>
             <div class="form-group">
-              <label for="phone"
-                     class="text">手&ensp;机&ensp;号：</label>
-              <el-input class="forminput"
-                        name="phone"
-                        v-model="userinfo.phone"
-                        maxlength="11" />
+              <label for="phone" class="text">手&ensp;机&ensp;号：</label>
+
+              <el-input class="forminput" name="phone" v-model="userinfo.phone" maxlength="11" />
             </div>
             <div class="form-group">
-              <label for="code"
-                     class="text">验&ensp;证&ensp;码：</label>
-              <el-input id="code"
-                        style="width: 230px;"
-                        class="forminput"
-                        name="code"
-                        v-model="userinfo.code"
-                        maxlength="4" />
-              <el-button id="codebtn"
-                         type="primary"
-                         class="forminput"
-                         :disabled="correct.codeclick"
-                         @click="pushcode">
+              <label for="code" class="text">验&ensp;证&ensp;码：</label>
+              <el-input id="code" style="width: 230px;" class="forminput" name="code" v-model="userinfo.code"
+                maxlength="4" />
+              <el-button id="codebtn" type="primary" class="forminput" :disabled="correct.codeclick" @click="pushcode">
                 <span v-if="!correct.codetimes">获取验证码</span>
                 <span v-if="correct.codetimes">倒计时{{ count }}s</span>
               </el-button>
             </div>
 
             <div class="form-group">
-              <label for="password"
-                     class="text">密&ensp;&ensp;&ensp;&ensp;码：</label>
-              <el-input class="forminput"
-                        type="password"
-                        v-model="userinfo.password"
-                        :minlength="6"
-                        :maxlength="18" />
+              <label for="password" class="text">密&ensp;&ensp;&ensp;&ensp;码：</label>
+              <el-input class="forminput" type="password" v-model="userinfo.password" :minlength="6" :maxlength="18" />
               <!-- <div class="pwshow" @click="pwshow">
                       <img src="./image/pwnoshow.png" alt="">
                     </div> -->
             </div>
             <div class="form-group">
-              <label for="password"
-                     class="text">确认密码：</label>
-              <el-input id="password"
-                        class="forminput"
-                        type="password"
-                        v-model="userinfo.password2" />
+              <label for="password" class="text">确认密码：</label>
+              <el-input id="password" class="forminput" type="password" v-model="userinfo.password2" />
             </div>
 
             <div class="hint">
@@ -81,11 +50,8 @@
 
             <div class="form-group m-0">
 
-              <el-button type="primary"
-                         class="btn btn-primary btn-block"
-                         @click="okregister"
-                         :disabled="correct.registerclick"
-                         style="width: 200px; margin-left:80px;">
+              <el-button type="primary" class="btn btn-primary btn-block" @click="okregister"
+                :disabled="correct.registerclick" style="width: 200px; margin-left:80px;">
                 注册
               </el-button>
 
@@ -143,8 +109,11 @@ watch([userinfo, correct], (oldValue, newValue) => {
     }
   }
   //验证两次密码
-  if (newValue[0].password == newValue[0].password2 && newValue[0].password != '' && userinfo.code != '') {
+  if (newValue[0].password == newValue[0].password2 && newValue[0].password != '') {
     newValue[1].passwordflag = false
+    if (newValue[0].password == '') {
+      newValue[1].passwordflag = false
+    }
   }
   else {
     newValue[1].passwordflag = true

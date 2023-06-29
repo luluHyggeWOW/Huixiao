@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import {
   repLogin, repPhonecode, repRegister, repgetAllfankui, repgetMyfankui, repgetAllsolution,
   repgetMysolution, reppushfankui, reppushsolution, repdeletefankui, repchangefankui,
-  repdeleteMyfankui
+  repdeleteMyfankui, repForgetcode, repForgetPassword
 } from '@/api/api';
 import { ref, reactive } from 'vue'
 import { ElMessage } from 'element-plus';
@@ -29,30 +29,14 @@ export const submituser = defineStore('user', () => {
   const mysolution = ref();
   const allsolution = ref();
   const token = localStorage.getItem("huixiao");
-  async function loginsubmit () {
-    let data = new window.FormData();
-    // data.append('username', `{"password":${user.password},"authType":"password","cellphone":${user.cellphone}`);
-    data.append('username', `{"password":${user.password},"authType":"password","cellphone":${user.cellphone}}`);
+  async function loginsubmit (data) {
     let result = await repLogin(data);
-    const store = usermain()
     if (result.access_token) {
-      store.$patch(state => {
-        state.userinfo.usertoken = result.access_token
-        state.userinfo.id = user.cellphone
-      })
-      if (store.userinfo.usertoken == '') {
-        ElMessage.error('账号或密码错误')
-      }
-      else {
-        localStorage.setItem('huixiao', result.access_token);
-        ElMessage.success('登陆成功')
-        await store.getuserinfo()
-        console.log('logingetuserinfo', store.userinfo);
-        router.push({ path: "/news" });
-
-      }
-    } else {
-      ElMessage.error('登陆失败')
+      const store = usermain()
+      localStorage.setItem('huixiao', result.access_token);
+      ElMessage.success('登陆成功')
+      await store.getuserinfo()
+      router.push({ path: "/news" });
     }
   }
   async function registersubmit () {
@@ -66,6 +50,19 @@ export const submituser = defineStore('user', () => {
     reisterflag.value = result
     console.log('registerresult', reisterflag.value);
   }
+  async function forgetpassword (data) {
+    let result = await repForgetPassword(data, register.cellphone);
+    console.log(111, result);
+    if (result.code == 200) {
+      ElMessage.success('重置密码成功！')
+    }
+    else if (result.code == 201) {
+      ElMessage.warning('验证码错误!')
+    } else {
+      ElMessage.error('重置密码失败！')
+    }
+
+  }
   async function codesubmit () {
     let phone = register.cellphone;
     let result = await repPhonecode(phone);
@@ -73,12 +70,11 @@ export const submituser = defineStore('user', () => {
       ElMessage.success('验证码发送成功')
     }
     else {
-      ElMessage.error(result.data)
+      ElMessage.error('验证码发送失败')
     }
   }
-  async function codesubmit () {
-    let phone = register.cellphone;
-    let result = await repPhonecode(phone);
+  async function forgetcodesubmit (phone) {
+    let result = await repForgetcode(phone);
     if (result.code == 200) {
       ElMessage.success('验证码发送成功')
     }
@@ -188,6 +184,8 @@ export const submituser = defineStore('user', () => {
     changefankui,
     fankuiflag,
     deleteMyfankui,
+    forgetpassword,
+    forgetcodesubmit
     // deleteMysolution
   }
 

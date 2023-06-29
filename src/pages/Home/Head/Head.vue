@@ -1,46 +1,20 @@
 <template>
   <div class="headr">
-    <el-menu class="el-menu-demo"
-             mode="horizontal"
-             :id="head">
-      <div class="logo"
-           @click=" $router.push('/news')"><img src="./image/logo.png"
-             alt=""></div>
-      <Search v-if="searchshow()"></Search>
-
-      <el-sub-menu index="5"
-                   class="userimg">
-        <template #title><img :src="userimg"
-               alt=""></template>
-        <el-menu-item index="2-1"
-                      @click="userinfo"
-                      v-if="loginflag"
-                      class="elmenuitem">我的资料</el-menu-item>
-        <el-menu-item index="2-2"
-                      @click="gologin()"
-                      v-if="!loginflag"
-                      class="elmenuitem">去登录</el-menu-item>
-        <el-menu-item index="2-3"
-                      @click="deletelogin()"
-                      v-if="loginflag"
-                      class="elmenuitem">退出登录</el-menu-item>
+    <div class="logo" @click=" $router.push('/news')"><img src="./image/logo.png" alt=""></div>
+    <Search v-if="searchshow()" class="search"></Search>
+    <el-menu class="el-menu-demo" mode="horizontal" :id="head">
+      <el-sub-menu index="5" class="userimg">
+        <template #title><img :src="userimg" alt=""></template>
+        <el-menu-item index="2-1" @click="userinfo" v-if="loginflag" class="elmenuitem">我的资料</el-menu-item>
+        <el-menu-item index="2-2" @click="gologin()" v-if="!loginflag" class="elmenuitem">去登录</el-menu-item>
+        <el-menu-item index="2-3" @click="deletelogin()" v-if="loginflag" class="elmenuitem">退出登录</el-menu-item>
       </el-sub-menu>
-      <el-menu-item index="1"
-                    @click="fankui"><img src="./image/fankui.png"
-             alt=""
-             style="width:20px">反馈中心</el-menu-item>
-      <el-menu-item index="2"
-                    style="40px"
-                    disabled><img src="./image/xiuli.png"
-             alt=""
-             style="width:30px">
+      <el-menu-item index="1" @click="fankui"><img src="./image/fankui.png" alt=""
+          style="width:20px">反馈中心</el-menu-item>
+      <el-menu-item index="2" style="40px" disabled><img src="./image/xiuli.png" alt="" style="width:30px">
         处理中心
       </el-menu-item>
-      <el-menu-item index="3"
-                    style="40px"
-                    disabled><img src="./image/gongju.png"
-             alt=""
-             style="width:20px">
+      <el-menu-item index="3" style="40px" disabled><img src="./image/gongju.png" alt="" style="width:20px">
         实用工具
       </el-menu-item>
 
@@ -82,7 +56,7 @@ const userinfo = () => {
   // 滚动条宽度
   let scrollWidth = window.innerWidth - document.documentElement.offsetWidth;
   console.log(scrollWidth);
-  document.body.style.overflow = 'hidden';
+  // document.body.style.overflow = 'hidden';
   document.body.style.paddingRight = scrollWidth + 'px';
   $router.push('/userinfo')
 }

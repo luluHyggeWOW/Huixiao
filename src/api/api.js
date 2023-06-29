@@ -34,8 +34,12 @@ export const repForumimg = (data) => requests({ url: `/user/open/upload`, data, 
 export const repLogin = (data) => requests({ url: `/auth/oauth/token?client_id=XcWebApp&client_secret=XcWebApp&grant_type=password`, data: data, method: 'post' })
 //注册
 export const repRegister = (data) => requests({ url: `/user/open/logon/`, data, method: 'post' })
-//验证码
+//重置密码
+export const repForgetPassword = (data) => requests({ url: `/user/open/setpass/`, data, method: 'post' })
+//注册验证码
 export const repPhonecode = (phone) => requests({ url: `/user/open/sedsms/${phone}`, method: 'get' })
+//修改密码验证码
+export const repForgetcode = (phone) => requests({ url: `/user/open/send/${phone}`, method: 'get' })
 //获取用户信息
 export const repUserinfo = (token) => requests({ url: `/user/getuser/`, headers: { Authorization: `Bearer ${token}` }, method: 'get' })
 //修改用户信息
@@ -110,7 +114,6 @@ export const repDeleteMycomment = (id, token) => requests({ url: `/talk/talk_tal
 export const repchangefankui = (data, token) => requests({ url: `/help/addHelp`, headers: { Authorization: `Bearer ${token}` }, data, method: 'post' })
 export default {
   reqForumSearchList,
-  // reqNewsSearchList,
   reqShopSearchList,
   reqForumList,
   repForumcollect,
@@ -153,4 +156,6 @@ export default {
   repdeleteMyfankui,
   repchangefankui,
   repDeleteMycomment,
+  repForgetcode,
+  repForgetPassword
 }
