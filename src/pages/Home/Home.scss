@@ -132,21 +132,14 @@ html {
 
       .views {
         width: 1200px;
-        position: absolute;
-        margin-left: 50%;
-        transform: translateX(-50%);
-        animation: viewsfly-in 0.5s cubic-bezier(0, 0, 0.3, 1) forwards;
-        z-index: 0;
-
-        @keyframes viewsfly-in {
-          from {
-            margin-top: 100%;
-          }
-
-          to {
-            margin-top: 11%;
-          }
-        }
+        // position: absolute;
+        // margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        margin-top: 205px;
+        z-index: 2;
       }
 
 
@@ -163,10 +156,11 @@ html {
         // width: 1200px;
         position: fixed;
         left: 100%;
-        bottom: 30px;
-        top: 150px;
-        animation: mesfly-in 0.5s cubic-bezier(0, 0, 0.3, 1) forwards;
+
         z-index: 0;
+        transform: translateX(-100%);
+        top: 15%;
+        animation: mesfly-in 0.5s cubic-bezier(0, 0, 0.3, 1) forwards;
 
         @keyframes mesfly-in {
           from {
@@ -175,17 +169,11 @@ html {
 
           to {
             transform: translateX(-100%);
+
           }
         }
       }
 
-      .Chat {
-        position: fixed;
-        left: 50%;
-        top: 20%;
-        transform: translate(-50%, 0);
-        z-index: 20;
-      }
 
       .shop {
         // width: 1200px;
@@ -198,9 +186,9 @@ html {
 
       .gotop {
         position: fixed;
-        top: 93%;
+        bottom: 2%;
         z-index: 99;
-        left: 96%;
+        right: 1%;
         cursor: pointer;
         width: 40px;
         height: 40px;

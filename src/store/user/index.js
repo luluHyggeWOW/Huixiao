@@ -28,7 +28,7 @@ export const submituser = defineStore('user', () => {
   const allfankui = ref();
   const mysolution = ref();
   const allsolution = ref();
-  const token = localStorage.getItem("huixiao");
+  // const token = localStorage.getItem("huixiao");
   async function loginsubmit (data) {
     let result = await repLogin(data);
     if (result.access_token) {
@@ -86,6 +86,7 @@ export const submituser = defineStore('user', () => {
     }
   }
   async function getAllfankui () {
+    let token = localStorage.getItem("huixiao");
     let result = await repgetAllfankui(token);
     if (result.code == 200) {
       allfankui.value = result.data
@@ -113,6 +114,7 @@ export const submituser = defineStore('user', () => {
     }
   }
   async function getAllsolution () {
+    let token = localStorage.getItem("huixiao");
     let result = await repgetAllsolution(token);
     if (result.code == 200) {
       allsolution.value = result.data
@@ -122,6 +124,7 @@ export const submituser = defineStore('user', () => {
     }
   }
   async function getMysolution () {
+    let token = localStorage.getItem("huixiao");
     let result = await repgetMysolution(token);
     if (result.code == 200) {
       mysolution.value = result.data
@@ -142,7 +145,7 @@ export const submituser = defineStore('user', () => {
   async function pushfankui (data) {
     let result = await reppushfankui(data, token);
     if (result.code == 200) {
-      ElMessage.error('提交成功')
+      ElMessage.success('提交成功')
     }
     else {
       ElMessage.error('提交失败')
@@ -151,7 +154,7 @@ export const submituser = defineStore('user', () => {
   async function pushsolution (data) {
     let result = await reppushsolution(data);
     if (result.code == 200) {
-      ElMessage.error('提交成功')
+      ElMessage.success('提交成功')
     }
     else {
       ElMessage.error('提交失败')

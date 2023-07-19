@@ -1,30 +1,20 @@
 <template>
   <div class="box">
-    <div class="closebox"
-         @click="closebox"><img src="./image/closebtn.png"
-           alt=""></div>
+    <div class="closebox" @click="closebox"><img src="./image/closebtn.png" alt=""></div>
     <div class="top">
       <p>你的反馈与解决是我们最大的鼓励</p>
     </div>
     <div class="title">
-      <el-tabs type="border-card"
-               @tab-click="basicbtn"
-               v-model="activeName"
-               style="height:800px ;width:1178px;border-radius: 0px 0px 15px 15px;">
-        <el-tab-pane label="提出/修改反馈"
-                     name="pushfankui">
-          <template #label><span style=" "
-                  font-size=30px;>提出/修改反馈</span>
+      <el-tabs type="border-card" @tab-click="basicbtn" v-model="activeName"
+        style="height:800px ;width:1178px;border-radius: 0px 0px 15px 15px;">
+        <el-tab-pane label="提出/修改反馈" name="pushfankui">
+          <template #label><span style=" " font-size=30px;>提出/修改反馈</span>
           </template>
         </el-tab-pane>
-        <el-tab-pane label="所有反馈"
-                     name="allfankui"></el-tab-pane>
-        <el-tab-pane label="我的反馈"
-                     name="myfankui"></el-tab-pane>
-        <el-tab-pane label="所有解决方案"
-                     name="allsolution"></el-tab-pane>
-        <el-tab-pane label="我的解决方案"
-                     name="mysolution"></el-tab-pane>
+        <el-tab-pane label="所有反馈" name="allfankui"></el-tab-pane>
+        <el-tab-pane label="我的反馈" name="myfankui"></el-tab-pane>
+        <el-tab-pane label="所有解决方案" name="allsolution"></el-tab-pane>
+        <el-tab-pane label="我的解决方案" name="mysolution"></el-tab-pane>
         <!-- <el-tab-pane label="提出解决方案"
                      name="pushsolution"></el-tab-pane> -->
       </el-tabs>
@@ -32,15 +22,11 @@
     </div>
     <div class="infobox">
 
-      <div class="myinfo allfankui"
-           v-if=infopage.allfankui>
+      <div class="myinfo allfankui" v-if=infopage.allfankui>
         <div class="all">
-          <div class="div"
-               v-for="(list,index) in infoList.allfankuiList"
-               :key="index">
+          <div class="div" v-for="(list,index) in infoList.allfankuiList" :key="index">
             <div class="img">
-              <img :src="list.userHead"
-                   alt="">
+              <img :src="list.userHead" alt="">
             </div>
 
             <div class="title">
@@ -51,11 +37,9 @@
               </div>
 
             </div>
-            <div class="ForumCollect handle "
-                 @click="gosolution(list)">
-              <el-button type="primary"
-                         style="width:120px;height:40px;cursor: pointer;"><img src="./image/collected.png"
-                     alt="">
+            <div class="ForumCollect handle " @click="gosolution(list)">
+              <el-button type="primary" style="width:120px;height:40px;cursor: pointer;"><img
+                  src="./image/collected.png" alt="">
                 <p>解答</p>
               </el-button>
 
@@ -67,15 +51,11 @@
         </div>
 
       </div>
-      <div class="myinfo myfankui"
-           v-if=infopage.myfankui>
+      <div class="myinfo myfankui" v-if=infopage.myfankui>
         <div class="all">
-          <div class="div"
-               v-for="(list,index) in infoList.myfankuiList"
-               :key="index">
+          <div class="div" v-for="(list,index) in infoList.myfankuiList" :key="index">
             <div class="img">
-              <img :src="list.userHead"
-                   alt="">
+              <img :src="list.userHead" alt="">
             </div>
 
             <div class="title">
@@ -88,18 +68,13 @@
             </div>
 
             <div class="handle myfankui">
-              <el-button type="danger"
-                         style="width:100px;height:40px;"
-                         @click="deletemyfankui(list.hid)"><img src="./image/delement.png"
-                     alt="">
+              <el-button type="danger" style="width:100px;height:40px;" @click="deletemyfankui(list.hid)"><img
+                  src="./image/delement.png" alt="">
                 <p>删除</p>
               </el-button>
 
-              <el-button type="primary"
-                         style="width:100px;height:40px;cursor: pointer;"
-                         @click="changemyfankui(list)">
-                <img src="./image/change.png"
-                     alt="">
+              <el-button type="primary" style="width:100px;height:40px;cursor: pointer;" @click="changemyfankui(list)">
+                <img src="./image/change.png" alt="">
                 <p>修改</p>
               </el-button>
             </div>
@@ -111,15 +86,11 @@
         </div>
 
       </div>
-      <div class="myinfo allsolution"
-           v-if=infopage.allsolution>
+      <div class="myinfo allsolution" v-if=infopage.allsolution>
         <div class="all">
-          <div class="div"
-               v-for="(list,index) in infoList.allsolutionList"
-               :key="index">
+          <div class="div" v-for="(list,index) in infoList.allsolutionList" :key="index">
             <div class="img">
-              <img src="./image/xiuli.png"
-                   alt="">
+              <img src="./image/xiuli.png" alt="">
             </div>
 
             <div class="title">
@@ -156,15 +127,11 @@
         </div>
 
       </div>
-      <div class="myinfo mysolution"
-           v-if=infopage.mysolution>
+      <div class="myinfo mysolution" v-if=infopage.mysolution>
         <div class="all">
-          <div class="div"
-               v-for="(list,index) in infoList.mysolutionList"
-               :key="index">
+          <div class="div" v-for="(list,index) in infoList.mysolutionList" :key="index">
             <div class="img">
-              <img src="./image/xiuli.png"
-                   alt="">
+              <img src="./image/xiuli.png" alt="">
             </div>
 
             <div class="title">
@@ -187,8 +154,7 @@
         </div>
 
       </div>
-      <div class="besicinfo"
-           v-if=infopage.pushsolution>
+      <div class="besicinfo" v-if=infopage.pushsolution>
 
         <div class="div">
           <p>反馈人：</p>
@@ -204,52 +170,36 @@
         </div>
         <div class="div">
           <p>反馈详细：</p>
-          <div class="input"
-               style=" width:500px;">
+          <div class="input" style=" width:500px;">
             <p class="solutioninfo">{{solutioninfo.text}}</p>
           </div>
         </div>
         <div class="div">
           <p>反馈时间：</p>
-          <div class="input"
-               style=" width:200px;">
-            <p class="solutioninfo"
-               style=" width:200px;">{{solutioninfo.time}}</p>
+          <div class="input" style=" width:200px;">
+            <p class="solutioninfo" style=" width:200px;">{{solutioninfo.time}}</p>
           </div>
         </div>
         <div class="div">
           <p>解决：</p>
-          <div class="input"
-               style=" width:500px;">
-            <el-input type="textarea"
-                      placeholder=""
-                      v-model="solutioninfo.solution"
-                      maxlength="100"
-                      show-word-limit>
+          <div class="input" style=" width:500px;">
+            <el-input type="textarea" placeholder="" v-model="solutioninfo.solution" maxlength="100" show-word-limit>
             </el-input>
           </div>
         </div>
 
       </div>
-      <div class="besicinfo"
-           v-if=infopage.pushfankui>
+      <div class="besicinfo" v-if=infopage.pushfankui>
         <div class="div">
           <p>反馈地点：</p>
           <div class="input">
-            <el-input v-model="fankuiinfo.location"
-                      placeholder=""
-                      maxlength=10></el-input>
+            <el-input v-model="fankuiinfo.location" placeholder="" maxlength=10></el-input>
           </div>
         </div>
         <div class="div">
           <p>反馈详细：</p>
-          <div class="input"
-               style=" width:500px;">
-            <el-input type="textarea"
-                      placeholder=""
-                      v-model="fankuiinfo.text"
-                      maxlength="50"
-                      show-word-limit>
+          <div class="input" style=" width:500px;">
+            <el-input type="textarea" placeholder="" v-model="fankuiinfo.text" maxlength="50" show-word-limit>
             </el-input>
           </div>
         </div>
@@ -257,13 +207,9 @@
       </div>
     </div>
     <div class="btn">
-      <el-button style="width:150px;height:50px;font-size:20px;"
-                 @click="qvxiaoinfo()"
-                 v-if="btnshow1">取消</el-button>
-      <el-button type="primary"
-                 style="width:150px;height:50px;font-size:20px;"
-                 @click="pushinfo()"
-                 v-if="btnshow">提交</el-button>
+      <el-button style="width:150px;height:50px;font-size:20px;" @click="qvxiaoinfo()" v-if="btnshow1">取消</el-button>
+      <el-button type="primary" style="width:150px;height:50px;font-size:20px;" @click="pushinfo()"
+        v-if="btnshow">提交</el-button>
     </div>
   </div>
 </template>
@@ -504,6 +450,7 @@ async function pushinfo () {
         getallfankui()
         infopage.pushfankui = false
         infopage.allfankui = true
+
         fankuiinfo.id = '';
         fankuiinfo.location = '';
         fankuiinfo.text = '';
@@ -553,7 +500,11 @@ async function qvxiaoinfo () {
       solutioninfo.time = '';
       solutioninfo.name = '';
       getallsolution()
-      infopage.allsolution = true
+      infopage.allfankui = true
+      infopage.myfankui = false
+      infopage.allsolution = false
+      infopage.mysolution = false
+      infopage.pushfankui = false
       infopage.pushsolution = false
       btnshow.value = false
       btnshow1.value = false
@@ -588,7 +539,7 @@ const deletemyfankui = async (hid) => {
       console.log(hid);
       await store.deleteMyfankui(hid)
       getmyfankui()
-    }
+    } ElMessage
   }).catch((status) => {
     if (status == 'cancel') {
 
@@ -638,7 +589,7 @@ const deleteforumcollection = async (id) => {
 
 
 onMounted(() => {
-
+  // location.reload()
 })
 
 </script>

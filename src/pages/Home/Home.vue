@@ -1,7 +1,5 @@
 <template>
-  <div class="hide">
-  </div>
-  <div class="app">
+  <div class="app" ref="screen">
     <header>
 
       <Head></Head>
@@ -11,7 +9,8 @@
       <Nav></Nav>
       <section>
         <div class="title">
-          <div class="forumbtn" @click="Forumshow"><span class="bigtitle">学习论坛</span>
+          <div class="forumbtn" @click="Forumshow">
+            <span class="bigtitle">学习论坛</span>
             <span class="smalltitle">可以与他人交流讨论</span>
             <img src="./image/forum.png" alt="">
           </div>
@@ -20,7 +19,8 @@
             <span class="smalltitle">可以观察校园实时事件</span>
             <img src="./image/news.png" alt="">
           </div>
-          <div class="shopbtn" @click="Shopshow"><span class="bigtitle">二手市场</span>
+          <div class="shopbtn" @click="Shopshow">
+            <span class="bigtitle">二手市场</span>
             <span class="smalltitle">可以买卖闲置好物</span>
             <img src="./image/shop.png" alt="">
           </div>
@@ -33,9 +33,6 @@
       </div>
       <div class="mes">
         <Message />
-      </div>
-      <div class="Chat">
-        <Chat />
       </div>
       <div class="windons">
       </div>
@@ -55,18 +52,16 @@
 import Head from '@/pages/Home/Head/Head.vue'
 import Nav from '@/pages/Home/Nav/Nav.vue'
 import Message from '@/pages/Home/Message/Message.vue'
-import Chat from '@/pages/Home/Message/Chat/Chat.vue'
 import Footer from '@/pages/Home/Footer/Footer.vue'
 import Shopadd from '@/pages/Home/Section/Shop/Shopadd/Shopadd.vue'
 import Forumadd from '@/pages/Home/Section/Forum/Forumadd/Forumadd.vue'
-
 import { components, ref, router, watch, onMounted } from 'vue'
 import { useRoute, useRouter } from "vue-router"
 
 name: 'Home'
 const route = useRoute()
 const $router = useRouter()
-
+let screen = ref()
 const Forumshow = () => {
   $router.push('/forum')
 }
@@ -89,9 +84,6 @@ window.onload = function () {
 }
 
 
-onMounted(() => {
-
-})
 
 </script>
 
@@ -105,5 +97,11 @@ div img {
 html {
   padding: 0;
   margin: 0;
+  .section {
+    .title {
+      div {
+      }
+    }
+  }
 }
 </style>

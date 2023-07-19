@@ -1,9 +1,10 @@
 .main {
   background-color: rgb(244, 252, 255);
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  position: absolute;
+  // position: absolute;
   border-radius: 15px;
   width: 1200px;
+  min-height: 90vh;
 
   .title {
     position: absolute;
@@ -153,6 +154,7 @@
     width: 100%;
     height: auto;
     top: 400px;
+    min-height: 400px;
 
     .allnewstitle {
       position: relative;
